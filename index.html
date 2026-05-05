@@ -771,9 +771,17 @@
         line-height: 1.45;
       }
 
-      .site-footer strong {
+      .site-footer a {
         color: var(--text);
         font-weight: 720;
+        text-decoration-color: rgba(8, 125, 132, 0.36);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+      }
+
+      .site-footer a:hover {
+        color: var(--teal);
+        text-decoration-color: currentColor;
       }
 
       .sr-only {
@@ -1226,7 +1234,7 @@
         </section>
 
         <footer class="site-footer">
-          Built by <strong>Joey Wright</strong> and his agent team.
+          Built by <a href="https://www.joeywrightphoto.com" target="_blank" rel="noopener noreferrer">Joey Wright</a> and his agent team.
         </footer>
       </main>
     </div>
