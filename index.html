@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agent Setup Guide</title>
+    <script>
+      (() => {
+        let theme = null;
+        try {
+          theme = localStorage.getItem("agentGuideTheme");
+        } catch {
+          // Keep system detection available when storage is unavailable.
+        }
+
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.dataset.theme = theme;
+        } else if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
     <style>
       :root {
         color-scheme: light;
@@ -24,6 +40,46 @@
         --shadow: 0 24px 70px rgba(18, 42, 58, 0.11);
         --radius: 8px;
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #071017;
+        --bg-soft: #0d1b23;
+        --ink: #f4fbff;
+        --text: #d5e2ed;
+        --muted: #8fa4b5;
+        --line: rgba(165, 197, 211, 0.18);
+        --line-strong: rgba(58, 188, 190, 0.58);
+        --glass: rgba(12, 26, 35, 0.72);
+        --glass-strong: rgba(17, 36, 47, 0.9);
+        --teal: #3abcbe;
+        --teal-soft: rgba(58, 188, 190, 0.16);
+        --amber: #e2a543;
+        --amber-soft: rgba(226, 165, 67, 0.16);
+        --sage: #98b69d;
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme]) {
+          color-scheme: dark;
+          --bg: #071017;
+          --bg-soft: #0d1b23;
+          --ink: #f4fbff;
+          --text: #d5e2ed;
+          --muted: #8fa4b5;
+          --line: rgba(165, 197, 211, 0.18);
+          --line-strong: rgba(58, 188, 190, 0.58);
+          --glass: rgba(12, 26, 35, 0.72);
+          --glass-strong: rgba(17, 36, 47, 0.9);
+          --teal: #3abcbe;
+          --teal-soft: rgba(58, 188, 190, 0.16);
+          --amber: #e2a543;
+          --amber-soft: rgba(226, 165, 67, 0.16);
+          --sage: #98b69d;
+          --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+        }
       }
 
       * {
@@ -704,6 +760,93 @@
         display: block;
       }
 
+      :root[data-theme="dark"] {
+        background:
+          linear-gradient(90deg, rgba(58, 188, 190, 0.07) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(58, 188, 190, 0.07) 1px, transparent 1px) 0 0 / 48px 48px,
+          radial-gradient(circle at 75% 25%, rgba(58, 188, 190, 0.13), transparent 28rem),
+          var(--bg);
+      }
+
+      :root[data-theme="dark"] .topbar,
+      :root[data-theme="dark"] .answer,
+      :root[data-theme="dark"] .product-card,
+      :root[data-theme="dark"] .credential-box,
+      :root[data-theme="dark"] .path,
+      :root[data-theme="dark"] .detail-card,
+      :root[data-theme="dark"] .secondary,
+      :root[data-theme="dark"] .recommendation,
+      :root[data-theme="dark"] .icon-button:hover {
+        background: var(--glass);
+        border-color: var(--line);
+      }
+
+      :root[data-theme="dark"] .recommendation,
+      :root[data-theme="dark"] .path,
+      :root[data-theme="dark"] .detail-card {
+        box-shadow: var(--shadow);
+      }
+
+      :root[data-theme="dark"] .mark,
+      :root[data-theme="dark"] .answer-icon,
+      :root[data-theme="dark"] .path-icon {
+        background: var(--teal-soft);
+      }
+
+      :root[data-theme="dark"] .answer[data-route="openclaw"] .answer-icon,
+      :root[data-theme="dark"] .answer[data-tone="amber"] .answer-icon {
+        background: var(--amber-soft);
+      }
+
+      :root[data-theme="dark"] .answer:hover,
+      :root[data-theme="dark"] .answer.is-selected {
+        background: var(--glass-strong);
+        box-shadow:
+          0 0 0 1px rgba(58, 188, 190, 0.16),
+          0 18px 48px rgba(0, 0, 0, 0.26);
+      }
+
+      :root[data-theme="dark"] .product-card.is-openclaw {
+        background: linear-gradient(145deg, rgba(24, 30, 34, 0.92), rgba(42, 31, 17, 0.72));
+      }
+
+      :root[data-theme="dark"] .product-card.is-openclaw .product-icon {
+        background: rgba(255, 244, 228, 0.96);
+      }
+
+      :root[data-theme="dark"] .score-track {
+        background: rgba(188, 209, 219, 0.18);
+      }
+
+      :root[data-theme="dark"] .topbar,
+      :root[data-theme="dark"] .answer,
+      :root[data-theme="dark"] .path,
+      :root[data-theme="dark"] .detail-card {
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+      }
+
+      :root[data-theme="dark"] .subhead,
+      :root[data-theme="dark"] .answer-copy,
+      :root[data-theme="dark"] .helper,
+      :root[data-theme="dark"] .reason,
+      :root[data-theme="dark"] .check-list li,
+      :root[data-theme="dark"] .credential-box span,
+      :root[data-theme="dark"] .path-intro span,
+      :root[data-theme="dark"] .path-step p,
+      :root[data-theme="dark"] .detail-card p,
+      :root[data-theme="dark"] .detail-card li {
+        color: var(--text);
+      }
+
+      :root[data-theme="dark"] .panel-title,
+      :root[data-theme="dark"] .path-step h3 {
+        color: #cfe1eb;
+      }
+
+      :root[data-theme="dark"] .mark path:first-child {
+        stroke: #dff5f3;
+      }
+
       @media (max-width: 1180px) {
         .stage {
           grid-template-columns: 1fr;
@@ -832,6 +975,12 @@
           <span>Agent Setup Guide</span>
         </div>
         <div class="top-actions">
+          <button class="icon-button" type="button" id="themeButton" aria-label="Toggle color theme" title="Toggle color theme">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3v2.4M12 18.6V21M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M3 12h2.4M18.6 12H21M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+            </svg>
+          </button>
           <button class="icon-button" type="button" id="helpButton" aria-label="Show guide details" title="Guide details">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
@@ -1355,11 +1504,64 @@
       const backButton = document.querySelector("#backButton");
       const nextButton = document.querySelector("#nextButton");
       const resetButton = document.querySelector("#resetButton");
+      const themeButton = document.querySelector("#themeButton");
       const helpButton = document.querySelector("#helpButton");
       const detailsButton = document.querySelector("#detailsButton");
       const selectRouteButton = document.querySelector("#selectRouteButton");
       const installGuideLink = document.querySelector("#installGuideLink");
       const detailDrawer = document.querySelector("#detailDrawer");
+
+      const themeIcons = {
+        light: `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v2.4M12 18.6V21M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M3 12h2.4M18.6 12H21M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" /></svg>`,
+        dark: `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.6A7.4 7.4 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>`
+      };
+
+      const systemTheme = window.matchMedia?.("(prefers-color-scheme: dark)");
+
+      function savedTheme() {
+        try {
+          return localStorage.getItem("agentGuideTheme");
+        } catch {
+          return null;
+        }
+      }
+
+      function activeTheme() {
+        return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+      }
+
+      function setTheme(theme, persist = true) {
+        document.documentElement.dataset.theme = theme;
+        if (persist) {
+          try {
+            localStorage.setItem("agentGuideTheme", theme);
+          } catch {
+            // The visual theme can still change even if storage is blocked.
+          }
+        }
+        updateThemeButton();
+      }
+
+      function syncSystemTheme() {
+        if (savedTheme()) {
+          updateThemeButton();
+          return;
+        }
+        if (systemTheme?.matches) {
+          document.documentElement.dataset.theme = "dark";
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+        updateThemeButton();
+      }
+
+      function updateThemeButton() {
+        const current = activeTheme();
+        const next = current === "dark" ? "light" : "dark";
+        themeButton.innerHTML = themeIcons[next];
+        themeButton.setAttribute("aria-label", `Switch to ${next} theme`);
+        themeButton.title = `Switch to ${next} theme`;
+      }
 
       function getScores() {
         return Object.values(state.answers).reduce(
@@ -1531,6 +1733,12 @@
         render();
       });
 
+      themeButton.addEventListener("click", () => {
+        setTheme(activeTheme() === "dark" ? "light" : "dark");
+      });
+
+      systemTheme?.addEventListener("change", syncSystemTheme);
+
       helpButton.addEventListener("click", () => {
         detailDrawer.classList.toggle("is-open");
         if (detailDrawer.classList.contains("is-open")) {
@@ -1552,6 +1760,7 @@
         detailDrawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
 
+      syncSystemTheme();
       render();
     </script>
   </body>
