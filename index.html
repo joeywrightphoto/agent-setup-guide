@@ -787,6 +787,17 @@
         box-shadow: var(--shadow);
       }
 
+      :root[data-theme="dark"] .recommendation {
+        border-color: rgba(165, 197, 211, 0.11);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.025) inset,
+          var(--shadow);
+      }
+
+      :root[data-theme="dark"] .recommendation::after {
+        box-shadow: 0 0 0 1px rgba(165, 197, 211, 0.07) inset;
+      }
+
       :root[data-theme="dark"] .mark,
       :root[data-theme="dark"] .answer-icon,
       :root[data-theme="dark"] .path-icon {
