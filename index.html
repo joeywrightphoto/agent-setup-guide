@@ -732,6 +732,229 @@
         display: grid;
       }
 
+      .launch-card {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+        gap: 22px;
+        align-items: stretch;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(8, 125, 132, 0.28);
+        border-radius: var(--radius);
+        background:
+          linear-gradient(135deg, rgba(223, 245, 243, 0.86), rgba(255, 255, 255, 0.76)),
+          rgba(255, 255, 255, 0.82);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.88) inset,
+          0 22px 60px rgba(8, 125, 132, 0.12);
+        padding: 24px;
+      }
+
+      .launch-card.is-openclaw {
+        border-color: rgba(192, 122, 17, 0.3);
+        background:
+          linear-gradient(135deg, rgba(255, 240, 215, 0.9), rgba(255, 255, 255, 0.76)),
+          rgba(255, 255, 255, 0.82);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.88) inset,
+          0 22px 60px rgba(192, 122, 17, 0.12);
+      }
+
+      .launch-kicker {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--teal);
+        font-size: 0.78rem;
+        font-weight: 820;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .launch-card.is-openclaw .launch-kicker {
+        color: var(--amber);
+      }
+
+      .launch-card h3 {
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(1.6rem, 3vw, 2.28rem);
+        line-height: 1.04;
+      }
+
+      .launch-card p {
+        max-width: 700px;
+        margin: 13px 0 0;
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      .launch-points {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin: 20px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .launch-points li {
+        min-width: 0;
+        padding: 13px;
+        border: 1px solid rgba(89, 111, 128, 0.16);
+        border-radius: 7px;
+        background: rgba(255, 255, 255, 0.56);
+      }
+
+      .launch-points strong,
+      .launch-points span {
+        display: block;
+      }
+
+      .launch-points strong {
+        color: var(--ink);
+        font-size: 0.78rem;
+        font-weight: 780;
+      }
+
+      .launch-points span {
+        margin-top: 5px;
+        color: #52657c;
+        font-size: 0.9rem;
+        line-height: 1.35;
+      }
+
+      .launch-actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding: 18px;
+        border: 1px solid rgba(89, 111, 128, 0.18);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .launch-actions span {
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .launch-button,
+      .launch-secondary {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        border-radius: 7px;
+        padding: 0 17px;
+        font-size: 0.93rem;
+        font-weight: 780;
+        text-decoration: none;
+        transition:
+          transform 180ms var(--ease),
+          box-shadow 180ms var(--ease),
+          border-color 180ms var(--ease),
+          background 180ms var(--ease);
+      }
+
+      .launch-button {
+        border: 1px solid rgba(6, 102, 108, 0.72);
+        color: white;
+        background: linear-gradient(180deg, #0fa2a8, #08747b);
+        box-shadow: 0 16px 30px rgba(8, 125, 132, 0.24);
+      }
+
+      .launch-card.is-openclaw .launch-button {
+        border-color: rgba(148, 90, 10, 0.58);
+        background: linear-gradient(180deg, #d9942a, #b86e0e);
+        box-shadow: 0 16px 30px rgba(192, 122, 17, 0.24);
+      }
+
+      .launch-secondary {
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.66);
+        cursor: pointer;
+      }
+
+      .launch-button:hover,
+      .launch-secondary:hover {
+        transform: translateY(-1px);
+      }
+
+      .launch-card.is-spotlit {
+        animation: launchSpotlight 1800ms var(--ease);
+      }
+
+      .launch-card.is-openclaw.is-spotlit {
+        animation-name: launchSpotlightAmber;
+      }
+
+      @keyframes launchSpotlight {
+        0%,
+        100% {
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.88) inset,
+            0 22px 60px rgba(8, 125, 132, 0.12);
+        }
+        35% {
+          box-shadow:
+            0 0 0 3px rgba(58, 188, 190, 0.22),
+            0 0 48px rgba(58, 188, 190, 0.34),
+            0 24px 70px rgba(8, 125, 132, 0.18);
+        }
+      }
+
+      @keyframes launchSpotlightAmber {
+        0%,
+        100% {
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.88) inset,
+            0 22px 60px rgba(192, 122, 17, 0.12);
+        }
+        35% {
+          box-shadow:
+            0 0 0 3px rgba(226, 165, 67, 0.22),
+            0 0 48px rgba(226, 165, 67, 0.32),
+            0 24px 70px rgba(192, 122, 17, 0.18);
+        }
+      }
+
+      @keyframes launchSpotlightDark {
+        0%,
+        100% {
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.04) inset,
+            0 24px 70px rgba(0, 0, 0, 0.32);
+        }
+        35% {
+          box-shadow:
+            0 0 0 3px rgba(58, 188, 190, 0.2),
+            0 0 50px rgba(58, 188, 190, 0.28),
+            0 24px 70px rgba(0, 0, 0, 0.38);
+        }
+      }
+
+      @keyframes launchSpotlightAmberDark {
+        0%,
+        100% {
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.04) inset,
+            0 24px 70px rgba(0, 0, 0, 0.32);
+        }
+        35% {
+          box-shadow:
+            0 0 0 3px rgba(226, 165, 67, 0.2),
+            0 0 50px rgba(226, 165, 67, 0.26),
+            0 24px 70px rgba(0, 0, 0, 0.38);
+        }
+      }
+
+
       .detail-card {
         border: 1px solid var(--line);
         border-radius: var(--radius);
@@ -902,6 +1125,48 @@
         color: #cfe1eb;
       }
 
+      :root[data-theme="dark"] .launch-card {
+        border-color: rgba(58, 188, 190, 0.26);
+        background:
+          linear-gradient(135deg, rgba(58, 188, 190, 0.14), rgba(12, 26, 35, 0.86)),
+          var(--glass);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.04) inset,
+          0 24px 70px rgba(0, 0, 0, 0.32);
+      }
+
+      :root[data-theme="dark"] .launch-card.is-openclaw {
+        border-color: rgba(226, 165, 67, 0.26);
+        background:
+          linear-gradient(135deg, rgba(226, 165, 67, 0.13), rgba(12, 26, 35, 0.86)),
+          var(--glass);
+      }
+
+      :root[data-theme="dark"] .launch-points li,
+      :root[data-theme="dark"] .launch-actions {
+        background: rgba(8, 18, 25, 0.5);
+        border-color: var(--line);
+      }
+
+      :root[data-theme="dark"] .launch-points span,
+      :root[data-theme="dark"] .launch-actions span {
+        color: var(--text);
+      }
+
+      :root[data-theme="dark"] .launch-secondary {
+        background: rgba(12, 26, 35, 0.66);
+        border-color: var(--line);
+        color: var(--text);
+      }
+
+      :root[data-theme="dark"] .launch-card.is-spotlit {
+        animation-name: launchSpotlightDark;
+      }
+
+      :root[data-theme="dark"] .launch-card.is-openclaw.is-spotlit {
+        animation-name: launchSpotlightAmberDark;
+      }
+
       :root[data-theme="dark"] .mark path:first-child {
         stroke: #dff5f3;
       }
@@ -928,6 +1193,10 @@
         }
 
         .detail-drawer {
+          grid-template-columns: 1fr;
+        }
+
+        .launch-card {
           grid-template-columns: 1fr;
         }
       }
@@ -1006,7 +1275,9 @@
         }
 
         .primary,
-        .secondary {
+        .secondary,
+        .launch-button,
+        .launch-secondary {
           width: 100%;
         }
 
@@ -1018,6 +1289,20 @@
         .path {
           grid-template-columns: 1fr;
           padding: 20px;
+        }
+
+        .launch-card {
+          padding: 18px;
+        }
+
+        .launch-points {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .launch-card.is-spotlit {
+          animation: none;
         }
       }
     </style>
@@ -1203,6 +1488,37 @@
         </section>
 
         <section class="detail-drawer" id="detailDrawer" aria-label="Detailed setup guidance">
+          <article class="launch-card" id="launchCard">
+            <div>
+              <span class="launch-kicker">Your recommended install path</span>
+              <h3 id="launchTitle">Ready to install Hermes</h3>
+              <p id="launchSummary">Start with the official install guide, then work through the security notes below before adding personal data or broader access.</p>
+              <ul class="launch-points">
+                <li>
+                  <strong>Host</strong>
+                  <span id="launchHost">Secondary computer</span>
+                </li>
+                <li>
+                  <strong>Platform</strong>
+                  <span id="launchPlatform">macOS</span>
+                </li>
+                <li>
+                  <strong>Credentials</strong>
+                  <span id="launchCredentials">OpenAI subscription</span>
+                </li>
+              </ul>
+            </div>
+            <div class="launch-actions">
+              <span id="launchActionCopy">This is the next tab to open when they are ready to start installing.</span>
+              <a class="launch-button" id="launchInstallLink" href="https://hermes-agent.nousresearch.com/docs/getting-started/installation" target="_blank" rel="noopener noreferrer">
+                Open Hermes install guide
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+              <button class="launch-secondary" type="button" id="launchSecurityButton">Review security checklist</button>
+            </div>
+          </article>
           <article class="detail-card">
             <h3 id="bestForTitle">Best fit</h3>
             <p id="bestForCopy"></p>
@@ -1223,7 +1539,7 @@
             <h3>Cost guidance</h3>
             <p id="costDetail"></p>
           </article>
-          <article class="detail-card">
+          <article class="detail-card" id="securityCard">
             <h3>Security baseline</h3>
             <ul id="securitySteps"></ul>
           </article>
@@ -1575,6 +1891,9 @@
       const selectRouteButton = document.querySelector("#selectRouteButton");
       const installGuideLink = document.querySelector("#installGuideLink");
       const detailDrawer = document.querySelector("#detailDrawer");
+      const launchCard = document.querySelector("#launchCard");
+      const launchSecurityButton = document.querySelector("#launchSecurityButton");
+      const launchInstallLink = document.querySelector("#launchInstallLink");
 
       const themeIcons = {
         light: `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v2.4M12 18.6V21M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M3 12h2.4M18.6 12H21M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" /></svg>`,
@@ -1681,7 +2000,7 @@
         helperText.textContent = question.helper;
         progressLabel.textContent = `Step ${state.index + 1} of ${questions.length}`;
         backButton.style.visibility = state.index === 0 ? "hidden" : "visible";
-        nextButton.textContent = state.index === questions.length - 1 ? "Show setup path" : "Continue";
+        nextButton.textContent = state.index === questions.length - 1 ? "Show my install path" : "Continue";
 
         answerList.innerHTML = "";
         question.answers.forEach((answer) => {
@@ -1754,6 +2073,21 @@
         const { host } = getHostRecommendation();
         const { platform } = getPlatformRecommendation();
         const product = products[route];
+        const credentialAnswer = state.answers.credentials?.title || "Credential path still flexible";
+        launchCard.classList.toggle("is-openclaw", route === "openclaw");
+        document.querySelector("#launchTitle").textContent = `Ready to install ${product.name}`;
+        document.querySelector("#launchSummary").textContent = `${product.name} on ${platform.name}, running on ${host.name}. Start with the official install guide, then work through the security notes below before adding personal data or broader access.`;
+        document.querySelector("#launchHost").textContent = host.name;
+        document.querySelector("#launchPlatform").textContent = platform.name;
+        document.querySelector("#launchCredentials").textContent = credentialAnswer;
+        document.querySelector("#launchActionCopy").textContent = `Open the official ${product.name} install guide when they are ready to start.`;
+        launchInstallLink.href = product.installUrl;
+        launchInstallLink.innerHTML = `
+          Open ${product.name} install guide
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        `;
         document.querySelector("#bestForTitle").textContent = `${product.name} best fit`;
         document.querySelector("#bestForCopy").textContent = product.bestFor;
         document.querySelector("#hostDetailTitle").textContent = `Host: ${host.name}`;
@@ -1764,6 +2098,16 @@
         document.querySelector("#costDetail").textContent = product.cost;
         document.querySelector("#securitySteps").innerHTML = securityBaseline.map((step) => `<li>${step}</li>`).join("");
         document.querySelector("#setupSteps").innerHTML = product.steps.map((step) => `<li>${step}</li>`).join("");
+      }
+
+      function revealLaunchCard(spotlight = false) {
+        detailDrawer.classList.add("is-open");
+        if (spotlight) {
+          launchCard.classList.remove("is-spotlit");
+          void launchCard.offsetWidth;
+          launchCard.classList.add("is-spotlit");
+        }
+        launchCard.scrollIntoView({ behavior: "smooth", block: "center" });
       }
 
       function render() {
@@ -1780,8 +2124,8 @@
           state.index += 1;
           render();
         } else {
-          detailDrawer.classList.add("is-open");
-          detailDrawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          render();
+          revealLaunchCard(true);
         }
       });
 
@@ -1815,15 +2159,18 @@
       detailsButton.addEventListener("click", () => {
         detailDrawer.classList.toggle("is-open");
         if (detailDrawer.classList.contains("is-open")) {
-          detailDrawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          launchCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
       });
 
       selectRouteButton.addEventListener("click", () => {
         state.index = questions.length - 1;
-        detailDrawer.classList.add("is-open");
         render();
-        detailDrawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        revealLaunchCard(true);
+      });
+
+      launchSecurityButton.addEventListener("click", () => {
+        document.querySelector("#securityCard").scrollIntoView({ behavior: "smooth", block: "center" });
       });
 
       syncSystemTheme();
