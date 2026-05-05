@@ -762,6 +762,20 @@
         padding-left: 18px;
       }
 
+      .site-footer {
+        width: min(1320px, calc(100vw - 56px));
+        margin: 22px auto 0;
+        padding: 0 2px 10px;
+        color: var(--muted);
+        font-size: 0.86rem;
+        line-height: 1.45;
+      }
+
+      .site-footer strong {
+        color: var(--text);
+        font-weight: 720;
+      }
+
       .sr-only {
         position: absolute;
         width: 1px;
@@ -864,7 +878,8 @@
       :root[data-theme="dark"] .path-intro span,
       :root[data-theme="dark"] .path-step p,
       :root[data-theme="dark"] .detail-card p,
-      :root[data-theme="dark"] .detail-card li {
+      :root[data-theme="dark"] .detail-card li,
+      :root[data-theme="dark"] .site-footer {
         color: var(--text);
       }
 
@@ -917,7 +932,8 @@
         .topbar,
         .stage,
         .path,
-        .detail-drawer {
+        .detail-drawer,
+        .site-footer {
           width: calc(100vw - 56px);
           max-width: calc(100vw - 56px);
         }
@@ -1208,6 +1224,10 @@
             <ul id="setupSteps"></ul>
           </article>
         </section>
+
+        <footer class="site-footer">
+          Built by <strong>Joey Wright</strong> and his agent team.
+        </footer>
       </main>
     </div>
 
