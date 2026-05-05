@@ -357,6 +357,24 @@
         overflow-wrap: anywhere;
       }
 
+      .answer-warning {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        width: fit-content;
+        max-width: 100%;
+        margin-top: 12px;
+        padding: 7px 9px;
+        border: 1px solid rgba(192, 122, 17, 0.24);
+        border-radius: 7px;
+        color: #8d570d;
+        background: rgba(255, 240, 215, 0.62);
+        font-size: 0.82rem;
+        font-weight: 720;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+      }
+
       .select-indicator {
         width: 26px;
         height: 26px;
@@ -838,6 +856,7 @@
 
       :root[data-theme="dark"] .subhead,
       :root[data-theme="dark"] .answer-copy,
+      :root[data-theme="dark"] .answer-warning,
       :root[data-theme="dark"] .helper,
       :root[data-theme="dark"] .reason,
       :root[data-theme="dark"] .check-list li,
@@ -847,6 +866,12 @@
       :root[data-theme="dark"] .detail-card p,
       :root[data-theme="dark"] .detail-card li {
         color: var(--text);
+      }
+
+      :root[data-theme="dark"] .answer-warning {
+        border-color: rgba(226, 165, 67, 0.22);
+        color: #f0c778;
+        background: rgba(226, 165, 67, 0.1);
       }
 
       :root[data-theme="dark"] .panel-title,
@@ -1267,6 +1292,7 @@
               id: "main-machine",
               title: "My main computer",
               copy: "Only for a short local trial with a limited account, limited folders, and no broad secrets.",
+              warning: "Not recommended for a persistent install.",
               route: "hermes",
               icon: "laptop",
               scores: { hermes: 2, openclaw: 0 },
@@ -1642,6 +1668,7 @@
             <span>
               <span class="answer-title">${answer.title}</span>
               <span class="answer-copy">${answer.copy}</span>
+              ${answer.warning ? `<span class="answer-warning">${answer.warning}</span>` : ""}
             </span>
             <span class="select-indicator">${icons.check}</span>
           `;
