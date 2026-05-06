@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agent Setup Guide</title>
+    <title>Agent Setup Guide by JoeyBaggaBots</title>
     <script>
       (() => {
         let theme = null;
@@ -141,8 +141,30 @@
         gap: 14px;
         padding-left: 28px;
         color: var(--ink);
+      }
+
+      .brand-copy {
+        display: flex;
+        align-items: baseline;
+        gap: 7px;
+        flex-wrap: wrap;
+        line-height: 1.1;
+      }
+
+      .brand-title {
         font-weight: 760;
         font-size: 1.08rem;
+      }
+
+      .brand-byline {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 720;
+        text-decoration: none;
+      }
+
+      .brand-byline:hover {
+        color: var(--teal);
       }
 
       .mark {
@@ -842,6 +864,27 @@
         line-height: 1.35;
       }
 
+      .launch-follow {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 650;
+        line-height: 1.4;
+      }
+
+      .launch-follow a {
+        color: var(--text);
+        font-weight: 780;
+        text-decoration-color: rgba(8, 125, 132, 0.38);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+      }
+
+      .launch-follow a:hover {
+        color: var(--teal);
+        text-decoration-color: currentColor;
+      }
+
       .launch-button,
       .launch-secondary {
         min-height: 48px;
@@ -1149,7 +1192,8 @@
       }
 
       :root[data-theme="dark"] .launch-points span,
-      :root[data-theme="dark"] .launch-actions span {
+      :root[data-theme="dark"] .launch-actions span,
+      :root[data-theme="dark"] .launch-follow {
         color: var(--text);
       }
 
@@ -1157,6 +1201,16 @@
         background: rgba(12, 26, 35, 0.66);
         border-color: var(--line);
         color: var(--text);
+      }
+
+      :root[data-theme="dark"] .launch-follow a,
+      :root[data-theme="dark"] .brand-byline {
+        color: #d8e7ef;
+      }
+
+      :root[data-theme="dark"] .launch-follow a:hover,
+      :root[data-theme="dark"] .brand-byline:hover {
+        color: var(--teal);
       }
 
       :root[data-theme="dark"] .launch-card.is-spotlit {
@@ -1317,7 +1371,10 @@
               <path d="M12 3v18M4.8 7.1 12 11.2l7.2-4.1" stroke="#087d84" stroke-width="1.7" />
             </svg>
           </span>
-          <span>Agent Setup Guide</span>
+          <span class="brand-copy">
+            <span class="brand-title">Agent Setup Guide</span>
+            <a class="brand-byline" href="https://x.com/JoeyBaggaBots" target="_blank" rel="noopener noreferrer">by JoeyBaggaBots</a>
+          </span>
         </div>
         <div class="top-actions">
           <button class="icon-button" type="button" id="themeButton" aria-label="Toggle color theme" title="Toggle color theme">
@@ -1517,6 +1574,7 @@
                 </svg>
               </a>
               <button class="launch-secondary" type="button" id="launchSecurityButton">Review security checklist</button>
+              <p class="launch-follow">Follow <a href="https://x.com/JoeyBaggaBots" target="_blank" rel="noopener noreferrer">@JoeyBaggaBots</a> for real-world setup notes and updates.</p>
             </div>
           </article>
           <article class="detail-card">
