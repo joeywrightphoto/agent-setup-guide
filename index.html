@@ -4,193 +4,315 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent Setup Guide — Build your own AI assistant</title>
-<meta name="description" content="The easiest way to set up your own always-on AI assistant. You don't install anything by hand — you paste one prompt and let an AI do the whole setup for you.">
+<meta name="description" content="The easiest way to set up your own always-on AI assistant. You don't install anything by hand. You paste one prompt, and an AI does the entire setup while you watch.">
+<meta name="theme-color" content="#ffffff">
 <meta property="og:title" content="Agent Setup Guide — Build your own AI assistant">
-<meta property="og:description" content="Paste one prompt. An AI does the entire setup for you. No downloads, no terminal knowledge, no code.">
+<meta property="og:description" content="Paste one prompt. An AI does the entire setup for you. No downloads, no terminal, no code.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0a0e1a">
+<meta property="og:url" content="https://agentsetupguide.com">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://agentsetupguide.com/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
 <style>
 :root{
-  --bg:#0a0e1a; --panel:#111726; --panel-2:#161d30; --line:#232c45;
-  --text:#e8ecf7; --dim:#8892b0; --mute:#5a6480;
-  --coral:#ff4d4d; --coral-lt:#ff6e6e; --cyan:#00e5cc; --amber:#ffb020;
+  --bg:#ffffff;
+  --bg2:#f5f5f7;
+  --ink:#1d1d1f;
+  --ink2:#6e6e73;
+  --line:#d2d2d7;
+  --line2:#e8e8ed;
+  --blue:#0071e3;
+  --link:#0066cc;
+  --card:#ffffff;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  margin:0; background:var(--bg); color:var(--text);
-  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:17px;
+  line-height:1.47;
+  letter-spacing:-.011em;
   -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
-.wrap{max-width:760px;margin:0 auto;padding:0 22px}
-code,kbd,pre{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace}
-code{background:var(--panel-2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:.88em}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.narrow{max-width:720px;margin:0 auto}
+code,pre{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+code{background:var(--bg2);border-radius:5px;padding:2px 6px;font-size:.86em;letter-spacing:0}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
 
-header{padding:72px 0 46px;border-bottom:1px solid var(--line);
-  background:radial-gradient(900px 380px at 50% -140px,rgba(255,77,77,.16),transparent 70%)}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);font-weight:700;margin:0 0 16px}
-h1{font-size:clamp(34px,6vw,52px);line-height:1.08;margin:0 0 18px;letter-spacing:-.025em;font-weight:800}
-h1 .g{background:linear-gradient(100deg,var(--coral),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lede{font-size:19px;color:var(--dim);margin:0 0 26px;max-width:62ch}
-.lede b{color:var(--text);font-weight:600}
-.pills{display:flex;flex-wrap:wrap;gap:8px}
-.pill{font-size:13px;color:var(--dim);background:var(--panel);border:1px solid var(--line);
-  border-radius:100px;padding:6px 13px}
-.pill b{color:var(--cyan);font-weight:600}
+/* ---------- type ---------- */
+h1{
+  font-size:clamp(40px,7.2vw,72px);
+  line-height:1.05;
+  letter-spacing:-.022em;
+  font-weight:600;
+  margin:0 0 22px;
+}
+h1 .soft{color:var(--ink2)}
+h2{
+  font-size:clamp(30px,4.6vw,48px);
+  line-height:1.08;
+  letter-spacing:-.021em;
+  font-weight:600;
+  margin:0 0 18px;
+}
+h3{
+  font-size:clamp(22px,3vw,28px);
+  line-height:1.14;
+  letter-spacing:-.017em;
+  font-weight:600;
+  margin:0 0 10px;
+}
+h4{font-size:21px;line-height:1.2;letter-spacing:-.014em;font-weight:600;margin:0 0 6px}
+p{margin:0 0 18px}
+.lede{font-size:clamp(19px,2.4vw,24px);line-height:1.35;letter-spacing:-.012em;color:var(--ink);margin:0 0 16px}
+.sub{color:var(--ink2)}
+.small{font-size:15px;line-height:1.5;color:var(--ink2)}
+.tiny{font-size:12px;line-height:1.4;color:var(--ink2);letter-spacing:0}
+.eyebrow{font-size:19px;line-height:1.2;font-weight:600;letter-spacing:-.012em;color:var(--blue);margin:0 0 10px}
+.center{text-align:center}
 
-section{padding:52px 0;border-bottom:1px solid var(--line)}
-h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin:0 0 26px;font-weight:700}
-h3{font-size:21px;margin:0 0 8px;letter-spacing:-.01em;font-weight:650}
-p{margin:0 0 14px}
-.sub{color:var(--dim)}
-a{color:var(--coral-lt);text-decoration:none;border-bottom:1px solid rgba(255,110,110,.32)}
-a:hover{color:#fff;border-bottom-color:#fff}
+/* ---------- sections ---------- */
+section{padding:96px 0}
+section.tint{background:var(--bg2)}
+section.tight{padding:72px 0}
+.hero{padding:92px 0 78px;text-align:center}
 
-.step{display:grid;grid-template-columns:44px 1fr;gap:20px;margin-bottom:38px}
-.step:last-child{margin-bottom:0}
-.num{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:17px;
-  background:linear-gradient(150deg,var(--coral),#c9302c);color:#fff;box-shadow:0 5px 20px rgba(255,77,77,.24)}
-.step .body{min-width:0}
-.why{font-size:14px;color:var(--mute);margin:10px 0 0;padding-left:13px;border-left:2px solid var(--line)}
-.why b{color:var(--dim)}
+/* ---------- buttons ---------- */
+.cta{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;margin:30px 0 0}
+.btn{
+  display:inline-block;background:var(--blue);color:#fff;font-size:17px;font-weight:400;
+  padding:12px 24px;border-radius:980px;letter-spacing:-.01em;
+}
+.btn:hover{background:#0077ed;text-decoration:none}
+.btnlink{font-size:17px;color:var(--link)}
+.btnlink:hover{text-decoration:underline}
 
-.code{position:relative;background:#080c16;border:1px solid var(--line);border-radius:11px;margin:16px 0 0;overflow:hidden}
-.code pre{margin:0;padding:17px;overflow-x:auto;font-size:13.5px;line-height:1.7;color:#d5dcf0;white-space:pre-wrap;word-break:break-word}
-.code.big pre{max-height:320px;overflow-y:auto}
-.code .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:9px 12px;border-bottom:1px solid var(--line);background:var(--panel-2)}
-.code .bar span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:700}
-.copy{background:var(--panel);border:1px solid var(--line);color:var(--dim);
-  border-radius:7px;padding:5px 12px;font-size:11.5px;cursor:pointer;font-weight:700;transition:.15s;letter-spacing:.04em;white-space:nowrap}
-.copy:hover{color:#fff;border-color:var(--coral)}
-.copy.done{color:var(--cyan);border-color:var(--cyan)}
+/* ---------- stat bar ---------- */
+.stats{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin:44px auto 0;max-width:640px}
+.stats div{flex:1 1 150px;padding:0 18px;border-left:1px solid var(--line)}
+.stats div:first-child{border-left:none}
+.stats b{display:block;font-size:34px;line-height:1.1;font-weight:600;letter-spacing:-.02em}
+.stats span{font-size:14px;color:var(--ink2)}
 
-.choice{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:19px}
-.card.pick{border-color:rgba(0,229,204,.42);background:linear-gradient(170deg,rgba(0,229,204,.07),var(--panel))}
-.card h4{margin:0 0 3px;font-size:17px;font-weight:650}
-.tag{display:inline-block;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;
-  color:var(--cyan);border:1px solid rgba(0,229,204,.4);border-radius:5px;padding:2px 7px;margin-bottom:9px}
-.card .price{font-size:13px;color:var(--mute);margin:0 0 10px}
-.card ul{margin:0;padding-left:17px;font-size:14px;color:var(--dim)}
-.card li{margin-bottom:5px}
+/* ---------- feature grid ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px}
+.tile{background:var(--card);border-radius:20px;padding:30px 28px}
+section.tint .tile{background:#fff}
+.tile .ic{font-size:30px;line-height:1;margin:0 0 14px}
+.tile h4{font-size:19px;margin-bottom:5px}
+.tile p{font-size:15px;line-height:1.5;color:var(--ink2);margin:0}
 
-.skip{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);
-  border-radius:0 12px 12px 0;padding:19px 21px;margin-top:6px}
-.skip .row{padding:11px 0;border-top:1px solid var(--line)}
-.skip .row:first-child{padding-top:0;border-top:none}
-.skip .row:last-child{padding-bottom:0}
-.skip strong{color:var(--text);font-weight:650}
-.skip .row p{margin:3px 0 0;font-size:14.5px;color:var(--dim)}
+/* ---------- steps ---------- */
+.step{border-top:1px solid var(--line);padding:52px 0 0;margin-top:52px}
+.step:first-of-type{border-top:none;padding-top:0;margin-top:44px}
+.stepno{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--blue);margin:0 0 10px;text-transform:uppercase}
+.note{
+  background:var(--bg2);border-radius:16px;padding:20px 22px;margin:24px 0 0;
+  font-size:15px;line-height:1.55;color:var(--ink2);
+}
+section.tint .note{background:#fff}
+.note b{color:var(--ink);font-weight:600}
+.note.flag{border-left:4px solid var(--blue);border-radius:0 16px 16px 0}
 
-.note{background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:15px 17px;font-size:14.5px;color:var(--dim);margin-top:18px}
-.note b{color:var(--text)}
-.note.warn{border-left:3px solid var(--amber);border-radius:0 11px 11px 0}
+/* ---------- choice cards ---------- */
+.card{background:#fff;border:1px solid var(--line2);border-radius:20px;padding:28px 26px}
+.card.hi{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.badge{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.01em;color:var(--blue);
+  border:1px solid var(--blue);border-radius:980px;padding:3px 11px;margin:0 0 12px}
+.badge.grey{color:var(--ink2);border-color:var(--line)}
+.card .price{font-size:14px;color:var(--ink2);margin:0 0 14px}
+.card ul{margin:0;padding-left:19px;font-size:15px;line-height:1.55;color:var(--ink2)}
+.card li{margin-bottom:7px}
+.card li:last-child{margin-bottom:0}
 
-.later{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
-.later div{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px 16px;font-size:14.5px;color:var(--dim)}
-.later b{display:block;color:var(--text);font-size:15px;font-weight:650;margin-bottom:2px}
+/* ---------- code ---------- */
+.codebox{border:1px solid var(--line2);border-radius:18px;overflow:hidden;margin:28px 0 0;background:#fff}
+.codebox .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 18px;background:var(--bg2);border-bottom:1px solid var(--line2)}
+.codebox .bar span{font-size:14px;font-weight:600;color:var(--ink)}
+.copy{
+  background:var(--blue);color:#fff;border:none;border-radius:980px;
+  padding:7px 17px;font-size:14px;cursor:pointer;white-space:nowrap;
+  font-family:inherit;letter-spacing:-.01em;
+}
+.copy:hover{background:#0077ed}
+.copy.done{background:#1d1d1f}
+.codebox pre{
+  margin:0;padding:22px;overflow-x:auto;max-height:360px;overflow-y:auto;
+  font-size:13px;line-height:1.72;color:#1d1d1f;white-space:pre-wrap;word-break:break-word;letter-spacing:0;
+}
 
-.try{display:grid;gap:8px;margin-top:4px}
-.try div{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--cyan);
-  border-radius:0 10px 10px 0;padding:11px 15px;font-size:15px;color:var(--dim)}
+/* ---------- plain list ---------- */
+.rows{margin-top:36px;border-top:1px solid var(--line)}
+.rows .row{border-bottom:1px solid var(--line);padding:22px 0}
+.rows .row h4{font-size:18px;margin-bottom:4px}
+.rows .row p{margin:0;font-size:15px;line-height:1.55;color:var(--ink2)}
 
-.cross{display:block;background:var(--panel);border:1px solid var(--line);border-radius:13px;
-  padding:18px 20px;color:var(--dim);text-decoration:none}
-.cross:hover{border-color:var(--coral);color:var(--dim)}
-.cross b{display:block;color:var(--text);font-size:17px;font-weight:650;margin-bottom:3px}
-.cross span{font-size:14.5px}
+/* ---------- quotes ---------- */
+.says{display:grid;gap:12px;margin-top:32px}
+.says div{background:#fff;border-radius:14px;padding:16px 20px;font-size:17px;color:var(--ink)}
+section.tint .says div{background:#fff}
 
-footer{padding:40px 0 64px;color:var(--mute);font-size:13.5px;text-align:center}
-footer a{color:var(--dim)}
+/* ---------- cross link ---------- */
+.cross{display:block;background:#fff;border:1px solid var(--line2);border-radius:20px;padding:28px;color:var(--ink)}
+.cross:hover{border-color:var(--blue);text-decoration:none}
+.cross p{margin:0;font-size:15px;color:var(--ink2)}
 
-@media(max-width:620px){
-  .choice,.later{grid-template-columns:1fr}
-  .step{grid-template-columns:34px 1fr;gap:14px}
-  .num{width:34px;height:34px;font-size:15px;border-radius:10px}
-  header{padding:52px 0 36px}
+/* ---------- footer ---------- */
+footer{background:var(--bg2);padding:40px 0;border-top:1px solid var(--line)}
+footer p{margin:0 0 8px}
+footer p:last-child{margin:0}
+
+@media(max-width:860px){
+  .grid3{grid-template-columns:1fr;gap:14px}
+  .grid2{grid-template-columns:1fr;gap:14px}
+  section{padding:68px 0}
+  .hero{padding:64px 0 56px}
+  .stats div{flex-basis:100%;border-left:none;border-top:1px solid var(--line);padding:16px 0}
+  .stats div:first-child{border-top:none;padding-top:0}
 }
 </style>
 </head>
 <body>
 
-<header>
+<!-- ============ HERO ============ -->
+<header class="hero">
   <div class="wrap">
     <p class="eyebrow">Agent Setup Guide</p>
-    <h1>Build your own<br><span class="g">AI assistant.</span></h1>
-    <p class="lede">Not a chatbot in a browser tab. An assistant that <b>lives on your computer</b>, that you text like a person, that can actually read your files, run your errands and remember you.</p>
-    <p class="lede" style="font-size:17px">You won't install anything by hand. You'll paste <b>one prompt</b>, and an AI does the whole setup while you watch.</p>
-    <div class="pills">
-      <span class="pill"><b>3</b> steps</span>
-      <span class="pill"><b>0</b> things to download</span>
-      <span class="pill"><b>~20 min</b>, mostly waiting</span>
+    <h1>Your own AI assistant.<br><span class="soft">Living on your own Mac.</span></h1>
+    <p class="lede narrow">You text it from your phone. It reads your files, runs your errands, and actually remembers you.</p>
+    <p class="lede narrow sub" style="font-size:19px">You won't download a single thing. You'll paste one prompt, and an AI does the entire setup while you watch.</p>
+    <div class="cta">
+      <a class="btn" href="#steps">Start setup</a>
+      <a class="btnlink" href="#what">See what it does &rsaquo;</a>
+    </div>
+    <div class="stats">
+      <div><b>3</b><span>steps</span></div>
+      <div><b>0</b><span>things to install by hand</span></div>
+      <div><b>~20</b><span>minutes, mostly waiting</span></div>
     </div>
   </div>
 </header>
 
-<section>
+<!-- ============ WHAT ============ -->
+<section class="tint" id="what">
   <div class="wrap">
-    <h2>What you're actually building</h2>
-    <p>A free program called <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a> runs quietly on your computer. You talk to it from your phone over Telegram, like texting a friend.</p>
-    <p>The difference between this and ChatGPT: <b>it has hands.</b> It reads and writes your files, searches the web, runs commands, browses sites while logged into your accounts, checks your email and calendar, and remembers everything across every conversation. You point it at an AI subscription you probably already pay for, and it becomes the thing that actually does the work.</p>
-    <div class="note"><b>The entire requirement list:</b> a computer that stays awake, and one AI subscription. That's it. Everything else installs itself.</div>
+    <div class="narrow center">
+      <h2>Not a chatbot.<br>Something with hands.</h2>
+      <p class="lede sub">A free program called <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a> runs quietly on your computer. You talk to it over Telegram, like texting a friend. The difference is that it can actually go do the thing.</p>
+    </div>
+    <div class="grid3">
+      <div class="tile">
+        <p class="ic">📂</p>
+        <h4>It touches your real stuff</h4>
+        <p>Your files, your mail, your calendar, your browser while you're still logged in. Not a copy you pasted into a chat box.</p>
+      </div>
+      <div class="tile">
+        <p class="ic">🧠</p>
+        <h4>It remembers</h4>
+        <p>Every conversation builds on the last one. It keeps notes on who you are and how you work, and gets sharper the longer you use it.</p>
+      </div>
+      <div class="tile">
+        <p class="ic">🌙</p>
+        <h4>It works when you don't</h4>
+        <p>Watch a page for a price drop, sort the inbox overnight, text you a briefing before you're awake.</p>
+      </div>
+    </div>
+    <div class="note narrow" style="margin-top:36px">
+      <b>The entire requirement list:</b> a computer that stays awake, and one AI subscription you probably already pay for. Everything else installs itself.
+    </div>
   </div>
 </section>
 
-<section>
+<!-- ============ STEPS ============ -->
+<section id="steps">
   <div class="wrap">
-    <h2>Three steps</h2>
+    <div class="narrow center">
+      <h2>Three steps.</h2>
+      <p class="lede sub">Only one of them involves typing, and it's a paste.</p>
+    </div>
 
-    <div class="step">
-      <div class="num">1</div>
-      <div class="body">
-        <h3>Pick a brain</h3>
-        <p class="sub">The only thing here that costs money, and you may already pay for it. Pick one — you can add the other later.</p>
-        <div class="choice">
-          <div class="card pick">
-            <span class="tag">Most capable</span>
+    <div class="narrow">
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <p class="stepno">Step 1</p>
+        <h3>Pick a brain.</h3>
+        <p class="sub">The only part that costs money, and there's a good chance you already pay for it. Pick one now, add the other later if you want.</p>
+        <div class="grid2">
+          <div class="card hi">
+            <span class="badge">Most capable</span>
             <h4>Claude</h4>
-            <p class="price">Pro $20/mo · Max $100–200/mo · <a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai</a></p>
+            <p class="price">Pro $20/mo · Max $100–200/mo<br><a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a></p>
             <ul>
               <li>Best at long, messy, multi-step work</li>
-              <li>Strongest at code and editing files</li>
-              <li>Pro is enough to start. Max is for running it hard, all day</li>
+              <li>Strongest at writing and editing files</li>
+              <li>Pro is plenty to start. Max is for running it hard, all day</li>
             </ul>
           </div>
           <div class="card">
-            <span class="tag" style="color:var(--amber);border-color:rgba(255,176,32,.4)">Already have it</span>
+            <span class="badge grey">You probably have it</span>
             <h4>ChatGPT</h4>
-            <p class="price">Plus $20/mo · Pro $200/mo · <a href="https://chatgpt.com/download" target="_blank" rel="noopener">chatgpt.com</a></p>
+            <p class="price">Plus $20/mo · Pro $200/mo<br><a href="https://chatgpt.com/download" target="_blank" rel="noopener">chatgpt.com/download</a></p>
             <ul>
-              <li>Works great, and most people already subscribe</li>
-              <li>Uses your existing login — no API bill</li>
+              <li>Works well, and most people already subscribe</li>
+              <li>Uses the login you already have — no API bill</li>
               <li>Plus has tighter limits. Fine for chatting on demand</li>
             </ul>
           </div>
         </div>
-        <p class="why">Install that company's <b>desktop app</b> and sign in. That's all of step 1 — the app is what runs step 3 for you.</p>
+        <div class="note">
+          Install that company's <b>desktop app</b> and sign in. That's all of step 1 — the app is what runs step 3 for you.
+        </div>
       </div>
-    </div>
 
-    <div class="step">
-      <div class="num">2</div>
-      <div class="body">
-        <h3>Stop your computer from sleeping</h3>
-        <p class="sub">Your assistant only works while its computer is awake. It doesn't need to be a new machine or a spare one — your everyday laptop is fine. It just can't nap.</p>
-        <p class="sub" style="font-size:15px"><b>Mac:</b> System Settings → Lock Screen → set the display and the computer to <em>Never</em> while plugged in. Leave it plugged in, lid open.<br>
-        <b>Windows:</b> Settings → System → Power → set sleep to <em>Never</em> when plugged in.</p>
-        <p class="why">Skip this and it still works — it just goes quiet whenever your computer does, and wakes when you do. Plenty of people start that way and only fix it once they want things happening overnight.</p>
+      <!-- STEP 2 -->
+      <div class="step">
+        <p class="stepno">Step 2</p>
+        <h3>Give it a Mac that stays awake.</h3>
+        <p class="sub">This is the one real requirement, and it's worth getting right. Your assistant is only alive while its computer is. A sleeping Mac is an assistant that isn't there.</p>
+        <p class="sub">You don't need a new machine or a spare one. You need one machine that's plugged in and not napping. Find yourself below:</p>
+
+        <div class="grid3" style="margin-top:28px">
+          <div class="tile" style="background:var(--bg2)">
+            <p class="ic">🖥️</p>
+            <h4>Desktop Mac</h4>
+            <p>Mac mini, Studio, iMac. Easiest case by far — one setting and you're done. This is what most people end up with eventually.</p>
+          </div>
+          <div class="tile" style="background:var(--bg2)">
+            <p class="ic">💻</p>
+            <h4>Laptop, lid open</h4>
+            <p>Plugged in, lid up, sleep set to never. Totally fine, and how nearly everyone starts. It just has to live somewhere it can stay open.</p>
+          </div>
+          <div class="tile" style="background:var(--bg2)">
+            <p class="ic">🔌</p>
+            <h4>Laptop, lid closed</h4>
+            <p>Closed-lid — clamshell — only works with power <i>and</i> an external display <i>and</i> a keyboard or mouse connected. Unplug the monitor and it sleeps.</p>
+          </div>
+        </div>
+
+        <div class="note flag">
+          <b>You don't have to configure this yourself.</b> The prompt in step 3 checks which kind of Mac you're on, sets the sleep behavior to match, and shows you how to undo it. This section is just so you know what it's doing and why.
+        </div>
+
+        <p class="small" style="margin-top:24px"><b>If it has to sleep at night, that's still fine.</b> You get a fully working assistant that's simply offline while you are. The only thing you lose is work happening overnight — briefings, scans, anything scheduled. That's the honest reason to add a cheap always-on Mac later: because you got hooked, not because you're doing it wrong now.</p>
+        <p class="small"><b>Two things to know.</b> A laptop working hard with the lid shut runs hotter, so give it air. And on Windows this all works too — power settings are under Settings → System → Power, and the prompt handles it.</p>
       </div>
-    </div>
 
-    <div class="step">
-      <div class="num">3</div>
-      <div class="body">
-        <h3>Paste this and let it build itself</h3>
-        <p class="sub">Open the desktop app from step 1, turn on its ability to use your computer (next section), then paste this in and hit send. It installs everything, connects your phone, and checks its own work.</p>
-        <div class="code big">
-          <div class="bar"><span>The whole setup, in one paste</span><button class="copy">Copy prompt</button></div>
+      <!-- STEP 3 -->
+      <div class="step">
+        <p class="stepno">Step 3</p>
+        <h3>Paste this. Watch it build itself.</h3>
+        <p class="sub">Open the desktop app from step 1, let it run things on your computer (that's the next section), then paste this in and send. It installs everything, keeps your Mac awake, connects your phone, and checks its own work before it tells you it's done.</p>
+        <div class="codebox">
+          <div class="bar"><span>The whole setup, in one paste</span><button class="copy" type="button">Copy prompt</button></div>
           <pre>I want to set up OpenClaw on this computer so I have my own always-on AI
 assistant that I can text from my phone. Please do the entire setup for me.
 
@@ -198,124 +320,184 @@ Assume I am not a developer. Do not ask me to make technical decisions, and
 explain each step in plain language as you go. Do the work yourself rather
 than handing me instructions to follow.
 
-Steps:
-
 1. Read the official guide at https://docs.openclaw.ai/start/getting-started
-   first, and follow that rather than anything you remember.
-2. Install OpenClaw by running:
+   first and follow that, rather than anything you remember. It changes.
+
+2. Install it by running:
    curl -fsSL https://openclaw.ai/install.sh | bash
-   That script installs Node and anything else it needs on its own. Do not
-   install Homebrew, Node, Git, a code editor, or a terminal app separately.
-3. Run: openclaw onboard --install-daemon
-   Walk me through the prompts. When it asks about the AI provider, sign in
-   with my existing Claude or ChatGPT SUBSCRIPTION. Do NOT set up a
-   pay-per-use API key or any billing account.
-4. Set up Telegram so I can text it from my phone: help me create a bot with
-   @BotFather, get the token, and lock it down so only my account can message
-   it. Tell me exactly what to tap on my phone.
-5. Verify it actually works. Run openclaw gateway status, then have me send a
-   real Telegram message and confirm I get a reply. Do not tell me it's done
-   until you have seen it reply.
-6. Ask me a few questions about who I am and what I do, and write the answers
-   into its memory files so it knows me from day one.
+   That script brings its own Node and anything else it needs. Do not install
+   Homebrew, Node, Git, a code editor or a terminal app separately.
+
+3. The installer opens a setup wizard on its own. Walk me through it. When it
+   asks about the AI provider, reuse my existing Claude or ChatGPT
+   SUBSCRIPTION login. Do NOT set up a pay-per-use API key, and do not create
+   any billing account.
+
+4. Make it run in the background and survive a restart:
+   openclaw gateway install
+
+5. Keep this machine awake, because the assistant only runs while it is.
+   Work out what kind of computer this is and set it up to match:
+   - A desktop Mac: set the computer to never sleep while on power.
+   - A laptop I keep open: never sleep while plugged in, and tell me to leave
+     it plugged in with the lid up.
+   - A laptop with an external display: tell me it can run lid-closed, but
+     only while plugged in with the display and a keyboard or mouse attached.
+   Tell me which case I am, show me the setting you changed, and tell me how
+   to undo it.
+
+6. Set up Telegram so I can text it from my phone: help me create a bot with
+   @BotFather, get the token, and lock it down so only my own account can
+   message it. Tell me exactly what to tap on my phone.
+
+7. Prove it works. Run: openclaw gateway status
+   Then have me send a real Telegram message and confirm I get a reply back.
+   Do not tell me it is done until you have seen it reply. If something
+   breaks, run: openclaw triage
+
+8. Ask me a handful of questions about who I am and what I do, and write the
+   answers into its memory files so it knows me from day one.
 
 Rules: stop and ask me before anything that costs money, sends a message to
-another person, or deletes files. At the end, give me a short list of what you
-set up, where it lives, and three things I should try first.</pre>
+another person, or deletes files. At the end, give me a short list of what
+you set up, where it lives, and three things I should try first.</pre>
         </div>
-        <p class="why">It will ask permission before running things on your machine. That's normal, and it's the point — but read what it's about to do before you approve. Never approve something that deletes files or spends money if you don't understand it.</p>
+        <div class="note">
+          It'll ask permission before running things on your machine. That's normal, and it's the point — but read what it's about to do before you approve it. Never approve something that deletes files or spends money if you don't understand it.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERMISSION ============ -->
+<section class="tint tight">
+  <div class="wrap narrow">
+    <h2>The one setting you flip yourself.</h2>
+    <p class="lede sub">Step 3 only works if the desktop app is allowed to run things on your computer. Both apps ship locked down, on purpose.</p>
+    <p><b>ChatGPT:</b> the setup runs in <b>Codex</b>, inside the ChatGPT desktop app. Point it at a folder on your computer and allow it to run commands there.</p>
+    <p><b>Claude:</b> same idea — <b>Claude Code</b>, inside the Claude desktop app, pointed at a folder on your machine.</p>
+    <div class="note flag">
+      <b>Approve as you go, at least at first.</b> Letting it run without asking is faster, and it's where most people end up — but only after watching it work for a while. There's no undo on a command that already ran.
+    </div>
+    <p class="small" style="margin-top:26px">These menus move around every few weeks as the apps update, so no guide stays right for long. If you can't find it, ask the app itself: <b>"how do I let you run commands on my computer?"</b> It knows its own settings better than this page can.</p>
+  </div>
+</section>
+
+<!-- ============ LEFT OUT ============ -->
+<section>
+  <div class="wrap narrow">
+    <h2>What we left out, on purpose.</h2>
+    <p class="lede sub">Every other guide hands you a download list. Here's why this one doesn't.</p>
+    <div class="rows">
+      <div class="row">
+        <h4>Node.js, Homebrew, Git</h4>
+        <p>The installer puts these in for you. If a guide tells you to download them first, that guide is out of date.</p>
+      </div>
+      <div class="row">
+        <h4>A fancy terminal — iTerm2, Warp, Ghostty</h4>
+        <p>The terminal already on your Mac is fine, and doing it this way you barely open it. These are for people who live in a terminal all day. You won't.</p>
+      </div>
+      <div class="row">
+        <h4>VS Code, or any code editor</h4>
+        <p>You're not the one writing code — your assistant is, and it edits its own files directly. Install an editor only if you personally want to sit and read them.</p>
+      </div>
+      <div class="row">
+        <h4>A cloud server or VPS</h4>
+        <p>Tempting, and it's a downgrade. A Linux box in a datacenter can't touch your messages, contacts, calendar, mail, photos or logged-in browser — which is most of what makes this feel like magic.</p>
+      </div>
+      <div class="row">
+        <h4>A second computer</h4>
+        <p>Genuinely nice once you're hooked and want things running at 4am. Completely unnecessary to start, and you'll know when you want one.</p>
+      </div>
+      <div class="row">
+        <h4>API keys and credits</h4>
+        <p>Your normal Claude or ChatGPT subscription is enough. Setting up billing at an API console is how people accidentally spend real money.</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>Letting the app touch your computer</h2>
-    <p class="sub">Step 3 only works if the desktop app is allowed to run things. Both apps ship locked down, so this is the one setting you have to flip yourself.</p>
-    <p><b>ChatGPT:</b> the setup happens in <b>Codex</b>, inside the ChatGPT desktop app. Point it at a folder on your computer and let it run commands there.</p>
-    <p><b>Claude:</b> same idea — <b>Claude Code</b>, inside the Claude desktop app, pointed at a folder on your machine.</p>
-    <div class="note warn"><b>Approve as you go, at least at first.</b> Letting it run without asking is faster, and it's where most people end up — but only after watching it work for a while. There's no undo on a command that already ran.</div>
-    <p class="why" style="margin-top:18px">These menus move around as the apps update. If you can't find the setting, ask the app itself: <b>"how do I let you run commands on my computer?"</b> It knows its own settings better than any guide can stay current.</p>
+<!-- ============ FIRST THINGS ============ -->
+<section class="tint">
+  <div class="wrap narrow">
+    <h2>Once it's alive.</h2>
+    <p class="lede sub">Don't open with a big project. Open by proving to yourself it's real.</p>
+    <div class="says">
+      <div>“What's on my calendar tomorrow?”</div>
+      <div>“Summarize this for me: [paste a link]”</div>
+      <div>“Watch this page and text me if the price drops.”</div>
+      <div>“Go through my inbox and tell me what actually needs me.”</div>
+    </div>
+    <p style="margin-top:30px">Then let it get to know you. This gets dramatically better once it has real context on who you are and how you work — and unlike a chat window, it writes that down and keeps it.</p>
   </div>
 </section>
 
+<!-- ============ LATER ============ -->
 <section>
   <div class="wrap">
-    <h2>What we left out on purpose</h2>
-    <p class="sub" style="margin-bottom:20px">Every other setup guide hands you a download list. Here's why this one doesn't.</p>
-    <div class="skip">
-      <div class="row"><strong>Node.js, Homebrew, Git</strong>
-        <p>The installer puts these in for you. If a guide tells you to download them first, that guide is out of date.</p></div>
-      <div class="row"><strong>A fancy terminal — iTerm2, Warp, Ghostty</strong>
-        <p>The terminal already on your computer is fine, and doing it this way you barely open it. These are for people who live in a terminal all day. You won't.</p></div>
-      <div class="row"><strong>VS Code or any code editor</strong>
-        <p>You're not writing code — your assistant is, and it edits its own files directly. Install an editor only if you personally want to sit and read the code.</p></div>
-      <div class="row"><strong>A cloud server or VPS</strong>
-        <p>Tempting, but it's a downgrade. A Linux box in a datacenter can't touch your messages, contacts, calendar, mail, photos or logged-in browser — which is most of what makes this feel like magic. Use your own machine.</p></div>
-      <div class="row"><strong>A second computer or a Mac mini</strong>
-        <p>Genuinely nice once you're hooked and want it running 24/7. Completely unnecessary to start.</p></div>
-      <div class="row"><strong>API keys and credits</strong>
-        <p>Your normal Claude or ChatGPT subscription is enough. Setting up billing at an API console is how people accidentally spend real money.</p></div>
+    <div class="narrow">
+      <h2>Later, when you want more.</h2>
+      <p class="lede sub">Don't set any of this up now. When you hit the moment you want one, just ask your assistant to add it. It can do its own installs.</p>
+    </div>
+    <div class="grid3" style="margin-top:40px">
+      <div class="tile" style="background:var(--bg2)">
+        <h4>A password manager</h4>
+        <p>Somewhere safe for it to keep logins, instead of you pasting passwords into a chat window.</p>
+      </div>
+      <div class="tile" style="background:var(--bg2)">
+        <h4>A private network</h4>
+        <p>Reach the home machine from anywhere, without opening it up to the internet.</p>
+      </div>
+      <div class="tile" style="background:var(--bg2)">
+        <h4>Version control</h4>
+        <p>A free undo button for its memory and notes. You'll want this the first time it deletes something you liked.</p>
+      </div>
+      <div class="tile" style="background:var(--bg2)">
+        <h4>Discord</h4>
+        <p>Separate rooms — alerts here, logs there, one per project — for when a single Telegram thread stops being enough.</p>
+      </div>
+      <div class="tile" style="background:var(--bg2)">
+        <h4>A voice</h4>
+        <p>So it sends voice notes instead of walls of text. Purely for fun. A lot of fun.</p>
+      </div>
+      <div class="tile" style="background:var(--bg2)">
+        <h4>Web hosting</h4>
+        <p>So it can build you dashboards and put them online. This page is an example of that.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>Once it's alive</h2>
-    <p>Don't start with a big project. Start by proving to yourself it's real:</p>
-    <div class="try">
-      <div>"What's on my calendar tomorrow?"</div>
-      <div>"Summarize this article for me: [link]"</div>
-      <div>"Watch this webpage and text me if the price drops."</div>
-      <div>"Go through my inbox and tell me what actually needs me."</div>
-    </div>
-    <p style="margin-top:20px">Then let it get to know you. The whole thing gets dramatically better once it has real context on who you are and how you work — it writes that down and keeps it.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Later, when you want more</h2>
-    <p class="sub" style="margin-bottom:18px">Don't set any of this up now. When you hit the moment where you want one, just ask your assistant to add it — it can do its own installs.</p>
-    <div class="later">
-      <div><b>A password manager</b>Somewhere safe for it to keep logins, instead of you pasting passwords into a chat window.</div>
-      <div><b>A private network</b>So you can reach the home machine from anywhere without opening it up to the internet.</div>
-      <div><b>Version control</b>A free undo button for its memory and notes. You'll want this the first time it deletes something.</div>
-      <div><b>Discord</b>Separate rooms — alerts here, logs there, one per project — for when a single Telegram thread isn't enough.</div>
-      <div><b>A voice</b>So it can send voice notes instead of walls of text. Purely for fun. A lot of fun.</div>
-      <div><b>Web hosting</b>So it can build you dashboards and put them online. This page is an example of that.</div>
-    </div>
-  </div>
-</section>
-
-<section style="border-bottom:none">
-  <div class="wrap">
+<!-- ============ CROSS ============ -->
+<section class="tint tight">
+  <div class="wrap narrow">
     <h2>Not sure this is the right system?</h2>
     <a class="cross" href="/compare">
-      <b>Take the 2-minute quiz →</b>
-      <span>A few questions about your setup, and it tells you whether OpenClaw or Hermes fits you better, where to run it, and how to keep it locked down.</span>
+      <h4>Take the 2-minute quiz &rsaquo;</h4>
+      <p>A few questions about your setup, and it tells you whether OpenClaw or Hermes fits you better, where to run it, and how to keep it locked down.</p>
     </a>
-    <div class="note" style="margin-top:20px">Full documentation: <a href="https://docs.openclaw.ai" target="_blank" rel="noopener">docs.openclaw.ai</a> — but you genuinely don't need it to start. Ask your assistant instead. It knows how it works.</div>
+    <div class="note" style="margin-top:22px">
+      Full documentation lives at <a href="https://docs.openclaw.ai" target="_blank" rel="noopener">docs.openclaw.ai</a> — but you genuinely don't need it to start. Ask your assistant instead. It knows how it works.
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    Made for friends who saw the setup and wanted one of their own.<br>
-    Not affiliated with OpenClaw, Anthropic or OpenAI.
+    <p class="tiny">Made for friends who saw the setup and wanted one of their own.</p>
+    <p class="tiny">Not affiliated with OpenClaw, Anthropic or OpenAI. Prices are what they were at time of writing — check before you subscribe.</p>
   </div>
 </footer>
 
 <script>
 document.querySelectorAll('.copy').forEach(function(b){
   b.addEventListener('click',function(){
-    var t=b.closest('.code').querySelector('pre').innerText;
+    var t=b.closest('.codebox').querySelector('pre').innerText;
     navigator.clipboard.writeText(t).then(function(){
       b.textContent='Copied';b.classList.add('done');
-      setTimeout(function(){b.textContent='Copy prompt';b.classList.remove('done')},1800);
+      setTimeout(function(){b.textContent='Copy prompt';b.classList.remove('done');},1800);
     });
   });
 });
