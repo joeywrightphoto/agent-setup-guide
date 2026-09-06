@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://agentsetupguide.com">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://agentsetupguide.com/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'><g fill='none' stroke='%235e5ce6' stroke-width='2.8' stroke-linecap='round'><rect x='5.6' y='9.2' width='28.8' height='22' rx='8.6'/><path d='M20 5.8v3.4M3 18.4v4.2M37 18.4v4.2'/><path d='M15.4 24.4c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.6-2.5'/></g><g fill='%235e5ce6'><circle cx='20' cy='3.2' r='2.6'/><circle cx='14.6' cy='18.4' r='2.5'/><circle cx='25.4' cy='18.4' r='2.5'/></g></svg>">
 <style>
 :root{
   --bg:#ffffff;
@@ -38,7 +38,8 @@
   --edge-mint:#a9dfc2;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+/* the sticky bar is 56px, so anchored sections have to stop clear of it */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:74px}
 body{
   margin:0;
   background:var(--bg);
@@ -121,6 +122,35 @@ section.tight{padding:72px 0}
 .btn:hover{background:#0077ed;text-decoration:none}
 .btnlink{font-size:17px;color:var(--link)}
 .btnlink:hover{text-decoration:underline}
+
+/* ---------- sticky nav ----------
+   Apple's bar: translucent, blurred, hairline underneath, nothing else. */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+.nav .bar{
+  display:flex;align-items:center;gap:22px;
+  height:56px;max-width:1120px;margin:0 auto;padding:0 22px;
+}
+.brand{display:flex;align-items:center;gap:9px;flex:0 0 auto;color:var(--ink);
+  font-size:17px;font-weight:600;letter-spacing:-.014em;white-space:nowrap}
+.brand:hover{text-decoration:none;color:var(--ink)}
+/* the mark: one colour, round everything, big eyes — a robot you'd let in the house */
+.bot{width:27px;height:auto;flex:0 0 auto;color:var(--g2);display:block}
+.brand:hover .bot{color:var(--g3)}
+.bot{transition:color .2s ease}
+.navlinks{display:flex;align-items:center;gap:26px;margin-left:auto;min-width:0}
+.navlinks a{font-size:14px;letter-spacing:-.006em;color:var(--ink2);white-space:nowrap}
+.navlinks a:hover{color:var(--ink);text-decoration:none}
+.navcta{
+  flex:0 0 auto;background:var(--blue);color:#fff;
+  font-size:14px;padding:7px 16px;border-radius:980px;letter-spacing:-.006em;white-space:nowrap;
+}
+.navcta:hover{background:#0077ed;text-decoration:none;color:#fff}
 
 /* ---------- stat bar ---------- */
 .stats{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin:44px auto 0;max-width:640px}
@@ -279,17 +309,61 @@ footer p:last-child{margin:0}
   .stats div{flex-basis:100%;border-left:none;border-top:1px solid var(--line);padding:16px 0}
   .stats div:first-child{border-top:none;padding-top:0}
 }
+/* the nav links go before the wordmark does — the CTA is the point of the bar.
+   The CTA has to take over the auto margin, or it slides left next to the logo. */
+@media(max-width:820px){
+  .navlinks{display:none}
+  .navcta{margin-left:auto}
+}
 @media(max-width:560px){
   .grid4{grid-template-columns:1fr}
+}
+/* the wordmark earns its place on a phone — shrink the bar instead of gutting it */
+@media(max-width:480px){
+  .nav .bar{gap:12px;padding:0 16px}
+  .brand{font-size:16px;gap:8px}
+  .bot{width:24px}
+  .navcta{font-size:13px;padding:6px 13px}
+}
+@media(max-width:340px){
+  .brand span{display:none}
 }
 </style>
 </head>
 <body>
 
+<!-- ============ NAV ============ -->
+<nav class="nav" aria-label="Main">
+  <div class="bar">
+    <a class="brand" href="/">
+      <svg class="bot" viewBox="0 0 40 36" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round">
+          <rect x="5.6" y="9.2" width="28.8" height="22" rx="8.6"/>
+          <path d="M20 5.8v3.4M3 18.4v4.2M37 18.4v4.2"/>
+          <path d="M15.4 24.4c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.6-2.5"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="20" cy="3.2" r="2.6"/>
+          <circle cx="14.6" cy="18.4" r="2.5"/>
+          <circle cx="25.4" cy="18.4" r="2.5"/>
+        </g>
+      </svg>
+      <span>Agent Setup Guide</span>
+    </a>
+    <div class="navlinks">
+      <a href="#what">What it does</a>
+      <a href="#steps">Setup</a>
+      <a href="#later">Add-ons</a>
+      <a href="/compare">Compare</a>
+    </div>
+    <a class="navcta" href="#consult">Book a consult</a>
+  </div>
+</nav>
+
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">Agent Setup Guide <span class="by">by <a href="https://x.com/JoeyBaggaBots" target="_blank" rel="noopener">Joey Wright</a></span></p>
+    <p class="eyebrow"><span class="by">by <a href="https://x.com/JoeyBaggaBots" target="_blank" rel="noopener">Joey Wright</a></span></p>
     <h1>Your own <span class="grad">AI assistant.</span><br><span class="soft">Living on your own Mac.</span></h1>
     <p class="lede narrow">You text it from your phone. It reads your files, runs your errands, and actually remembers you.</p>
     <p class="lede narrow sub" style="font-size:19px">You won't download a single thing. You'll paste two prompts, and an AI does the entire setup while you watch.</p>
@@ -636,7 +710,7 @@ give me five things to try that you couldn't have done an hour ago.</pre>
 </section>
 
 <!-- ============ LATER ============ -->
-<section>
+<section id="later">
   <div class="wrap">
     <div class="narrow center">
       <h2>Later, when you want more.</h2>
@@ -779,8 +853,39 @@ only what I choose.</pre>
   </div>
 </section>
 
+<!-- ============ CONSULT ============ -->
+<section class="tint tight" id="consult">
+  <div class="wrap">
+    <div class="narrow center">
+      <h2>Or skip ahead with <span class="grad">a real session.</span></h2>
+      <p class="lede sub">Everything above is free and it genuinely works. But if you'd rather not figure out what's possible on your own, book two hours with me on Zoom and we'll build it around what you actually do all day.</p>
+    </div>
+    <div class="grid3" style="margin-top:40px">
+      <div class="tile tb">
+        <p class="ic">🧩</p>
+        <h4>Your setup, not a template</h4>
+        <p>We start with where your time actually goes, then decide what's worth handing to an assistant and what isn't.</p>
+      </div>
+      <div class="tile tv">
+        <p class="ic">🛠️</p>
+        <h4>Sites, apps, automations</h4>
+        <p>Getting something built without hiring a developer, or wiring AI into a business you already run.</p>
+      </div>
+      <div class="tile tm">
+        <p class="ic">📝</p>
+        <h4>You don't take notes</h4>
+        <p>Afterwards you get a written summary, a step-by-step action plan, and the actual prompts to paste into your own AI.</p>
+      </div>
+    </div>
+    <div class="cta" style="margin-top:38px">
+      <a class="btn" href="https://calendly.com/joeywrightphoto" target="_blank" rel="noopener">Book a session</a>
+      <a class="btnlink" href="mailto:info@joeywrightphoto.com">Or email me first &rsaquo;</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CROSS ============ -->
-<section class="tint tight">
+<section class="tight">
   <div class="wrap narrow">
     <h2>Not sure this is the right system?</h2>
     <a class="cross" href="/compare">

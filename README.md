@@ -195,16 +195,54 @@ competing for attention with colour, one of them is wrong.
 - Under 700px the `by Joey Wright` byline in `.brand` is hidden — it wraps to a
   second line and looks broken. The footer credits him regardless.
 
+### The nav bar and the robot mark
+
+Both pages open with the same sticky bar: translucent white, 20px blur, one
+hairline underneath, 56px tall. Nothing else goes in it.
+
+The logo is an inline SVG, **one colour** (`currentColor`, set to the violet
+pop token), drawn on a `0 0 40 36` viewBox. Round head, oversized eyes, a
+smile, stubby ears, one antenna — friendly on purpose. It is duplicated in
+four places and they must move together if it is ever redrawn:
+
+1. `index.html` nav `<svg class="bot">`
+2. `index.html` favicon data-URI
+3. `compare/index.html` topbar `<svg class="bot">`
+4. `compare/index.html` favicon data-URI
+
+**Bar layout rules, learned the hard way:**
+
+- The guide's nav links hide below **820px**, and `.navcta` has to pick up
+  `margin-left:auto` in that same query or the CTA slides left and sits next
+  to the wordmark.
+- On the quiz the bar also carries three working icon buttons, so below
+  **560px** the wordmark hides instead of the buttons. The robot still links
+  home. Without that rule the CTA runs off the right edge on a phone.
+- `scroll-padding-top: 74px` on `html` keeps anchored sections clear of the
+  bar. Any new `id` target inherits it automatically.
+
+### The consult section
+
+`#consult` sits between the add-ons and the quiz cross-link, and it is what
+the nav CTA points at. The **Book a session** button goes to
+`https://calendly.com/joeywrightphoto` — Joey's whole booking page, on
+purpose, because the dedicated AI session event is not published yet. When it
+goes live, deep-link straight to it and add the price to the section.
+
+The quiz's own CTA points at `/#consult` rather than Calendly, so there is one
+place to change.
+
 ### Credit and the also-by shelf
 
-Joey is credited in three places, and they should stay in sync:
+Joey is credited in four places, and they should stay in sync:
 
-1. The guide's hero eyebrow — `Agent Setup Guide by Joey Wright`.
-2. The `#also` section above the guide's footer — four `.plink` cards for
+1. The nav wordmark — `Agent Setup Guide` next to the robot.
+2. The guide's hero eyebrow — `by Joey Wright`, linking to @JoeyBaggaBots.
+3. The `#also` section above the guide's footer — four `.plink` cards for
    **SpeedGrid, HeySiggy, ShootFeed, ShootCast**, each on one of the four
    tints. This is a soft cross-sell, so keep it to one plain sentence per app
    and never let it outgrow the setup content above it.
-3. A one-line `Also by Joey:` row in the quiz footer. Text links only — the
+4. A one-line `Also by Joey:` row in the quiz footer. Text links only — the
    quiz doesn't get the card treatment.
 
 If an app is added or renamed, update **both** the `#also` grid and the quiz
@@ -217,5 +255,10 @@ footer row. Check the live taglines before writing new copy; don't invent them.
 - [ ] Opens correctly at a narrow width (the guide gets read on a phone).
 - [ ] The **Copy prompt** button copies the full prompt.
 - [ ] Any command you touched still matches the OpenClaw docs.
-- [ ] `/compare` still loads and its logos still resolve.
+- [ ] `/compare` still loads, its logos resolve, and the quiz still runs all
+      six steps with no console errors.
+- [ ] The nav bar fits with no horizontal overflow at 1440, 834, 430 and 360,
+      and the CTA is still hard against the right edge at every one.
+- [ ] The eight prompt `<pre>` blocks hash identical to the previous commit
+      unless you meant to change one. Someone may be mid-paste.
 - [ ] No personal information anywhere on the page.
