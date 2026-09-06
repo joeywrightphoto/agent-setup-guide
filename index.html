@@ -28,10 +28,14 @@
   --g1:#0071e3;
   --g2:#5e5ce6;
   --g3:#bf5af2;
-  --tint-blue:#eef4fe;
-  --tint-violet:#f6efff;
-  --tint-warm:#fff4e8;
-  --tint-mint:#ecf9f1;
+  --tint-blue:#d8e8fd;
+  --tint-violet:#ecdefb;
+  --tint-warm:#ffe6c9;
+  --tint-mint:#d5f0e1;
+  --edge-blue:#b3d3f9;
+  --edge-violet:#d9bdf3;
+  --edge-warm:#f7cb95;
+  --edge-mint:#a9dfc2;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -125,15 +129,21 @@ section.tight{padding:72px 0}
 /* ---------- feature grid ---------- */
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px}
-.tile{background:var(--card);border-radius:20px;padding:30px 28px}
+.tile{background:var(--card);border:1px solid transparent;border-radius:20px;padding:30px 28px}
 section.tint .tile{background:#fff}
-.tile .ic{font-size:30px;line-height:1;margin:0 0 14px}
+/* the emoji sits on a crisp white chip, which is what makes the tint read as colour */
+.tile .ic{
+  display:flex;align-items:center;justify-content:center;
+  width:54px;height:54px;border-radius:16px;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);
+  font-size:27px;line-height:1;margin:0 0 18px;
+}
 .tile h4{font-size:19px;margin-bottom:5px}
 .tile p{font-size:15px;line-height:1.5;color:var(--ink2);margin:0}
-.tile.tb,section.tint .tile.tb{background:var(--tint-blue)}
-.tile.tv,section.tint .tile.tv{background:var(--tint-violet)}
-.tile.tw,section.tint .tile.tw{background:var(--tint-warm)}
-.tile.tm,section.tint .tile.tm{background:var(--tint-mint)}
+.tile.tb,section.tint .tile.tb{background:linear-gradient(168deg,#cfe3fd,#e2eefe);border-color:var(--edge-blue)}
+.tile.tv,section.tint .tile.tv{background:linear-gradient(168deg,#e6d5fa,#f1e5fd);border-color:var(--edge-violet)}
+.tile.tw,section.tint .tile.tw{background:linear-gradient(168deg,#ffdfba,#ffecd6);border-color:var(--edge-warm)}
+.tile.tm,section.tint .tile.tm{background:linear-gradient(168deg,#cbecda,#dcf3e6);border-color:var(--edge-mint)}
 
 /* ---------- steps ---------- */
 .step{border-top:1px solid var(--line);padding:52px 0 0;margin-top:52px;--accent:var(--blue)}
