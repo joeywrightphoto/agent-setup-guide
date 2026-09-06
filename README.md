@@ -251,10 +251,11 @@ four places and they must move together if it is ever redrawn:
 ### The consult section
 
 `#consult` sits between the add-ons and the quiz cross-link, and it is what
-the nav CTA points at. The **Book a session** button goes to
-`https://calendly.com/joeywrightphoto` — Joey's whole booking page, on
-purpose, because the dedicated AI session event is not published yet. When it
-goes live, deep-link straight to it and add the price to the section.
+the nav CTA points at. The **Book a session** button deep-links to
+`https://calendly.com/joeywrightphoto/ai` — a published, live event: 2 hours,
+Zoom, **$500** taken through Stripe at booking, with a recording, written
+summary and action plan sent afterwards. The price is written into the button
+label, so if it ever changes it has to change in both places.
 
 The quiz's own CTA points at `/#consult` rather than Calendly, so there is one
 place to change.
