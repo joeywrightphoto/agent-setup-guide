@@ -150,9 +150,13 @@ restrictions:
 - Minimal shadow. Depth comes from spacing and hairlines, not glass or blur.
   There is no glass anywhere now — the quiz's sticky blurred top bar was
   removed so both pages open the same way. Don't reintroduce one.
-- **Neither page has a nav bar.** The guide opens on its hero; the quiz opens on
-  a plain `← Agent Setup Guide` link on the page background. If you find
-  yourself adding a sticky header, that's a regression, not a feature.
+- **Icons are single-colour vector line art, never emoji.** They come from one
+  `<symbol>` sprite at the top of `<body>` — 24px grid, `1.6` stroke,
+  `fill="none"`, round caps and joins, drawn in `currentColor`. Used as
+  `<svg class="ic"><use href="#i-name"></use></svg>`. There is deliberately
+  **no chip or coloured square behind an icon** — the tinted card is already
+  the container, and a second one muddies it. Need a new one? Draw it into the
+  sprite in the same style. Don't paste an emoji, don't add an icon font.
 
 Tokens live in `:root` at the top of each file. Change them there, not inline.
 The quiz carries a second full token set under `:root[data-theme="dark"]` and a
@@ -178,6 +182,29 @@ assignment, so colour is added deliberately and in four places only:
 
 The rule: colour marks *one* thing per screen. If two elements in view are
 competing for attention with colour, one of them is wrong.
+
+Tints are **gradients, not flat fills** — each runs from a saturated corner to
+near-white (`linear-gradient(168deg, …)`) and carries a matching hairline
+border plus an `--icon` colour for the line icon inside it. Keep those three in
+step: change a tint and you change its border and its icon colour too. They
+were once ~4% saturation and vanished against the `#f5f5f7` sections — always
+judge a tint against the surface it sits on, not in isolation.
+
+### Bento: three items, unequal boxes
+
+Sets of three don't use three equal columns. `.bento` is Apple's pattern — one
+tall box beside two stacked ones. Add `.feat` to whichever tile should be the
+tall one, and `.flip` on the container to put it on the right instead of the
+left. The featured tile centres its content vertically and scales its icon and
+heading up, because a tall box with a paragraph stranded at the top reads as a
+mistake rather than a choice.
+
+Which item gets `.feat` is an editorial decision, not a default. Step 2 flips
+so **Laptop, lid closed** is the tall one, because that's the section's actual
+payoff — it's the reason nobody reading this needs to buy a second machine.
+
+`.bento` collapses to a stack at **700px**, on its own breakpoint rather than
+the 860px one the 3-up grids use, so iPad portrait keeps the layout.
 
 ### Quiz-specific gotchas
 
@@ -238,15 +265,37 @@ Joey is credited in four places, and they should stay in sync:
 
 1. The nav wordmark — `Agent Setup Guide` next to the robot.
 2. The guide's hero eyebrow — `by Joey Wright`, linking to @JoeyBaggaBots.
-3. The `#also` section above the guide's footer — four `.plink` cards for
-   **SpeedGrid, HeySiggy, ShootFeed, ShootCast**, each on one of the four
-   tints. This is a soft cross-sell, so keep it to one plain sentence per app
-   and never let it outgrow the setup content above it.
+3. The `#also` section above the guide's footer — a `.shelf` of four artwork
+   cards for **SpeedGrid, HeySiggy, ShootFeed, ShootCast**. See below.
 4. A one-line `Also by Joey:` row in the quiz footer. Text links only — the
    quiz doesn't get the card treatment.
 
-If an app is added or renamed, update **both** the `#also` grid and the quiz
+If an app is added or renamed, update **both** the `#also` shelf and the quiz
 footer row. Check the live taglines before writing new copy; don't invent them.
+
+**The shelf** is modelled on Apple's *Endless entertainment* row: a horizontal
+scroll-snap strip of artwork that runs off both edges of the viewport, so it
+reads as a shelf you browse rather than a grid you've finished.
+
+- Art lives in `graphics/apps/*.jpg`, ~900px wide, under 60KB each. These are
+  the apps' **own** OG/store graphics, resized — pulled from each project repo,
+  not redrawn. If an app's branding changes, re-export from its repo rather
+  than editing the JPEG here.
+- Every card is `aspect-ratio: 1.905` with `object-fit: cover`. ShootCast's
+  source is 2.048, so it crops slightly at the sides — check its logo and
+  tagline survive if you replace it.
+- `.art` needs `height: auto`. The `width`/`height` attributes on `<img>` are a
+  presentational hint and will beat `aspect-ratio` without it, which renders
+  every card absurdly tall. This has bitten once already.
+- The shelf sits **outside** `.wrap`, full section width, and computes its own
+  `--gutter` from `%` (never `vw`, which a desktop scrollbar throws off) so the
+  first card's left edge lands exactly on the heading's. Verified at 0px offset
+  from 390 to 1440.
+- **The art carries each app's name, so the card doesn't repeat it in type.**
+  The name lives in `alt` and `aria-label`. Don't add an `<h4>` back.
+- Tone: this is a thank-you, not a pitch. The line under the heading is about
+  taking a look at what else Joey's made — **no money talk, no "this is how I
+  make a living."** One plain sentence per app.
 
 ---
 
@@ -259,6 +308,11 @@ footer row. Check the live taglines before writing new copy; don't invent them.
       six steps with no console errors.
 - [ ] The nav bar fits with no horizontal overflow at 1440, 834, 430 and 360,
       and the CTA is still hard against the right edge at every one.
+- [ ] The app shelf scrolls, all four images actually render, and the first
+      card's left edge matches the heading's at 390 / 768 / 834 / 1440. Lazy
+      images don't decode in an off-screen screenshot — scroll to the shelf and
+      wait before you judge a grey card as broken.
+- [ ] No emoji used as an icon anywhere, and no chip behind a line icon.
 - [ ] The eight prompt `<pre>` blocks hash identical to the previous commit
       unless you meant to change one. Someone may be mid-paste.
 - [ ] No personal information anywhere on the page.

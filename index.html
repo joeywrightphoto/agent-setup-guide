@@ -164,19 +164,36 @@ section.tight{padding:72px 0}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px}
 .tile{background:var(--card);border:1px solid transparent;border-radius:20px;padding:30px 28px}
 section.tint .tile{background:#fff}
-/* the emoji sits on a crisp white chip, which is what makes the tint read as colour */
+/* bare line icon, no chip behind it — the tint is the container, so a second
+   container just muddies it. Colour comes from --icon, set per tint below. */
 .tile .ic{
-  display:flex;align-items:center;justify-content:center;
-  width:54px;height:54px;border-radius:16px;
-  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);
-  font-size:27px;line-height:1;margin:0 0 18px;
+  display:block;width:34px;height:34px;margin:0 0 16px;
+  color:var(--icon,var(--ink));
 }
 .tile h4{font-size:19px;margin-bottom:5px}
 .tile p{font-size:15px;line-height:1.5;color:var(--ink2);margin:0}
-.tile.tb,section.tint .tile.tb{background:linear-gradient(168deg,#cfe3fd,#e2eefe);border-color:var(--edge-blue)}
-.tile.tv,section.tint .tile.tv{background:linear-gradient(168deg,#e6d5fa,#f1e5fd);border-color:var(--edge-violet)}
-.tile.tw,section.tint .tile.tw{background:linear-gradient(168deg,#ffdfba,#ffecd6);border-color:var(--edge-warm)}
-.tile.tm,section.tint .tile.tm{background:linear-gradient(168deg,#cbecda,#dcf3e6);border-color:var(--edge-mint)}
+.tile.tb,section.tint .tile.tb{background:linear-gradient(168deg,#cfe3fd,#e9f2fe 62%,#f4f9ff);border-color:var(--edge-blue);--icon:#0059b8}
+.tile.tv,section.tint .tile.tv{background:linear-gradient(168deg,#e6d5fa,#f2e8fd 62%,#faf5ff);border-color:var(--edge-violet);--icon:#6b31c9}
+.tile.tw,section.tint .tile.tw{background:linear-gradient(168deg,#ffdfba,#ffeeda 62%,#fff8f0);border-color:var(--edge-warm);--icon:#a8540a}
+.tile.tm,section.tint .tile.tm{background:linear-gradient(168deg,#cbecda,#e0f4e9 62%,#f2fbf6);border-color:var(--edge-mint);--icon:#137a4a}
+
+/* ---------- bento: three items, unequal boxes ----------
+   Apple's pattern — one tall box beside two stacked ones, instead of three
+   identical columns. `.flip` puts the tall one on the right, which is how a
+   section makes its third item the payoff rather than the leftover. */
+.bento{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:22px;margin-top:44px}
+.bento > :nth-child(1){grid-column:1;grid-row:1 / span 2}
+.bento > :nth-child(2){grid-column:2;grid-row:1}
+.bento > :nth-child(3){grid-column:2;grid-row:2}
+.bento.flip > :nth-child(1){grid-column:1;grid-row:1}
+.bento.flip > :nth-child(2){grid-column:1;grid-row:2}
+.bento.flip > :nth-child(3){grid-column:2;grid-row:1 / span 2}
+/* the tall tile is mostly air by design, so its content centres rather than
+   stranding a paragraph at the top of a very deep box */
+.bento .feat{display:flex;flex-direction:column;justify-content:center;padding:40px 34px}
+.bento .feat .ic{width:44px;height:44px;margin-bottom:20px}
+.bento .feat h4{font-size:24px;letter-spacing:-.012em;margin-bottom:8px}
+.bento .feat p{font-size:16.5px;line-height:1.5}
 
 /* ---------- steps ---------- */
 .step{border-top:1px solid var(--line);padding:52px 0 0;margin-top:52px;--accent:var(--blue)}
@@ -273,20 +290,43 @@ section.tint .says div{background:#fff}
 .cross:hover{border-color:var(--g2);text-decoration:none}
 .cross p{margin:0;font-size:15px;color:var(--ink2)}
 
-/* ---------- also-by shelf ---------- */
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
-.plink{
-  display:block;border:1px solid transparent;border-radius:20px;padding:24px 22px;color:var(--ink);
+/* ---------- also-by shelf ----------
+   Apple's "Endless entertainment" row: a full-bleed horizontal scroller of
+   artwork cards that runs off both edges, so it reads as a shelf you browse
+   rather than a grid you've finished. The art already carries each app's name,
+   so the card doesn't repeat it in type — the name lives in alt/aria instead. */
+.shelf{
+  /* the shelf sits OUTSIDE .wrap and is full-section-width, so cards can run
+     off both edges. Its gutter is computed to land on the same left edge as
+     .wrap's content — done with % rather than vw so a desktop scrollbar can't
+     push it out of alignment or cause horizontal overflow. */
+  --gutter:max(22px,calc((100% - 980px) / 2 + 22px));
+  display:flex;gap:18px;margin-top:36px;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-padding-left:var(--gutter);
+  padding:4px var(--gutter) 22px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
 }
-.plink:hover{text-decoration:none;transform:translateY(-2px)}
-.plink{transition:transform .18s ease}
-.plink h4{font-size:18px;margin-bottom:5px}
-.plink p{font-size:14px;line-height:1.45;color:var(--ink2);margin:0 0 14px}
-.plink .go{font-size:13px;font-weight:600;color:var(--link);letter-spacing:-.006em}
-.plink.tb{background:linear-gradient(168deg,#cfe3fd,#e2eefe);border-color:var(--edge-blue)}
-.plink.tv{background:linear-gradient(168deg,#e6d5fa,#f1e5fd);border-color:var(--edge-violet)}
-.plink.tm{background:linear-gradient(168deg,#cbecda,#dcf3e6);border-color:var(--edge-mint)}
-.plink.tw{background:linear-gradient(168deg,#ffdfba,#ffecd6);border-color:var(--edge-warm)}
+.shelf::-webkit-scrollbar{display:none}
+.plink{
+  flex:0 0 min(420px,80vw);scroll-snap-align:start;
+  display:block;color:var(--ink);
+  transition:transform .22s ease;
+}
+.plink:hover{text-decoration:none;transform:translateY(-4px)}
+.plink .art{
+  /* height:auto is load-bearing — the width/height attributes on <img> are a
+     presentational hint, and without this the pixel height wins over
+     aspect-ratio and every card renders full-bleed tall. */
+  display:block;width:100%;height:auto;aspect-ratio:1.905;object-fit:cover;
+  border-radius:20px;background:var(--bg2);
+  box-shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.07);
+}
+.plink p{font-size:15px;line-height:1.45;color:var(--ink2);margin:16px 2px 6px}
+.plink .go{font-size:13.5px;font-weight:600;color:var(--link);letter-spacing:-.006em;margin-left:2px}
+.plink:hover .go{text-decoration:underline}
 
 /* ---------- footer ---------- */
 footer{background:var(--bg2);padding:40px 0;border-top:1px solid var(--line)}
@@ -303,7 +343,7 @@ footer p:last-child{margin:0}
 @media(max-width:860px){
   .grid3{grid-template-columns:1fr;gap:14px}
   .grid2{grid-template-columns:1fr;gap:14px}
-  .grid4{grid-template-columns:repeat(2,1fr);gap:14px}
+  .bento{gap:16px}
   section{padding:68px 0}
   .hero{padding:64px 0 56px}
   .stats div{flex-basis:100%;border-left:none;border-top:1px solid var(--line);padding:16px 0}
@@ -315,8 +355,21 @@ footer p:last-child{margin:0}
   .navlinks{display:none}
   .navcta{margin-left:auto}
 }
+/* the bento holds two columns much further down than a 3-up grid does, so it
+   collapses on its own breakpoint — iPad portrait keeps the layout */
+@media(max-width:700px){
+  .bento{grid-template-columns:1fr;gap:14px}
+  .bento > :nth-child(1),.bento > :nth-child(2),.bento > :nth-child(3),
+  .bento.flip > :nth-child(1),.bento.flip > :nth-child(2),.bento.flip > :nth-child(3){
+    grid-column:1;grid-row:auto;
+  }
+  .bento .feat{padding:30px 28px}
+  .bento .feat .ic{width:34px;height:34px;margin-bottom:16px}
+  .bento .feat h4{font-size:19px}
+  .bento .feat p{font-size:15px}
+}
 @media(max-width:560px){
-  .grid4{grid-template-columns:1fr}
+  .shelf{gap:14px}
 }
 /* the wordmark earns its place on a phone — shrink the bar instead of gutting it */
 @media(max-width:480px){
@@ -331,6 +384,49 @@ footer p:last-child{margin:0}
 </style>
 </head>
 <body>
+
+<!-- ============ ICON SPRITE ============
+     Single-colour line icons, Apple style: 24px grid, 1.6 stroke, round joins,
+     no fill, drawn in currentColor so each tile tints its own. Referenced with
+     <svg class="ic"><use href="#i-name"></use></svg>. These replaced emoji —
+     emoji render differently on every platform and never match a type system. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-files" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4l2 2.4h7A1.5 1.5 0 0 1 19 9.9v7.6A1.5 1.5 0 0 1 17.5 19h-13A1.5 1.5 0 0 1 3 17.5Z"/>
+    <path d="M7 6V4.5A1.5 1.5 0 0 1 8.5 3h5.2l2 2.4h3.8A1.5 1.5 0 0 1 21 6.9v7"/>
+  </symbol>
+  <symbol id="i-memory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.5 3h11a1.5 1.5 0 0 1 1.5 1.5v16.2l-7-3.4-7 3.4V4.5A1.5 1.5 0 0 1 6.5 3Z"/>
+    <path d="M9 7.5h6M9 11h4"/>
+  </symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 14.4A8.6 8.6 0 0 1 9.6 4 8.6 8.6 0 1 0 20 14.4Z"/>
+  </symbol>
+  <symbol id="i-desktop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.6" y="4" width="18.8" height="12.4" rx="1.8"/>
+    <path d="M9.4 20.4h5.2M12 16.4v4"/>
+  </symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 5.6A1.6 1.6 0 0 1 6.6 4h10.8A1.6 1.6 0 0 1 19 5.6v9.2H5Z"/>
+    <path d="M2.4 14.8h19.2l-1 2.6a1.6 1.6 0 0 1-1.5 1H4.9a1.6 1.6 0 0 1-1.5-1Z"/>
+  </symbol>
+  <symbol id="i-lidclosed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.6" y="13.2" width="18.8" height="4.6" rx="2.3"/>
+    <path d="M9.8 15.5h4.4"/>
+    <path d="M10.1 10.4a2.9 2.9 0 0 1 3.8 0M7.9 7.5a6.4 6.4 0 0 1 8.2 0"/>
+  </symbol>
+  <symbol id="i-fit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8.8"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-build" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14.6 3.4a5 5 0 0 0-5.9 6.4L3.6 14.9a2 2 0 0 0 2.8 2.8l5.1-5.1a5 5 0 0 0 6.4-5.9l-2.8 2.8-2.7-.7-.7-2.7Z"/>
+    <path d="M14.2 14.2 19 19"/>
+  </symbol>
+  <symbol id="i-plan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.4 3h8.2L20 8.4v11.1A1.5 1.5 0 0 1 18.5 21h-12A1.5 1.5 0 0 1 5 19.5v-15A1.5 1.5 0 0 1 6.4 3Z"/>
+    <path d="M14.2 3v5.4H20"/><path d="M8.6 13.4l1.7 1.7 3.4-3.4"/><path d="M8.6 17.8h6.8"/>
+  </symbol>
+</defs></svg>
 
 <!-- ============ NAV ============ -->
 <nav class="nav" aria-label="Main">
@@ -386,19 +482,19 @@ footer p:last-child{margin:0}
       <h2>Not a chatbot.<br>Something with <span class="grad">hands.</span></h2>
       <p class="lede sub">A free program called <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a> runs quietly on your computer. You talk to it over Telegram, like texting a friend. The difference is that it can actually go do the thing.</p>
     </div>
-    <div class="grid3">
-      <div class="tile tb">
-        <p class="ic">📂</p>
+    <div class="bento">
+      <div class="tile tb feat">
+        <svg class="ic" aria-hidden="true"><use href="#i-files"></use></svg>
         <h4>It touches your real stuff</h4>
         <p>Your files, your mail, your calendar, your browser while you're still logged in. Not a copy you pasted into a chat box.</p>
       </div>
       <div class="tile tv">
-        <p class="ic">🧠</p>
+        <svg class="ic" aria-hidden="true"><use href="#i-memory"></use></svg>
         <h4>It remembers</h4>
         <p>Every conversation builds on the last one. It keeps notes on who you are and how you work, and gets sharper the longer you use it.</p>
       </div>
       <div class="tile tm">
-        <p class="ic">🌙</p>
+        <svg class="ic" aria-hidden="true"><use href="#i-moon"></use></svg>
         <h4>It works when you don't</h4>
         <p>Watch a page for a price drop, sort the inbox overnight, text you a briefing before you're awake.</p>
       </div>
@@ -448,19 +544,21 @@ footer p:last-child{margin:0}
         <p class="sub">This is the one real requirement, and it's worth getting right. Your assistant is only alive while its computer is. A sleeping Mac is an assistant that isn't there.</p>
         <p class="sub">You don't need a new machine or a spare one. You need one machine that's plugged in and not napping. Find yourself below:</p>
 
-        <div class="grid3" style="margin-top:28px">
+        <!-- flipped: the lid-closed case is the surprising one and the reason
+             nobody here needs to buy a second machine, so it gets the tall box -->
+        <div class="bento flip" style="margin-top:28px">
           <div class="tile tb">
-            <p class="ic">🖥️</p>
+            <svg class="ic" aria-hidden="true"><use href="#i-desktop"></use></svg>
             <h4>Desktop Mac</h4>
             <p>Mac mini, Studio, iMac. Easiest case by far — one setting and you're done. This is what most people end up with eventually.</p>
           </div>
           <div class="tile tv">
-            <p class="ic">💻</p>
+            <svg class="ic" aria-hidden="true"><use href="#i-laptop"></use></svg>
             <h4>Laptop, lid open</h4>
             <p>Plugged in, lid up, sleep set to never. Totally fine, and how nearly everyone starts. It just has to live somewhere it can stay open.</p>
           </div>
-          <div class="tile tw">
-            <p class="ic">🔌</p>
+          <div class="tile tw feat">
+            <svg class="ic" aria-hidden="true"><use href="#i-lidclosed"></use></svg>
             <h4>Laptop, lid closed</h4>
             <p>Yes, this works — and you don't need a monitor plugged in to do it. It's one free app, and step 3 sets it up. Close the lid, tuck it on a shelf, keep the assistant.</p>
           </div>
@@ -860,19 +958,19 @@ only what I choose.</pre>
       <h2>Or skip ahead with <span class="grad">a real session.</span></h2>
       <p class="lede sub">Everything above is free and it genuinely works. But if you'd rather not figure out what's possible on your own, book two hours with me on Zoom and we'll build it around what you actually do all day.</p>
     </div>
-    <div class="grid3" style="margin-top:40px">
-      <div class="tile tb">
-        <p class="ic">🧩</p>
+    <div class="bento" style="margin-top:40px">
+      <div class="tile tb feat">
+        <svg class="ic" aria-hidden="true"><use href="#i-fit"></use></svg>
         <h4>Your setup, not a template</h4>
         <p>We start with where your time actually goes, then decide what's worth handing to an assistant and what isn't.</p>
       </div>
       <div class="tile tv">
-        <p class="ic">🛠️</p>
+        <svg class="ic" aria-hidden="true"><use href="#i-build"></use></svg>
         <h4>Sites, apps, automations</h4>
         <p>Getting something built without hiring a developer, or wiring AI into a business you already run.</p>
       </div>
       <div class="tile tm">
-        <p class="ic">📝</p>
+        <svg class="ic" aria-hidden="true"><use href="#i-plan"></use></svg>
         <h4>You don't take notes</h4>
         <p>Afterwards you get the recording, a written summary, a step-by-step action plan, and the actual prompts to paste into your own AI.</p>
       </div>
@@ -904,30 +1002,30 @@ only what I choose.</pre>
   <div class="wrap">
     <div class="narrow center">
       <h3>Also built by <span class="grad">Joey Wright.</span></h3>
-      <p class="small">This guide is free. These are the apps I actually make a living on.</p>
+      <p class="small">This guide is free and always will be. If it was useful, the nicest thing you can do is take a look at what else I&rsquo;ve made.</p>
     </div>
-    <div class="grid4">
-      <a class="plink tb" href="https://speedgrid.app" target="_blank" rel="noopener">
-        <h4>SpeedGrid</h4>
-        <p>Turns your browser's new tab into a fast, organized home for the sites you actually use.</p>
-        <span class="go">speedgrid.app &rsaquo;</span>
-      </a>
-      <a class="plink tv" href="https://heysiggy.app" target="_blank" rel="noopener">
-        <h4>HeySiggy</h4>
-        <p>Email signatures that look designed instead of pasted. Build it, own it, take it anywhere.</p>
-        <span class="go">heysiggy.app &rsaquo;</span>
-      </a>
-      <a class="plink tm" href="https://shootfeed.io" target="_blank" rel="noopener">
-        <h4>ShootFeed</h4>
-        <p>Write a post once, publish it everywhere your audience is, and see what's worth making next.</p>
-        <span class="go">shootfeed.io &rsaquo;</span>
-      </a>
-      <a class="plink tw" href="https://shootcast.io" target="_blank" rel="noopener">
-        <h4>ShootCast</h4>
-        <p>A weather outlook built for photographers — light, rain, wind, tides, sunrise and sunset.</p>
-        <span class="go">shootcast.io &rsaquo;</span>
-      </a>
-    </div>
+  </div>
+  <div class="shelf">
+    <a class="plink" href="https://speedgrid.app" target="_blank" rel="noopener" aria-label="SpeedGrid">
+      <img class="art" src="/graphics/apps/speedgrid.jpg" alt="SpeedGrid" width="900" height="473" loading="lazy" decoding="async">
+      <p>Turns your browser's new tab into a fast, organized home for the sites you actually use.</p>
+      <span class="go">speedgrid.app &rsaquo;</span>
+    </a>
+    <a class="plink" href="https://heysiggy.app" target="_blank" rel="noopener" aria-label="HeySiggy">
+      <img class="art" src="/graphics/apps/heysiggy.jpg" alt="HeySiggy" width="900" height="472" loading="lazy" decoding="async">
+      <p>Email signatures that look designed instead of pasted. Build it, own it, take it anywhere.</p>
+      <span class="go">heysiggy.app &rsaquo;</span>
+    </a>
+    <a class="plink" href="https://shootfeed.io" target="_blank" rel="noopener" aria-label="ShootFeed">
+      <img class="art" src="/graphics/apps/shootfeed.jpg" alt="ShootFeed" width="900" height="472" loading="lazy" decoding="async">
+      <p>Write a post once, publish it everywhere your audience is, and see what's worth making next.</p>
+      <span class="go">shootfeed.io &rsaquo;</span>
+    </a>
+    <a class="plink" href="https://shootcast.io" target="_blank" rel="noopener" aria-label="ShootCast">
+      <img class="art" src="/graphics/apps/shootcast.jpg" alt="ShootCast" width="900" height="440" loading="lazy" decoding="async">
+      <p>A weather outlook built for photographers — light, rain, wind, tides, sunrise and sunset.</p>
+      <span class="go">shootcast.io &rsaquo;</span>
+    </a>
   </div>
 </section>
 
