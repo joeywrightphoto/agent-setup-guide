@@ -1,25 +1,25 @@
 # Agent Setup Guide
 
-A small static website for helping friends choose between a streamlined Hermes setup and a more customizable OpenClaw setup.
+agentsetupguide.com — two static pages, no build step.
+
+| Path | File | What it is |
+|---|---|---|
+| `/` | `index.html` | **The main guide.** The easiest path to your own always-on AI assistant: pick a subscription, stop the machine sleeping, paste one prompt and let Claude Code / Codex do the whole install. |
+| `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. |
+
+Shared assets live in `graphics/` and are referenced absolutely (`/graphics/...`) so both pages can use them.
+
+## Editing rules for the main guide
+
+The guide's whole promise is **nobody installs anything by hand.**
+
+- No download lists. The OpenClaw installer brings its own Node/Homebrew/Git.
+- No terminal apps, no code editors, no VPS, no second computer.
+- Subscription auth only. Never steer readers toward an API console — that's how people get a surprise bill.
+- Anything optional is described by the *problem it solves*, with no link and no install steps: you ask your assistant to add it later.
+
+Commands quoted on the page are checked against https://docs.openclaw.ai/start/getting-started — re-verify before changing them.
 
 ## Use it
 
 Open `index.html` in a browser, or host this folder with any static host.
-
-## What it does
-
-- Starts with one simple question.
-- Routes toward Hermes or OpenClaw with a live recommendation preview.
-- Asks about install target, operating system, complexity, multi-agent needs, maintenance tolerance, and credential preference.
-- Recommends a secondary computer by default, with VPS and main-machine guidance when appropriate.
-- Notes that Hermes works on macOS, Linux, and Windows through WSL2, but not native Windows via the official installer.
-- Gives credential guidance for subscription/account-based setup versus provider API tokens.
-- Steers subscription users toward OpenAI ChatGPT plans for predictable OpenAI-backed usage, and treats Anthropic/Claude as API-token-only.
-- Explains cost shape without scaring people: subscriptions are predictable; API tokens need spend caps and billing alerts.
-- Links to the canonical install guides for [Hermes](https://hermes-agent.nousresearch.com/docs/getting-started/installation) and [OpenClaw](https://docs.openclaw.ai/install).
-- Includes a security baseline for Tailscale/private access, SSH keys, limited OS users, updates, and token hygiene.
-- Shows a short setup checklist for the recommended route.
-
-## Default safety posture
-
-The guide intentionally recommends a secondary computer first, a locked-down VPS second, and the main personal computer only for short limited trials.
