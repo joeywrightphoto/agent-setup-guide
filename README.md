@@ -6,6 +6,10 @@
 A public, non-technical guide that walks a friend from zero to their own
 always-on AI assistant. Two static pages, no build step, no dependencies.
 
+> **Working on this with an AI agent?** `AGENTS.md` is the orientation — what
+> this site is, the eight rules that must not be broken, and how to deploy.
+> This README is the detail, and it wins wherever the two disagree.
+
 ---
 
 ## Layout
