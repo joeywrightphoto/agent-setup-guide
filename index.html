@@ -92,6 +92,9 @@ p{margin:0 0 18px}
 .small{font-size:15px;line-height:1.5;color:var(--ink2)}
 .tiny{font-size:12px;line-height:1.4;color:var(--ink2);letter-spacing:0}
 .eyebrow{font-size:19px;line-height:1.2;font-weight:600;letter-spacing:-.012em;color:var(--blue);margin:0 0 10px}
+.eyebrow .by{color:var(--ink2);font-weight:400}
+.eyebrow .by a{color:var(--ink2)}
+.eyebrow .by a:hover{color:var(--link)}
 .center{text-align:center}
 
 /* ---------- sections ---------- */
@@ -240,6 +243,21 @@ section.tint .says div{background:#fff}
 .cross:hover{border-color:var(--g2);text-decoration:none}
 .cross p{margin:0;font-size:15px;color:var(--ink2)}
 
+/* ---------- also-by shelf ---------- */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
+.plink{
+  display:block;border:1px solid transparent;border-radius:20px;padding:24px 22px;color:var(--ink);
+}
+.plink:hover{text-decoration:none;transform:translateY(-2px)}
+.plink{transition:transform .18s ease}
+.plink h4{font-size:18px;margin-bottom:5px}
+.plink p{font-size:14px;line-height:1.45;color:var(--ink2);margin:0 0 14px}
+.plink .go{font-size:13px;font-weight:600;color:var(--link);letter-spacing:-.006em}
+.plink.tb{background:linear-gradient(168deg,#cfe3fd,#e2eefe);border-color:var(--edge-blue)}
+.plink.tv{background:linear-gradient(168deg,#e6d5fa,#f1e5fd);border-color:var(--edge-violet)}
+.plink.tm{background:linear-gradient(168deg,#cbecda,#dcf3e6);border-color:var(--edge-mint)}
+.plink.tw{background:linear-gradient(168deg,#ffdfba,#ffecd6);border-color:var(--edge-warm)}
+
 /* ---------- footer ---------- */
 footer{background:var(--bg2);padding:40px 0;border-top:1px solid var(--line)}
 footer p{margin:0 0 8px}
@@ -255,10 +273,14 @@ footer p:last-child{margin:0}
 @media(max-width:860px){
   .grid3{grid-template-columns:1fr;gap:14px}
   .grid2{grid-template-columns:1fr;gap:14px}
+  .grid4{grid-template-columns:repeat(2,1fr);gap:14px}
   section{padding:68px 0}
   .hero{padding:64px 0 56px}
   .stats div{flex-basis:100%;border-left:none;border-top:1px solid var(--line);padding:16px 0}
   .stats div:first-child{border-top:none;padding-top:0}
+}
+@media(max-width:560px){
+  .grid4{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -267,7 +289,7 @@ footer p:last-child{margin:0}
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">Agent Setup Guide</p>
+    <p class="eyebrow">Agent Setup Guide <span class="by">by <a href="https://x.com/JoeyBaggaBots" target="_blank" rel="noopener">Joey Wright</a></span></p>
     <h1>Your own <span class="grad">AI assistant.</span><br><span class="soft">Living on your own Mac.</span></h1>
     <p class="lede narrow">You text it from your phone. It reads your files, runs your errands, and actually remembers you.</p>
     <p class="lede narrow sub" style="font-size:19px">You won't download a single thing. You'll paste two prompts, and an AI does the entire setup while you watch.</p>
@@ -771,9 +793,41 @@ only what I choose.</pre>
   </div>
 </section>
 
+<!-- ============ ALSO BY ============ -->
+<section class="tight" id="also">
+  <div class="wrap">
+    <div class="narrow center">
+      <h3>Also built by <span class="grad">Joey Wright.</span></h3>
+      <p class="small">This guide is free. These are the apps I actually make a living on.</p>
+    </div>
+    <div class="grid4">
+      <a class="plink tb" href="https://speedgrid.app" target="_blank" rel="noopener">
+        <h4>SpeedGrid</h4>
+        <p>Turns your browser's new tab into a fast, organized home for the sites you actually use.</p>
+        <span class="go">speedgrid.app &rsaquo;</span>
+      </a>
+      <a class="plink tv" href="https://heysiggy.app" target="_blank" rel="noopener">
+        <h4>HeySiggy</h4>
+        <p>Email signatures that look designed instead of pasted. Build it, own it, take it anywhere.</p>
+        <span class="go">heysiggy.app &rsaquo;</span>
+      </a>
+      <a class="plink tm" href="https://shootfeed.io" target="_blank" rel="noopener">
+        <h4>ShootFeed</h4>
+        <p>Write a post once, publish it everywhere your audience is, and see what's worth making next.</p>
+        <span class="go">shootfeed.io &rsaquo;</span>
+      </a>
+      <a class="plink tw" href="https://shootcast.io" target="_blank" rel="noopener">
+        <h4>ShootCast</h4>
+        <p>A weather outlook built for photographers — light, rain, wind, tides, sunrise and sunset.</p>
+        <span class="go">shootcast.io &rsaquo;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
-    <p class="tiny">Made for friends who saw the setup and wanted one of their own.</p>
+    <p class="tiny">Made for friends who saw the setup and wanted one of their own. Built by <a href="https://x.com/JoeyBaggaBots" target="_blank" rel="noopener">Joey Wright</a> and his agent team.</p>
     <p class="tiny">Not affiliated with OpenClaw or OpenAI. Prices are what they were at time of writing — check before you subscribe.</p>
   </div>
 </footer>
