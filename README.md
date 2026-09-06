@@ -12,7 +12,7 @@ always-on AI assistant. Two static pages, no build step, no dependencies.
 
 | URL | File | What it is |
 |---|---|---|
-| `/` | `index.html` | **The main guide.** Three steps: get ChatGPT, keep the Mac awake, paste one prompt and let Codex do the whole install. |
+| `/` | `index.html` | **The main guide.** Four steps: get ChatGPT, keep the Mac awake, paste one prompt and let Codex do the whole install, then create the Telegram bot on your phone. |
 | `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. Has its own dark/light theme toggle — independent of the main page by design. |
 | — | `graphics/` | Shared images. Referenced **absolutely** (`/graphics/…`) so `/compare` doesn't 404 from its subfolder. |
 
@@ -80,8 +80,17 @@ is the one third-party app the guide names, because the OS alternative is a
 
 **5. Optional things get described, not linked.**
 Anything in "Later, when you want more" is named by the *problem it solves*,
-with no vendor, no link and no install steps. The answer is always "ask your
-assistant to add it."
+with no vendor, no link and no install steps. Each one is a `<details>`
+accordion that opens to a copy-paste prompt, so the answer stays "ask your
+assistant to add it" rather than "go download this." Keep the vendor names out
+of both the summary and the prompt — naming the problem lets the assistant pick
+whatever is current.
+
+**5b. Telegram is a step, not a footnote.**
+Step 4 spells out the @BotFather flow because it is the one part the AI cannot
+do for the reader — it happens on their phone. The step-3 prompt still handles
+the config side (token, `dmPolicy: pairing`, `openclaw pairing approve`), so the
+two halves have to stay in sync. Don't collapse step 4 back into the prompt.
 
 **6. Nothing personal on the page.**
 No names, no file paths, no account handles, no references to whose setup this
@@ -91,7 +100,8 @@ came from. It has to be sendable to a stranger.
 Every command quoted on the page is checked against
 <https://docs.openclaw.ai/start/getting-started>. Re-check before editing one —
 the CLI moves. Currently quoted: `curl -fsSL https://openclaw.ai/install.sh | bash`,
-`openclaw gateway install`, `openclaw gateway status`, `openclaw triage`.
+`openclaw gateway install`, `openclaw gateway status`, `openclaw triage`,
+`openclaw pairing list telegram`, `openclaw pairing approve telegram <CODE>`.
 
 ---
 

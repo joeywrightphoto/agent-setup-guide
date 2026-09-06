@@ -149,6 +149,29 @@ section.tint .note{background:#fff}
   font-size:13px;line-height:1.72;color:#1d1d1f;white-space:pre-wrap;word-break:break-word;letter-spacing:0;
 }
 
+/* ---------- accordions ---------- */
+.acc{margin-top:40px;border-top:1px solid var(--line)}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{
+  display:flex;align-items:center;gap:20px;
+  list-style:none;cursor:pointer;padding:24px 0;
+}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:hover h4{color:var(--link)}
+.acc .txt{flex:1 1 auto;min-width:0}
+.acc .txt h4{font-size:19px;margin:0 0 4px;transition:color .2s ease}
+.acc .txt p{margin:0;font-size:15px;line-height:1.55;color:var(--ink2)}
+.acc .chev{
+  flex:0 0 auto;width:10px;height:10px;margin-right:8px;
+  border-right:1.5px solid var(--ink2);border-bottom:1.5px solid var(--ink2);
+  transform:translateY(-3px) rotate(45deg);transition:transform .25s ease;
+}
+.acc details[open] .chev{transform:translateY(2px) rotate(-135deg)}
+.acc .body{padding:0 0 28px}
+.acc .body p{font-size:15px;line-height:1.55;color:var(--ink2);margin:0 0 16px}
+.codebox.mini{margin:0}
+.codebox.mini pre{padding:18px;max-height:none;font-size:13px}
+
 /* ---------- plain list ---------- */
 .rows{margin-top:36px;border-top:1px solid var(--line)}
 .rows .row{border-bottom:1px solid var(--line);padding:22px 0}
@@ -194,7 +217,7 @@ footer p:last-child{margin:0}
       <a class="btnlink" href="#what">See what it does &rsaquo;</a>
     </div>
     <div class="stats">
-      <div><b>3</b><span>steps</span></div>
+      <div><b>4</b><span>steps</span></div>
       <div><b>0</b><span>things to install by hand</span></div>
       <div><b>~20</b><span>minutes, mostly waiting</span></div>
     </div>
@@ -235,8 +258,8 @@ footer p:last-child{margin:0}
 <section id="steps">
   <div class="wrap">
     <div class="narrow center">
-      <h2>Three steps.</h2>
-      <p class="lede sub">Only one of them involves typing, and it's a paste.</p>
+      <h2>Four steps.</h2>
+      <p class="lede sub">Two settings, one paste, and a two-minute detour on your phone.</p>
     </div>
 
     <div class="narrow">
@@ -301,7 +324,7 @@ footer p:last-child{margin:0}
       <div class="step">
         <p class="stepno">Step 3</p>
         <h3>Paste this. Watch it build itself.</h3>
-        <p class="sub">Open the desktop app from step 1, let it run things on your computer (that's the next section), then paste this in and send. It installs everything, keeps your Mac awake, connects your phone, and checks its own work before it tells you it's done.</p>
+        <p class="sub">Open the desktop app from step 1, let it run things on your computer (that's the next section), then paste this in and send. It installs everything, keeps your Mac awake, wires up your phone, and checks its own work before it tells you it's done.</p>
         <div class="codebox">
           <div class="bar"><span>The whole setup, in one paste</span><button class="copy" type="button">Copy prompt</button></div>
           <pre>I want to set up OpenClaw on this computer so I have my own always-on AI
@@ -340,9 +363,14 @@ than handing me instructions to follow.
    Ask me which of these I want rather than guessing. Then tell me which case
    I am, show me the setting you changed, and tell me how to undo it.
 
-6. Set up Telegram so I can text it from my phone: help me create a bot with
-   @BotFather, get the token, and lock it down so only my own account can
-   message it. Tell me exactly what to tap on my phone.
+6. Set up Telegram so I can text it from my phone. Read
+   https://docs.openclaw.ai/channels/telegram and follow it. Walk me through
+   creating a bot with @BotFather on my phone one message at a time, wait for
+   me to paste you the token, then put the token into the OpenClaw config
+   yourself and restart the gateway. Set the DM policy to pairing so strangers
+   cannot talk to it. When I send my first message, run
+   "openclaw pairing list telegram" and approve my code with
+   "openclaw pairing approve telegram &lt;CODE&gt;".
 
 7. Prove it works. Run: openclaw gateway status
    Then have me send a real Telegram message and confirm I get a reply back.
@@ -359,6 +387,46 @@ you set up, where it lives, and three things I should try first.</pre>
         <div class="note">
           It'll ask permission before running things on your machine. That's normal, and it's the point — but read what it's about to do before you approve it. Never approve something that deletes files or spends money if you don't understand it.
         </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step">
+        <p class="stepno">Step 4</p>
+        <h3>Pick up your phone.</h3>
+        <p class="sub">This is the part your computer can't do for you, and it's the part that makes the whole thing feel real. You're giving your assistant a phone number, in the form of a Telegram bot that only answers to you.</p>
+        <p class="sub">Step 3 will walk you through this in real time. Here's the whole thing anyway, so nothing surprises you:</p>
+
+        <div class="rows" style="margin-top:32px">
+          <div class="row">
+            <h4>1. Get Telegram, if you don't have it</h4>
+            <p>Free, on the App Store. Sign up with your phone number. You'll never need to use it for anything else.</p>
+          </div>
+          <div class="row">
+            <h4>2. Message @BotFather</h4>
+            <p>Search Telegram for <b>BotFather</b> — the one with the blue checkmark — and open the chat. This is Telegram's official robot for making robots. Tap Start.</p>
+          </div>
+          <div class="row">
+            <h4>3. Send <code>/newbot</code></h4>
+            <p>It asks for a display name — anything you like, this is what shows at the top of the chat. Then it asks for a username, which has to be unique and end in <b>bot</b>. Expect to be told your first few are taken.</p>
+          </div>
+          <div class="row">
+            <h4>4. Copy the token it gives you</h4>
+            <p>A long line that looks like <code>7891234567:AAF...</code>. Paste it back to the assistant on your computer and it does the rest — config, restart, all of it.</p>
+          </div>
+          <div class="row">
+            <h4>5. Text your bot</h4>
+            <p>Open the chat with your new bot and say hi. Nothing comes back yet — that's on purpose. It's waiting to be told you're you.</p>
+          </div>
+          <div class="row">
+            <h4>6. Approve yourself, once</h4>
+            <p>Tell the assistant on your computer that you sent it. It approves your account, and from then on the bot replies to you and ignores everyone else. That's the last step. Say something to it.</p>
+          </div>
+        </div>
+
+        <div class="note flag">
+          <b>Keep the token to yourself.</b> Anyone holding it can talk to your assistant as if they were you. Don't paste it into a group chat, a screenshot, or a public repo. If it ever gets out, <code>/revoke</code> in BotFather issues a fresh one.
+        </div>
+        <p class="small" style="margin-top:24px"><b>Why Telegram and not iMessage or WhatsApp?</b> It's the only one that hands you a bot in two minutes with no business account, no approval queue, and no phone tethered to the machine. Others can be added later. None of them are this easy on day one.</p>
       </div>
 
     </div>
@@ -384,18 +452,6 @@ you set up, where it lives, and three things I should try first.</pre>
     <h2>What we left out, on purpose.</h2>
     <p class="lede sub">Every other guide hands you a download list. Here's why this one doesn't.</p>
     <div class="rows">
-      <div class="row">
-        <h4>Node.js, Homebrew, Git</h4>
-        <p>The installer puts these in for you. If a guide tells you to download them first, that guide is out of date.</p>
-      </div>
-      <div class="row">
-        <h4>A fancy terminal — iTerm2, Warp, Ghostty</h4>
-        <p>The terminal already on your Mac is fine, and doing it this way you barely open it. These are for people who live in a terminal all day. You won't.</p>
-      </div>
-      <div class="row">
-        <h4>VS Code, or any code editor</h4>
-        <p>You're not the one writing code — your assistant is, and it edits its own files directly. Install an editor only if you personally want to sit and read them.</p>
-      </div>
       <div class="row">
         <h4>A cloud server or VPS</h4>
         <p>Tempting, and it's a downgrade. A Linux box in a datacenter can't touch your messages, contacts, calendar, mail, photos or logged-in browser — which is most of what makes this feel like magic.</p>
@@ -436,33 +492,139 @@ you set up, where it lives, and three things I should try first.</pre>
   <div class="wrap">
     <div class="narrow center">
       <h2>Later, when you want more.</h2>
-      <p class="lede sub">Don't set any of this up now. When you hit the moment you want one, just ask your assistant to add it. It can do its own installs.</p>
+      <p class="lede sub">Don't set any of these up now. When you hit the moment you want one, open it and paste the prompt. Your assistant does the rest — it can do its own installs.</p>
     </div>
-    <div class="grid3" style="margin-top:40px">
-      <div class="tile" style="background:var(--bg2)">
-        <h4>A password manager</h4>
-        <p>Somewhere safe for it to keep logins, instead of you pasting passwords into a chat window.</p>
-      </div>
-      <div class="tile" style="background:var(--bg2)">
-        <h4>A private network</h4>
-        <p>Reach the home machine from anywhere, without opening it up to the internet.</p>
-      </div>
-      <div class="tile" style="background:var(--bg2)">
-        <h4>Version control</h4>
-        <p>A free undo button for its memory and notes. You'll want this the first time it deletes something you liked.</p>
-      </div>
-      <div class="tile" style="background:var(--bg2)">
-        <h4>Discord</h4>
-        <p>Separate rooms — alerts here, logs there, one per project — for when a single Telegram thread stops being enough.</p>
-      </div>
-      <div class="tile" style="background:var(--bg2)">
-        <h4>A voice</h4>
-        <p>So it sends voice notes instead of walls of text. Purely for fun. A lot of fun.</p>
-      </div>
-      <div class="tile" style="background:var(--bg2)">
-        <h4>Web hosting</h4>
-        <p>So it can build you dashboards and put them online. This page is an example of that.</p>
-      </div>
+
+    <div class="narrow acc">
+
+      <details>
+        <summary>
+          <span class="txt">
+            <h4>A password manager</h4>
+            <p>Somewhere safe for it to keep logins, instead of you pasting passwords into a chat window.</p>
+          </span>
+          <span class="chev"></span>
+        </summary>
+        <div class="body">
+          <p>Sooner or later it needs a login to do something useful for you. This is where that lives.</p>
+          <div class="codebox mini">
+            <div class="bar"><span>Paste this to your assistant</span><button class="copy" type="button">Copy</button></div>
+            <pre>I want you to keep logins and keys somewhere safe instead of me pasting them
+into a chat window. Set up a password manager you can read from, walk me
+through creating the account if I don't have one, move anything sensitive
+we've already used into it, and from then on always read credentials from
+there. Explain what you did in plain language, and never print a secret back
+to me in the chat.</pre>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="txt">
+            <h4>A private network</h4>
+            <p>Reach the home machine from anywhere, without opening it up to the internet.</p>
+          </span>
+          <span class="chev"></span>
+        </summary>
+        <div class="body">
+          <p>Useful the first time you want a page it built for you, or a file off that machine, while you're not home.</p>
+          <div class="codebox mini">
+            <div class="bar"><span>Paste this to your assistant</span><button class="copy" type="button">Copy</button></div>
+            <pre>I want to reach this computer from my phone and my laptop when I'm not at
+home, without exposing anything to the public internet. Set up a private
+network across my devices, walk me through installing it on my phone one step
+at a time, and then show me how to confirm it's working. Do not open any
+ports on my router, and tell me what I should never expose.</pre>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="txt">
+            <h4>Version control</h4>
+            <p>A free undo button for its memory and notes. You'll want this the first time it deletes something you liked.</p>
+          </span>
+          <span class="chev"></span>
+        </summary>
+        <div class="body">
+          <p>The single highest-value thing on this list. It costs nothing and it will save you at least once.</p>
+          <div class="codebox mini">
+            <div class="bar"><span>Paste this to your assistant</span><button class="copy" type="button">Copy</button></div>
+            <pre>Give yourself an undo button. Put your own files, notes and memory under
+version control, back them up to a private repository that I own, and commit
+your changes automatically so I can always roll back if you delete or
+overwrite something. Walk me through creating the account if I need one. Keep
+the repository private, and make sure no passwords or keys ever get committed
+into it.</pre>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="txt">
+            <h4>Discord</h4>
+            <p>Separate rooms — alerts here, logs there, one per project — for when a single Telegram thread stops being enough.</p>
+          </span>
+          <span class="chev"></span>
+        </summary>
+        <div class="body">
+          <p>You'll know you need this when your Telegram thread turns into a firehose you scroll past.</p>
+          <div class="codebox mini">
+            <div class="bar"><span>Paste this to your assistant</span><button class="copy" type="button">Copy</button></div>
+            <pre>One Telegram thread isn't enough anymore. Set me up on Discord as a second
+place to talk to you, with separate channels: one for alerts, one for logs,
+and one per project. Create a private server and the bot, tell me exactly
+what to tap, lock it so only my own account can talk to you, and then tell me
+which channel does what. Keep Telegram working exactly as it is.</pre>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="txt">
+            <h4>A voice</h4>
+            <p>So it sends voice notes instead of walls of text. Purely for fun. A lot of fun.</p>
+          </span>
+          <span class="chev"></span>
+        </summary>
+        <div class="body">
+          <p>The only thing on this list that costs extra, so it's also the only one where the prompt tells it to check with you first.</p>
+          <div class="codebox mini">
+            <div class="bar"><span>Paste this to your assistant</span><button class="copy" type="button">Copy</button></div>
+            <pre>I want you to send me voice notes instead of walls of text. Set up
+text-to-speech, help me pick a voice, and tell me what it costs and what the
+free allowance is BEFORE we start — ask me before spending anything. Then
+send me a real voice note in Telegram so I can hear it, and tell me how to
+ask for a voice note any time I want one.</pre>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="txt">
+            <h4>Web hosting</h4>
+            <p>So it can build you dashboards and put them online. This page is an example of that.</p>
+          </span>
+          <span class="chev"></span>
+        </summary>
+        <div class="body">
+          <p>Trackers, dashboards, little tools, a page like this one. Free for anything personal.</p>
+          <div class="codebox mini">
+            <div class="bar"><span>Paste this to your assistant</span><button class="copy" type="button">Copy</button></div>
+            <pre>I want you to be able to build me web pages and put them online — dashboards,
+trackers, little tools. Set up free web hosting connected to a repository I
+own, walk me through the account signup, and stay on the free plan. Then
+prove it works by building me one simple page and sending me the live link.
+Tell me how to ask for a new page later.</pre>
+          </div>
+        </div>
+      </details>
+
     </div>
   </div>
 </section>
@@ -490,11 +652,12 @@ you set up, where it lives, and three things I should try first.</pre>
 
 <script>
 document.querySelectorAll('.copy').forEach(function(b){
+  var label=b.textContent;
   b.addEventListener('click',function(){
     var t=b.closest('.codebox').querySelector('pre').innerText;
     navigator.clipboard.writeText(t).then(function(){
       b.textContent='Copied';b.classList.add('done');
-      setTimeout(function(){b.textContent='Copy prompt';b.classList.remove('done');},1800);
+      setTimeout(function(){b.textContent=label;b.classList.remove('done');},1800);
     });
   });
 });
