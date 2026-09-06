@@ -13,7 +13,7 @@ always-on AI assistant. Two static pages, no build step, no dependencies.
 | URL | File | What it is |
 |---|---|---|
 | `/` | `index.html` | **The main guide.** Five steps: get ChatGPT, keep the Mac awake, paste the install prompt, create the Telegram bot on your phone, then paste the interview prompt that connects it to your mail, calendar, messages and notes. |
-| `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. Has its own dark/light theme toggle — independent of the main page by design. |
+| `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. Same Apple design language as the main page, plus a dark/light theme toggle the main page doesn't have. |
 | — | `graphics/` | Shared images. Referenced **absolutely** (`/graphics/…`) so `/compare` doesn't 404 from its subfolder. |
 
 Both pages are self-contained: CSS and JS are inline, there is no framework,
@@ -138,17 +138,54 @@ the CLI moves. Currently quoted: `curl -fsSL https://openclaw.ai/install.sh | ba
 
 ## Design
 
-The main guide follows Apple's marketing style, which is mostly a set of
+**Both pages** follow Apple's marketing style, which is mostly a set of
 restrictions:
 
 - System font stack (SF Pro on Apple devices), never a webfont.
 - Two backgrounds only — `#fff` and `#f5f5f7` — alternating by section.
-- Text `#1d1d1f`, secondary `#6e6e73`, one accent: `#0071e3` blue. No gradients.
+- Text `#1d1d1f`, secondary `#6e6e73`, one accent: `#0071e3` blue.
 - Headlines large and tight: `font-weight: 600`, negative letter-spacing.
 - Generous vertical space. If a section feels cramped, add padding, not columns.
 - Pill buttons, 20px card radius, hairline `#d2d2d7` rules.
+- Minimal shadow. Depth comes from spacing and hairlines, not glass or blur.
+  The one exception is the quiz's sticky top bar, which uses Apple's own
+  `backdrop-filter: saturate(180%) blur(20px)`.
 
-Tokens live in `:root` at the top of `index.html`. Change them there, not inline.
+Tokens live in `:root` at the top of each file. Change them there, not inline.
+The quiz carries a second full token set under `:root[data-theme="dark"]` and a
+matching `prefers-color-scheme` block — **edit all three or dark mode drifts.**
+
+### Colour
+
+The restrictions above would produce a page that looks like a homework
+assignment, so colour is added deliberately and in four places only:
+
+1. **A gradient on one word of a headline** (`.grad`, `#0071e3 → #5e5ce6 →
+   #bf5af2`). Three per page, maximum. It marks the payoff word — *AI
+   assistant*, *hands*, *alive*. Never on body text, never on a whole line.
+2. **Tinted card backgrounds** — `--tint-blue`, `--tint-violet`, `--tint-warm`,
+   `--tint-mint`. Very pale, so `#1d1d1f` text still passes contrast on them.
+3. **A per-step accent.** Each of the five steps sets its own `--accent`
+   (blue → indigo → purple → pink → amber) which drives its step number and the
+   left bar of any `.note.flag` inside it, so the page reads as a progression.
+   The values are darkened versions of Apple's system colours because they get
+   used on small uppercase text — don't swap in the bright ones.
+4. **A soft radial wash behind the hero** (`.hero::before`), and the two product
+   identities in the quiz: Hermes blue/violet, OpenClaw orange/pink.
+
+The rule: colour marks *one* thing per screen. If two elements in view are
+competing for attention with colour, one of them is wrong.
+
+### Quiz-specific gotchas
+
+- The stylesheet is a full replacement for the old teal glass theme, but the
+  **markup and JS were left untouched.** Only two hooks cross that line:
+  `--score-width` (set inline by JS on `.score-fill`) and `data-tone="amber"`
+  on `.answer`. Don't rename either.
+- `.check-list li` is built in JS as an inline `<svg>` tick plus a `<span>`.
+  Style the SVG — don't add a `::before` marker or you get two ticks.
+- The brand mark's SVG has hardcoded `stroke` attributes; CSS overrides them so
+  it survives dark mode. Leave those rules in.
 
 ---
 
