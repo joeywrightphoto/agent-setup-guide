@@ -163,6 +163,10 @@ section.tint .tile{background:#fff}
 section.tint .note{background:#fff}
 .note b{color:var(--ink);font-weight:600}
 .note.flag{border-left:4px solid var(--accent,var(--blue));border-radius:0 16px 16px 0}
+/* a standalone note under centred content: the box was already centred, but the
+   left-aligned ragged text inside made it read as shifted. Centre the text and
+   balance the wrap so the box looks as centred as it measures. */
+.note.mid{text-align:center;max-width:640px;padding:22px 30px;text-wrap:balance}
 
 /* ---------- choice cards ---------- */
 .card{background:#fff;border:1px solid var(--line2);border-radius:20px;padding:28px 26px}
@@ -303,7 +307,7 @@ footer p:last-child{margin:0}
         <p>Watch a page for a price drop, sort the inbox overnight, text you a briefing before you're awake.</p>
       </div>
     </div>
-    <div class="note narrow" style="margin-top:36px">
+    <div class="note narrow mid" style="margin-top:36px">
       <b>The entire requirement list:</b> a computer that stays awake, and one AI subscription you probably already pay for. Everything else installs itself.
     </div>
   </div>
