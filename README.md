@@ -148,8 +148,11 @@ restrictions:
 - Generous vertical space. If a section feels cramped, add padding, not columns.
 - Pill buttons, 20px card radius, hairline `#d2d2d7` rules.
 - Minimal shadow. Depth comes from spacing and hairlines, not glass or blur.
-  The one exception is the quiz's sticky top bar, which uses Apple's own
-  `backdrop-filter: saturate(180%) blur(20px)`.
+  There is no glass anywhere now — the quiz's sticky blurred top bar was
+  removed so both pages open the same way. Don't reintroduce one.
+- **Neither page has a nav bar.** The guide opens on its hero; the quiz opens on
+  a plain `← Agent Setup Guide` link on the page background. If you find
+  yourself adding a sticky header, that's a regression, not a feature.
 
 Tokens live in `:root` at the top of each file. Change them there, not inline.
 The quiz carries a second full token set under `:root[data-theme="dark"]` and a
@@ -184,8 +187,28 @@ competing for attention with colour, one of them is wrong.
   on `.answer`. Don't rename either.
 - `.check-list li` is built in JS as an inline `<svg>` tick plus a `<span>`.
   Style the SVG — don't add a `::before` marker or you get two ticks.
-- The brand mark's SVG has hardcoded `stroke` attributes; CSS overrides them so
-  it survives dark mode. Leave those rules in.
+- The old brand mark SVG and its `.mark` / `.brand-copy` / `.brand-byline`
+  styles are gone with the top bar. `.brand` is now a single link.
+- `#themeButton`, `#helpButton` and `#resetButton` still live in `.top-actions`
+  and are all wired in JS. Moving the header is fine; **deleting those three
+  IDs breaks dark mode, the detail drawer, and reset.**
+- Under 700px the `by Joey Wright` byline in `.brand` is hidden — it wraps to a
+  second line and looks broken. The footer credits him regardless.
+
+### Credit and the also-by shelf
+
+Joey is credited in three places, and they should stay in sync:
+
+1. The guide's hero eyebrow — `Agent Setup Guide by Joey Wright`.
+2. The `#also` section above the guide's footer — four `.plink` cards for
+   **SpeedGrid, HeySiggy, ShootFeed, ShootCast**, each on one of the four
+   tints. This is a soft cross-sell, so keep it to one plain sentence per app
+   and never let it outgrow the setup content above it.
+3. A one-line `Also by Joey:` row in the quiz footer. Text links only — the
+   quiz doesn't get the card treatment.
+
+If an app is added or renamed, update **both** the `#also` grid and the quiz
+footer row. Check the live taglines before writing new copy; don't invent them.
 
 ---
 
