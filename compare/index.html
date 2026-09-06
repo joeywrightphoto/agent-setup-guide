@@ -6,20 +6,11 @@
     <title>Agent Setup Guide by JoeyBaggaBots</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'><g fill='none' stroke='%235e5ce6' stroke-width='2.8' stroke-linecap='round'><rect x='5.6' y='9.2' width='28.8' height='22' rx='8.6'/><path d='M20 5.8v3.4M3 18.4v4.2M37 18.4v4.2'/><path d='M15.4 24.4c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.6-2.5'/></g><g fill='%235e5ce6'><circle cx='20' cy='3.2' r='2.6'/><circle cx='14.6' cy='18.4' r='2.5'/><circle cx='25.4' cy='18.4' r='2.5'/></g></svg>" />
     <script>
-      (() => {
-        let theme = null;
-        try {
-          theme = localStorage.getItem("agentGuideTheme");
-        } catch {
-          // Keep system detection available when storage is unavailable.
-        }
-
-        if (theme === "light" || theme === "dark") {
-          document.documentElement.dataset.theme = theme;
-        } else if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
-          document.documentElement.dataset.theme = "dark";
-        }
-      })();
+      // The theme toggle was removed so this page matches the setup guide, which
+      // is light-only. Pin light explicitly: without this, the prefers-color-scheme
+      // rule below would send this page dark while "/" stayed white. The dark
+      // tokens are left in the stylesheet so a toggle can come back cheaply.
+      document.documentElement.dataset.theme = "light";
     </script>
     <style>
       /* ============================================================
@@ -1067,6 +1058,22 @@
       }
 
       /* ---------- responsive ---------- */
+
+      /* iPad Pro portrait is 1024pt wide, which auto-fit still resolves to three
+         290px columns. Seven cards of uneven height in three narrow columns read
+         as cramped, so cap it at two from 1100px down and stack on phones. */
+      @media (max-width: 1100px) {
+        .detail-drawer {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .detail-drawer {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
       @media (max-width: 1040px) {
         .stage {
           grid-template-columns: minmax(0, 1fr);
@@ -1195,19 +1202,6 @@
         </a>
         <div class="top-actions">
           <a class="top-link" href="/">&larr; Setup guide</a>
-          <button class="icon-button" type="button" id="themeButton" aria-label="Toggle color theme" title="Toggle color theme">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 3v2.4M12 18.6V21M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M3 12h2.4M18.6 12H21M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
-            </svg>
-          </button>
-          <button class="icon-button" type="button" id="helpButton" aria-label="Show guide details" title="Guide details">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
-              <path d="M9.8 9.2a2.35 2.35 0 0 1 4.55.75c0 1.65-1.46 2.05-2.07 3.05-.19.31-.28.66-.28 1.05" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-              <path d="M12 17.1h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
-            </svg>
-          </button>
           <button class="icon-button" type="button" id="resetButton" aria-label="Reset answers" title="Reset answers">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
@@ -1826,6 +1820,9 @@
       }
 
       function updateThemeButton() {
+        // No-op while the theme toggle is absent; the theme plumbing stays intact
+        // so the button can be restored without touching this logic.
+        if (!themeButton) return;
         const current = activeTheme();
         const next = current === "dark" ? "light" : "dark";
         themeButton.innerHTML = themeIcons[next];
@@ -2029,13 +2026,12 @@
         render();
       });
 
-      themeButton.addEventListener("click", () => {
+      themeButton?.addEventListener("click", () => {
         setTheme(activeTheme() === "dark" ? "light" : "dark");
       });
 
-      systemTheme?.addEventListener("change", syncSystemTheme);
-
-      helpButton.addEventListener("click", () => {
+      // The drawer is still reachable from the results card's own details button.
+      helpButton?.addEventListener("click", () => {
         detailDrawer.classList.toggle("is-open");
         if (detailDrawer.classList.contains("is-open")) {
           detailDrawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
