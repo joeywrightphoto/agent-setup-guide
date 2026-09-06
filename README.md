@@ -12,7 +12,7 @@ always-on AI assistant. Two static pages, no build step, no dependencies.
 
 | URL | File | What it is |
 |---|---|---|
-| `/` | `index.html` | **The main guide.** Three steps: pick a subscription, keep the Mac awake, paste one prompt and let Claude Code / Codex do the whole install. |
+| `/` | `index.html` | **The main guide.** Three steps: get ChatGPT, keep the Mac awake, paste one prompt and let Codex do the whole install. |
 | `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. Has its own dark/light theme toggle — independent of the main page by design. |
 | — | `graphics/` | Shared images. Referenced **absolutely** (`/graphics/…`) so `/compare` doesn't 404 from its subfolder. |
 
@@ -53,25 +53,41 @@ install step, the change is wrong.
 
 **2. Subscription auth only.**
 Never steer a reader toward an API console or a billing account. A normal
-Claude or ChatGPT subscription is the whole story. This is the single mistake
-that costs a beginner real money.
+ChatGPT subscription is the whole story. This is the single mistake that costs
+a beginner real money.
 
-**3. Assume the machine stays on.**
+**3. One provider — ChatGPT.**
+The guide deliberately offers no choice of AI company. OpenClaw supports
+Anthropic too, but its subscription route runs through `claude -p`, which the
+OpenClaw docs flag as programmatic/Agent-SDK usage and steer toward an API key
+for long-lived gateway hosts — i.e. straight into rule 2. OpenAI's docs state
+plainly that subscription OAuth is supported in external tools like OpenClaw.
+One officially-supported lane beats a fork in the road on step one. Don't add
+a second provider card back in.
+
+**4. Assume the machine stays on.**
 An always-awake computer is presented as a requirement, not an optional extra.
 Step 2 sorts the reader into desktop / laptop-open / laptop-clamshell, and the
 step 3 prompt configures sleep for whichever they are. Don't soften this back
 into "you can skip it."
 
-**4. Optional things get described, not linked.**
+Clamshell is solved with [Amphetamine](https://apps.apple.com/us/app/amphetamine/id937984704)
+(free, Mac App Store), which lifts macOS's external-display-and-keyboard
+requirement for closed-lid operation. Apple Silicon laptops also need its
+**Power Protect** option, or a charger plug/unplug can drop the session. This
+is the one third-party app the guide names, because the OS alternative is a
+`sudo` command a beginner shouldn't be pasting.
+
+**5. Optional things get described, not linked.**
 Anything in "Later, when you want more" is named by the *problem it solves*,
 with no vendor, no link and no install steps. The answer is always "ask your
 assistant to add it."
 
-**5. Nothing personal on the page.**
+**6. Nothing personal on the page.**
 No names, no file paths, no account handles, no references to whose setup this
 came from. It has to be sendable to a stranger.
 
-**6. Verify commands before changing them.**
+**7. Verify commands before changing them.**
 Every command quoted on the page is checked against
 <https://docs.openclaw.ai/start/getting-started>. Re-check before editing one —
 the CLI moves. Currently quoted: `curl -fsSL https://openclaw.ai/install.sh | bash`,

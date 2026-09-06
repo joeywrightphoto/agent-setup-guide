@@ -244,33 +244,23 @@ footer p:last-child{margin:0}
       <!-- STEP 1 -->
       <div class="step">
         <p class="stepno">Step 1</p>
-        <h3>Pick a brain.</h3>
-        <p class="sub">The only part that costs money, and there's a good chance you already pay for it. Pick one now, add the other later if you want.</p>
-        <div class="grid2">
-          <div class="card hi">
-            <span class="badge">Most capable</span>
-            <h4>Claude</h4>
-            <p class="price">Pro $20/mo · Max $100–200/mo<br><a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a></p>
-            <ul>
-              <li>Best at long, messy, multi-step work</li>
-              <li>Strongest at writing and editing files</li>
-              <li>Pro is plenty to start. Max is for running it hard, all day</li>
-            </ul>
-          </div>
-          <div class="card">
-            <span class="badge grey">You probably have it</span>
-            <h4>ChatGPT</h4>
-            <p class="price">Plus $20/mo · Pro $200/mo<br><a href="https://chatgpt.com/download" target="_blank" rel="noopener">chatgpt.com/download</a></p>
-            <ul>
-              <li>Works well, and most people already subscribe</li>
-              <li>Uses the login you already have — no API bill</li>
-              <li>Plus has tighter limits. Fine for chatting on demand</li>
-            </ul>
-          </div>
+        <h3>Get ChatGPT.</h3>
+        <p class="sub">The only part that costs money, and there's a good chance you already pay for it. One subscription, one login, no bill to watch.</p>
+        <div class="card hi" style="margin-top:28px">
+          <span class="badge">All you need</span>
+          <h4>ChatGPT Plus</h4>
+          <p class="price">$20/mo · <a href="https://chatgpt.com/download" target="_blank" rel="noopener">chatgpt.com/download</a></p>
+          <ul>
+            <li>Most people already have it</li>
+            <li>Signs in with the account you already use — never an API bill</li>
+            <li>Its coding side, <b>Codex</b>, is what builds this for you in step 3</li>
+            <li>Plenty for chatting on demand. Upgrade later only if you start running things around the clock</li>
+          </ul>
         </div>
         <div class="note">
-          Install that company's <b>desktop app</b> and sign in. That's all of step 1 — the app is what runs step 3 for you.
+          Install the <b>ChatGPT desktop app</b> and sign in. That's all of step 1 — the app is what runs step 3 for you.
         </div>
+        <p class="small" style="margin-top:20px"><b>Why only one option?</b> Other AI subscriptions work too, and you can add one later in about a minute by asking your assistant. But every extra choice on this page is another chance to get stuck on step one. ChatGPT is the lane that's officially supported end to end, and it's the one most people are already paying for.</p>
       </div>
 
       <!-- STEP 2 -->
@@ -294,7 +284,7 @@ footer p:last-child{margin:0}
           <div class="tile" style="background:var(--bg2)">
             <p class="ic">🔌</p>
             <h4>Laptop, lid closed</h4>
-            <p>Closed-lid — clamshell — only works with power <i>and</i> an external display <i>and</i> a keyboard or mouse connected. Unplug the monitor and it sleeps.</p>
+            <p>Yes, this works — and you don't need a monitor plugged in to do it. It's one free app, and step 3 sets it up. Close the lid, tuck it on a shelf, keep the assistant.</p>
           </div>
         </div>
 
@@ -302,8 +292,9 @@ footer p:last-child{margin:0}
           <b>You don't have to configure this yourself.</b> The prompt in step 3 checks which kind of Mac you're on, sets the sleep behavior to match, and shows you how to undo it. This section is just so you know what it's doing and why.
         </div>
 
-        <p class="small" style="margin-top:24px"><b>If it has to sleep at night, that's still fine.</b> You get a fully working assistant that's simply offline while you are. The only thing you lose is work happening overnight — briefings, scans, anything scheduled. That's the honest reason to add a cheap always-on Mac later: because you got hooked, not because you're doing it wrong now.</p>
-        <p class="small"><b>Two things to know.</b> A laptop working hard with the lid shut runs hotter, so give it air. And on Windows this all works too — power settings are under Settings → System → Power, and the prompt handles it.</p>
+        <p class="small" style="margin-top:24px"><b>About the closed-lid one.</b> macOS normally refuses to stay awake with the lid shut unless a display and a keyboard are attached. A free Mac App Store app called <a href="https://apps.apple.com/us/app/amphetamine/id937984704" target="_blank" rel="noopener">Amphetamine</a> removes that requirement, and turns the internal screen off so it isn't burning in behind the lid. On Apple Silicon MacBooks turn on its <b>Power Protect</b> option too, or plugging and unplugging the charger can drop the session. Step 3 walks you through it.</p>
+        <p class="small"><b>If it has to sleep at night, that's still fine.</b> You get a fully working assistant that's simply offline while you are. The only thing you lose is work happening overnight — briefings, scans, anything scheduled. That's the honest reason to add a cheap always-on Mac later: because you got hooked, not because you're doing it wrong now.</p>
+        <p class="small"><b>Two things to know.</b> A laptop working hard with the lid shut runs hotter, so give it air and don't bury it in a drawer. And on Windows this all works too — power settings are under Settings → System → Power, and the prompt handles it.</p>
       </div>
 
       <!-- STEP 3 -->
@@ -329,9 +320,9 @@ than handing me instructions to follow.
    Homebrew, Node, Git, a code editor or a terminal app separately.
 
 3. The installer opens a setup wizard on its own. Walk me through it. When it
-   asks about the AI provider, reuse my existing Claude or ChatGPT
-   SUBSCRIPTION login. Do NOT set up a pay-per-use API key, and do not create
-   any billing account.
+   asks about the AI provider, choose OpenAI and sign in with my existing
+   ChatGPT SUBSCRIPTION. Do NOT set up a pay-per-use API key, and do not
+   create any billing account.
 
 4. Make it run in the background and survive a restart:
    openclaw gateway install
@@ -341,10 +332,13 @@ than handing me instructions to follow.
    - A desktop Mac: set the computer to never sleep while on power.
    - A laptop I keep open: never sleep while plugged in, and tell me to leave
      it plugged in with the lid up.
-   - A laptop with an external display: tell me it can run lid-closed, but
-     only while plugged in with the display and a keyboard or mouse attached.
-   Tell me which case I am, show me the setting you changed, and tell me how
-   to undo it.
+   - A laptop I want to run with the lid CLOSED: tell me to install the free
+     app Amphetamine from the Mac App Store, then walk me through turning off
+     "Allow system sleep when display is closed" and turning on Power Protect
+     if this is an Apple Silicon Mac. Warn me it runs hotter closed, so it
+     needs air.
+   Ask me which of these I want rather than guessing. Then tell me which case
+   I am, show me the setting you changed, and tell me how to undo it.
 
 6. Set up Telegram so I can text it from my phone: help me create a bot with
    @BotFather, get the token, and lock it down so only my own account can
@@ -375,9 +369,8 @@ you set up, where it lives, and three things I should try first.</pre>
 <section class="tint tight">
   <div class="wrap narrow">
     <h2>The one setting you flip yourself.</h2>
-    <p class="lede sub">Step 3 only works if the desktop app is allowed to run things on your computer. Both apps ship locked down, on purpose.</p>
-    <p><b>ChatGPT:</b> the setup runs in <b>Codex</b>, inside the ChatGPT desktop app. Point it at a folder on your computer and allow it to run commands there.</p>
-    <p><b>Claude:</b> same idea — <b>Claude Code</b>, inside the Claude desktop app, pointed at a folder on your machine.</p>
+    <p class="lede sub">Step 3 only works if the ChatGPT app is allowed to run things on your computer. It ships locked down, on purpose.</p>
+    <p>The setup runs in <b>Codex</b>, the coding side of the ChatGPT desktop app. Open it, point it at a folder on your computer, and allow it to run commands there. Then paste the prompt.</p>
     <div class="note flag">
       <b>Approve as you go, at least at first.</b> Letting it run without asking is faster, and it's where most people end up — but only after watching it work for a while. There's no undo on a command that already ran.
     </div>
@@ -413,7 +406,11 @@ you set up, where it lives, and three things I should try first.</pre>
       </div>
       <div class="row">
         <h4>API keys and credits</h4>
-        <p>Your normal Claude or ChatGPT subscription is enough. Setting up billing at an API console is how people accidentally spend real money.</p>
+        <p>Your normal ChatGPT subscription is enough. Setting up billing at an API console is how people accidentally spend real money.</p>
+      </div>
+      <div class="row">
+        <h4>Choosing between AI companies</h4>
+        <p>Claude and the rest all work, and swapping later takes about a minute — you just ask your assistant to do it. But a fork in the road on step one is where people stall out, so this guide picks the lane that's officially supported end to end and moves on.</p>
       </div>
     </div>
   </div>
@@ -487,7 +484,7 @@ you set up, where it lives, and three things I should try first.</pre>
 <footer>
   <div class="wrap">
     <p class="tiny">Made for friends who saw the setup and wanted one of their own.</p>
-    <p class="tiny">Not affiliated with OpenClaw, Anthropic or OpenAI. Prices are what they were at time of writing — check before you subscribe.</p>
+    <p class="tiny">Not affiliated with OpenClaw or OpenAI. Prices are what they were at time of writing — check before you subscribe.</p>
   </div>
 </footer>
 
