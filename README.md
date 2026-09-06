@@ -12,7 +12,7 @@ always-on AI assistant. Two static pages, no build step, no dependencies.
 
 | URL | File | What it is |
 |---|---|---|
-| `/` | `index.html` | **The main guide.** Four steps: get ChatGPT, keep the Mac awake, paste one prompt and let Codex do the whole install, then create the Telegram bot on your phone. |
+| `/` | `index.html` | **The main guide.** Five steps: get ChatGPT, keep the Mac awake, paste the install prompt, create the Telegram bot on your phone, then paste the interview prompt that connects it to your mail, calendar, messages and notes. |
 | `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. Has its own dark/light theme toggle — independent of the main page by design. |
 | — | `graphics/` | Shared images. Referenced **absolutely** (`/graphics/…`) so `/compare` doesn't 404 from its subfolder. |
 
@@ -92,6 +92,36 @@ do for the reader — it happens on their phone. The step-3 prompt still handles
 the config side (token, `dmPolicy: pairing`, `openclaw pairing approve`), so the
 two halves have to stay in sync. Don't collapse step 4 back into the prompt.
 
+**5c. Two prompts, and the split is deliberate.**
+Step 3 installs and gets the reader to "I texted it and it answered." Step 5
+connects it to their real accounts. Do not merge them. A permissions failure
+during an Apple or Google hookup would otherwise block someone from ever
+reaching a working assistant, and the payoff moment is what makes the rest of
+the work feel worth doing.
+
+Step 5 is an **interview**, not a checklist: it asks the reader about their
+life one question at a time, then wires up only what they said yes to. That is
+the whole point — a friend doesn't know which integrations exist, so the
+assistant has to ask. Keep the questions about *their life* (what email do you
+use) rather than about software. Its non-negotiable clauses: read-only first,
+never send as the user without asking, credentials go to a password manager,
+and stop for anything requiring a System Settings grant.
+
+**5d. Never tell a reader to disable SIP.**
+`imsg` basic mode (send/receive text and media) needs only Full Disk Access and
+Automation. The advanced iMessage actions — reactions, edits, unsend, threaded
+replies, effects, polls — require System Integrity Protection to be off. That is
+a permanent security downgrade to a friend's personal Mac and is out of scope
+for this guide. The step-5 prompt says so explicitly; leave that line in.
+
+**5e. The Apple integrations here are the officially supported ones.**
+Google mail/calendar/contacts via the Google Workspace skill (browser OAuth),
+IMAP mail via the mail skill (an app-specific password from account.apple.com,
+never the real Apple password), iMessage via `imsg`, plus the Apple Notes and
+Apple Reminders skills. Apple Calendar and Apple Contacts have no first-party
+OpenClaw skill — don't imply they're a one-liner. If someone lives in Apple's
+calendar, the honest answer today is that it needs custom work.
+
 **6. Nothing personal on the page.**
 No names, no file paths, no account handles, no references to whose setup this
 came from. It has to be sendable to a stranger.
@@ -101,7 +131,8 @@ Every command quoted on the page is checked against
 <https://docs.openclaw.ai/start/getting-started>. Re-check before editing one —
 the CLI moves. Currently quoted: `curl -fsSL https://openclaw.ai/install.sh | bash`,
 `openclaw gateway install`, `openclaw gateway status`, `openclaw triage`,
-`openclaw pairing list telegram`, `openclaw pairing approve telegram <CODE>`.
+`openclaw pairing list telegram`, `openclaw pairing approve telegram <CODE>`,
+`openclaw skills check`, `openclaw skills list`, `openclaw skills search`.
 
 ---
 

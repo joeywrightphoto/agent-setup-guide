@@ -211,15 +211,15 @@ footer p:last-child{margin:0}
     <p class="eyebrow">Agent Setup Guide</p>
     <h1>Your own AI assistant.<br><span class="soft">Living on your own Mac.</span></h1>
     <p class="lede narrow">You text it from your phone. It reads your files, runs your errands, and actually remembers you.</p>
-    <p class="lede narrow sub" style="font-size:19px">You won't download a single thing. You'll paste one prompt, and an AI does the entire setup while you watch.</p>
+    <p class="lede narrow sub" style="font-size:19px">You won't download a single thing. You'll paste two prompts, and an AI does the entire setup while you watch.</p>
     <div class="cta">
       <a class="btn" href="#steps">Start setup</a>
       <a class="btnlink" href="#what">See what it does &rsaquo;</a>
     </div>
     <div class="stats">
-      <div><b>4</b><span>steps</span></div>
+      <div><b>5</b><span>steps</span></div>
       <div><b>0</b><span>things to install by hand</span></div>
-      <div><b>~20</b><span>minutes, mostly waiting</span></div>
+      <div><b>~30</b><span>minutes, mostly waiting</span></div>
     </div>
   </div>
 </header>
@@ -258,8 +258,8 @@ footer p:last-child{margin:0}
 <section id="steps">
   <div class="wrap">
     <div class="narrow center">
-      <h2>Four steps.</h2>
-      <p class="lede sub">Two settings, one paste, and a two-minute detour on your phone.</p>
+      <h2>Five steps.</h2>
+      <p class="lede sub">Two prompts, one detour to your phone. Steps 1–4 get it alive. Step 5 is the one that makes it yours.</p>
     </div>
 
     <div class="narrow">
@@ -325,6 +325,7 @@ footer p:last-child{margin:0}
         <p class="stepno">Step 3</p>
         <h3>Paste this. Watch it build itself.</h3>
         <p class="sub">Open the desktop app from step 1, let it run things on your computer (that's the next section), then paste this in and send. It installs everything, keeps your Mac awake, wires up your phone, and checks its own work before it tells you it's done.</p>
+        <p class="sub">This one gets it <em>alive</em>. It deliberately doesn't touch your email or messages yet — that's step 5, and it goes much better once you've already seen the thing reply to you.</p>
         <div class="codebox">
           <div class="bar"><span>The whole setup, in one paste</span><button class="copy" type="button">Copy prompt</button></div>
           <pre>I want to set up OpenClaw on this computer so I have my own always-on AI
@@ -377,12 +378,10 @@ than handing me instructions to follow.
    Do not tell me it is done until you have seen it reply. If something
    breaks, run: openclaw triage
 
-8. Ask me a handful of questions about who I am and what I do, and write the
-   answers into its memory files so it knows me from day one.
-
 Rules: stop and ask me before anything that costs money, sends a message to
 another person, or deletes files. At the end, give me a short list of what
-you set up, where it lives, and three things I should try first.</pre>
+you set up, where it lives, and three things I should try first. Don't connect
+it to my email, calendar or messages yet — that's the next prompt.</pre>
         </div>
         <div class="note">
           It'll ask permission before running things on your machine. That's normal, and it's the point — but read what it's about to do before you approve it. Never approve something that deletes files or spends money if you don't understand it.
@@ -426,7 +425,75 @@ you set up, where it lives, and three things I should try first.</pre>
         <div class="note flag">
           <b>Keep the token to yourself.</b> Anyone holding it can talk to your assistant as if they were you. Don't paste it into a group chat, a screenshot, or a public repo. If it ever gets out, <code>/revoke</code> in BotFather issues a fresh one.
         </div>
-        <p class="small" style="margin-top:24px"><b>Why Telegram and not iMessage or WhatsApp?</b> It's the only one that hands you a bot in two minutes with no business account, no approval queue, and no phone tethered to the machine. Others can be added later. None of them are this easy on day one.</p>
+        <p class="small" style="margin-top:24px"><b>Why Telegram first, and not iMessage?</b> It's the only one that hands you a bot in two minutes with no business account, no approval queue, and no permissions to grant. iMessage genuinely works too, and step 5 sets it up if you want it — but it needs macOS permissions that are a bad first experience. Get one channel working, then add the other.</p>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step">
+        <p class="stepno">Step 5</p>
+        <h3>Now connect it to your life.</h3>
+        <p class="sub">Everything so far gave you a very capable stranger. This is the step that turns it into <em>your</em> assistant — your mail, your calendar, your messages, your notes, and a memory of who you are.</p>
+        <p class="sub">Here's the trick most people miss: <b>you don't have to know what to ask for.</b> This prompt interviews you first. It asks what you use and what you want, one question at a time, then goes and wires up only the things you said yes to. You're not expected to know the options — that's its job.</p>
+        <div class="codebox">
+          <div class="bar"><span>The prompt that makes it yours</span><button class="copy" type="button">Copy prompt</button></div>
+          <pre>You're running now. Next I want to connect you to the things I actually use,
+so you're useful to ME instead of being a generic assistant.
+
+Interview me FIRST. Ask me the questions below one at a time, in plain
+language, and wait for my answer before moving to the next one. Don't assume
+anything about my setup — if you don't know, ask. I am not technical, so ask
+me about my life, not about software.
+
+Ask me:
+1. Who I am, what I do for work, and the people who matter most day to day.
+2. What I'd love your help with in the first week.
+3. What email I use — Gmail, iCloud, Outlook, a work account, or several —
+   and whether I want you reading it.
+4. Whether my calendar and contacts live in Google or Apple.
+5. Whether I want you to read and send iMessages from this Mac.
+6. Whether I use Apple Notes, Apple Reminders, or something else for to-dos.
+7. Where my important files and photos actually live.
+8. Anything you should never touch, and anything you must always ask me
+   about before doing.
+
+Then set up ONLY the things I said yes to. Run "openclaw skills check" to see
+what's already available to you, and read https://docs.openclaw.ai for the
+real instructions rather than trusting your memory. A few that people get
+wrong:
+
+- Google mail, calendar or contacts: use the Google Workspace skill and sign
+  me in through the browser. Never ask me to create an API key or a billing
+  account.
+- iCloud or other IMAP mail: use the mail skill. It needs an app-specific
+  password from account.apple.com, NOT my real Apple password. Walk me
+  through creating one.
+- iMessage: install imsg and enable OpenClaw's iMessage channel. I'll have to
+  grant Full Disk Access and Automation in System Settings — tell me exactly
+  where to click. Basic send and receive only. Do NOT disable System Integrity
+  Protection on my Mac for the advanced features, and don't ask me to.
+- Apple Notes and Apple Reminders each have their own skill. Add them if I
+  said I use them.
+
+Rules while you do this, no exceptions:
+- Set everything up READ-ONLY first. Prove you can read my mail and calendar
+  before you have any ability to send or change anything.
+- Never send a message, reply to an email, or accept an invitation as me
+  without asking me first — every single time, until I tell you to stop.
+- Every password, token and key goes in a password manager or the system
+  keychain. Never in a chat, a note, or a file in a repository.
+- If something needs a permission only I can grant, stop and give me
+  click-by-click directions instead of trying to work around it.
+
+Finally: write everything you learned about me into your own memory files so
+you never have to ask again. Test each connection with something real and
+show me the result. Tell me plainly which ones did NOT work and why. Then
+give me five things to try that you couldn't have done an hour ago.</pre>
+        </div>
+        <div class="note flag">
+          <b>Take the read-only part seriously.</b> Let it read your mail for a few days before you let it answer any. Not because it's reckless — because you want to trust it, and trust is built by watching it be right about things that don't matter yet.
+        </div>
+        <p class="small" style="margin-top:24px"><b>Expect a couple of "go click this" moments.</b> Reading your Messages or your calendar needs a permission macOS only lets <em>you</em> grant, in System Settings. Your assistant will tell you where to click, but it genuinely cannot do those for you. That's the operating system protecting you, and it's working as intended.</p>
+        <p class="small"><b>Say no to plenty.</b> There's no prize for connecting everything on day one. Pick the two things you'd actually use this week, and add the rest whenever they come up — it's the same conversation every time.</p>
       </div>
 
     </div>
@@ -483,7 +550,7 @@ you set up, where it lives, and three things I should try first.</pre>
       <div>“Watch this page and text me if the price drops.”</div>
       <div>“Go through my inbox and tell me what actually needs me.”</div>
     </div>
-    <p style="margin-top:30px">Then let it get to know you. This gets dramatically better once it has real context on who you are and how you work — and unlike a chat window, it writes that down and keeps it.</p>
+    <p style="margin-top:30px">The last two are step 5's doing. That's the whole difference between a clever chatbot and something that knows your actual week — and unlike a chat window, it writes down what it learns about you and keeps it.</p>
   </div>
 </section>
 
@@ -621,6 +688,29 @@ trackers, little tools. Set up free web hosting connected to a repository I
 own, walk me through the account signup, and stay on the free plan. Then
 prove it works by building me one simple page and sending me the live link.
 Tell me how to ask for a new page later.</pre>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="txt">
+            <h4>Whatever else you already use</h4>
+            <p>Notes apps, music, smart home, project boards. Ask what's possible instead of guessing.</p>
+          </span>
+          <span class="chev"></span>
+        </summary>
+        <div class="body">
+          <p>The honest problem with a page like this one is that it can only list things we thought of. This prompt makes your assistant do the thinking instead — it knows what it can connect to, and it can install those connections itself.</p>
+          <div class="codebox mini">
+            <div class="bar"><span>Paste this to your assistant</span><button class="copy" type="button">Copy</button></div>
+            <pre>I want to know what else you could plug into that I haven't thought to ask
+for. Run "openclaw skills list" and "openclaw skills search" to see what's
+actually available to you, then look at what I've told you about my work and
+my day. Come back with a short list of the things that would genuinely help
+ME — not everything that exists — and say in one plain sentence what each one
+would let you do. Don't install anything yet. I'll pick, and then you set up
+only what I choose.</pre>
           </div>
         </div>
       </details>
