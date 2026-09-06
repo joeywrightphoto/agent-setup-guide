@@ -17,7 +17,7 @@ always-on AI assistant. Two static pages, no build step, no dependencies.
 | URL | File | What it is |
 |---|---|---|
 | `/` | `index.html` | **The main guide.** Five steps: get ChatGPT, keep the Mac awake, paste the install prompt, create the Telegram bot on your phone, then paste the interview prompt that connects it to your mail, calendar, messages and notes. |
-| `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. Same Apple design language as the main page, plus a dark/light theme toggle the main page doesn't have. |
+| `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. It uses the same fixed light theme as the main guide. |
 | — | `graphics/` | Shared images. Referenced **absolutely** (`/graphics/…`) so `/compare` doesn't 404 from its subfolder. |
 
 Both pages are self-contained: CSS and JS are inline, there is no framework,
@@ -163,8 +163,8 @@ restrictions:
   sprite in the same style. Don't paste an emoji, don't add an icon font.
 
 Tokens live in `:root` at the top of each file. Change them there, not inline.
-The quiz carries a second full token set under `:root[data-theme="dark"]` and a
-matching `prefers-color-scheme` block — **edit all three or dark mode drifts.**
+The quiz is light-only; do not add a dark token set, a `data-theme` override or
+a `prefers-color-scheme` rule back in.
 
 ### Colour
 
@@ -174,8 +174,12 @@ assignment, so colour is added deliberately and in four places only:
 1. **A gradient on one word of a headline** (`.grad`, `#0071e3 → #5e5ce6 →
    #bf5af2`). Three per page, maximum. It marks the payoff word — *AI
    assistant*, *hands*, *alive*. Never on body text, never on a whole line.
-2. **Tinted card backgrounds** — `--tint-blue`, `--tint-violet`, `--tint-warm`,
-   `--tint-mint`. Very pale, so `#1d1d1f` text still passes contrast on them.
+2. **Saturated card backgrounds** — deep blue, violet, warm and mint gradients
+   with white headings, softer white body copy and light line icons. They are
+   intentionally strong; keep the text contrast intact when changing them.
+   The three cards in **Not a chatbot** are the deliberate exception: clean
+   white panels with one oversized coloured line icon and one matching payoff
+   phrase in the heading. They have no visible border stroke.
 3. **A per-step accent.** Each of the five steps sets its own `--accent`
    (blue → indigo → purple → pink → amber) which drives its step number and the
    left bar of any `.note.flag` inside it, so the page reads as a progression.
@@ -187,12 +191,25 @@ assignment, so colour is added deliberately and in four places only:
 The rule: colour marks *one* thing per screen. If two elements in view are
 competing for attention with colour, one of them is wrong.
 
-Tints are **gradients, not flat fills** — each runs from a saturated corner to
-near-white (`linear-gradient(168deg, …)`) and carries a matching hairline
-border plus an `--icon` colour for the line icon inside it. Keep those three in
-step: change a tint and you change its border and its icon colour too. They
-were once ~4% saturation and vanished against the `#f5f5f7` sections — always
-judge a tint against the surface it sits on, not in isolation.
+Card colours are **gradients, not flat fills** — each runs through deep shades
+of one hue and carries a matching border, light copy and an `--icon` colour for
+the line icon inside it. Keep those pieces in step. These cards used to be pale
+tints and disappeared against the `#f5f5f7` sections; do not wash them out.
+The `#what` exception is intentionally not a tinted card: its `--feature-pop`
+token drives the icon and the `.card-pop` words, while the surrounding panel
+stays white.
+
+Immediately after `#what` is the quiet requirements section: a clean white
+band before the five steps. Its heading uses the same scale as other section
+headlines and simply says **You only need two things**, with *two things* as
+the section's one gradient colour moment. It says there are exactly two
+requirements: an always-awake Mac and a ChatGPT subscription. A reader starts
+on the Mac they already have; a Mac mini is only an optional,
+separate-machine upgrade — never a prerequisite. Apple currently positions it
+as its most affordable Mac desktop, but do not hard-code a price there.
+ChatGPT Plus is the starting plan; tell readers to upgrade only after their
+real use requires it. Keep the section free of a lead-in sentence: the
+headline and its two requirements are the entire message.
 
 ### Bento: three items, unequal boxes
 
@@ -207,6 +224,18 @@ Which item gets `.feat` is an editorial decision, not a default. Step 2 flips
 so **Laptop, lid closed** is the tall one, because that's the section's actual
 payoff — it's the reason nobody reading this needs to buy a second machine.
 
+Step 2's three device choices use the supplied product cut-outs in
+`graphics/devices/`. The desktop and lid-open art sits just beyond each card's
+right edge, leaving an unobstructed text column on the left; align their
+visible left edges, not the laptop's small lower lip. The closed-lid card is
+the exception: full-width text in its upper row and `.device-art-closed` low
+across a separate image row, with its visible left edge aligned to that text
+inset and its right edge flush to the card. The cards are white against the
+pale-gray setup section, with no neutral border stroke. They are product art,
+not icons: do not replace
+them with a second icon chip or a generic device glyph. The desktop, lid-open
+and lid-closed images must stay matched to their respective choices.
+
 `.bento` collapses to a stack at **700px**, on its own breakpoint rather than
 the 860px one the 3-up grids use, so iPad portrait keeps the layout.
 
@@ -220,11 +249,8 @@ the 860px one the 3-up grids use, so iPad portrait keeps the layout.
   Style the SVG — don't add a `::before` marker or you get two ticks.
 - The old brand mark SVG and its `.mark` / `.brand-copy` / `.brand-byline`
   styles are gone with the top bar. `.brand` is now a single link.
-- `#themeButton`, `#helpButton` and `#resetButton` still live in `.top-actions`
-  and are all wired in JS. Moving the header is fine; **deleting those three
-  IDs breaks dark mode, the detail drawer, and reset.**
-- Under 700px the `by Joey Wright` byline in `.brand` is hidden — it wraps to a
-  second line and looks broken. The footer credits him regardless.
+- `#resetButton` lives in `.page-actions` beneath the header, opposite the
+  **Back to Setup Guide** link. Keep the ID — it resets the six-step quiz.
 
 ### The nav bar and the robot mark
 
@@ -232,7 +258,8 @@ Both pages open with the same sticky bar: translucent white, 20px blur, one
 hairline underneath, 56px tall. Nothing else goes in it.
 
 The logo is an inline SVG, **one colour** (`currentColor`, set to the violet
-pop token), drawn on a `0 0 40 36` viewBox. Round head, oversized eyes, a
+pop token), drawn on a `0 0 40 36` viewBox. The guide wordmark is black; only
+the robot carries the violet pop. Round head, oversized eyes, a
 smile, stubby ears, one antenna — friendly on purpose. It is duplicated in
 four places and they must move together if it is ever redrawn:
 
@@ -243,12 +270,13 @@ four places and they must move together if it is ever redrawn:
 
 **Bar layout rules, learned the hard way:**
 
-- The guide's nav links hide below **820px**, and `.navcta` has to pick up
+- The guide's four nav links — **What it does**, **What you need**, **Setup**
+  and **Add-ons** — hide below **820px**, and `.navcta` has to pick up
   `margin-left:auto` in that same query or the CTA slides left and sits next
   to the wordmark.
-- On the quiz the bar also carries three working icon buttons, so below
-  **560px** the wordmark hides instead of the buttons. The robot still links
-  home. Without that rule the CTA runs off the right edge on a phone.
+- On the quiz the header carries only the wordmark and consult CTA. Its
+  **Back to Setup Guide** and **Reset comparison** controls sit directly below
+  the header in `.page-actions`, so both remain visible without crowding it.
 - `scroll-padding-top: 74px` on `html` keeps anchored sections clear of the
   bar. Any new `id` target inherits it automatically.
 
@@ -258,8 +286,13 @@ four places and they must move together if it is ever redrawn:
 the nav CTA points at. The **Book a session** button deep-links to
 `https://calendly.com/joeywrightphoto/ai` — a published, live event: 2 hours,
 Zoom, **$500** taken through Stripe at booking, with a recording, written
-summary and action plan sent afterwards. The price is written into the button
-label, so if it ever changes it has to change in both places.
+summary and action plan sent afterwards. The page deliberately leaves the
+price off the button label. Changing the underlying price or booking link still
+requires Joey's approval.
+
+Its three bento-card titles are intentionally larger than ordinary tile
+headings: the session is the guide's human payoff, so the card titles carry the
+composition rather than disappearing into the body copy.
 
 The quiz's own CTA points at `/#consult` rather than Calendly, so there is one
 place to change.
@@ -278,9 +311,10 @@ Joey is credited in four places, and they should stay in sync:
 If an app is added or renamed, update **both** the `#also` shelf and the quiz
 footer row. Check the live taglines before writing new copy; don't invent them.
 
-**The shelf** is modelled on Apple's *Endless entertainment* row: a horizontal
-scroll-snap strip of artwork that runs off both edges of the viewport, so it
-reads as a shelf you browse rather than a grid you've finished.
+**The shelf** is a centred four-card row on wide screens. Below 1100px it
+becomes a scroll-snap carousel so the artwork stays large: edge arrows, four
+position dots, touch scrolling and five-second autoplay. Autoplay pauses during
+interaction and is disabled when the reader prefers reduced motion.
 
 - Art lives in `graphics/apps/*.jpg`, ~900px wide, under 60KB each. These are
   the apps' **own** OG/store graphics, resized — pulled from each project repo,
@@ -292,10 +326,10 @@ reads as a shelf you browse rather than a grid you've finished.
 - `.art` needs `height: auto`. The `width`/`height` attributes on `<img>` are a
   presentational hint and will beat `aspect-ratio` without it, which renders
   every card absurdly tall. This has bitten once already.
-- The shelf sits **outside** `.wrap`, full section width, and computes its own
-  `--gutter` from `%` (never `vw`, which a desktop scrollbar throws off) so the
-  first card's left edge lands exactly on the heading's. Verified at 0px offset
-  from 390 to 1440.
+- The shelf sits **outside** `.wrap`. At 1100px and above, all four cards share
+  the available width and are horizontally centred. Below that, each card is
+  up to 420px wide (or the viewport minus 56px) and centred with calculated
+  side padding so it does not collapse into a thumbnail.
 - **The art carries each app's name, so the card doesn't repeat it in type.**
   The name lives in `alt` and `aria-label`. Don't add an `<h4>` back.
 - Tone: this is a thank-you, not a pitch. The line under the heading is about
@@ -313,10 +347,11 @@ reads as a shelf you browse rather than a grid you've finished.
       six steps with no console errors.
 - [ ] The nav bar fits with no horizontal overflow at 1440, 834, 430 and 360,
       and the CTA is still hard against the right edge at every one.
-- [ ] The app shelf scrolls, all four images actually render, and the first
-      card's left edge matches the heading's at 390 / 768 / 834 / 1440. Lazy
-      images don't decode in an off-screen screenshot — scroll to the shelf and
-      wait before you judge a grey card as broken.
+- [ ] The app shelf centres all four cards at 1440, switches to carousel mode
+      at 1099 and below, and its touch scroll, arrows, dots and autoplay all
+      select the same card at 390 / 768 / 834. Lazy images don't decode in an
+      off-screen screenshot — scroll to the shelf and wait before judging a
+      grey card as broken.
 - [ ] No emoji used as an icon anywhere, and no chip behind a line icon.
 - [ ] The eight prompt `<pre>` blocks hash identical to the previous commit
       unless you meant to change one. Someone may be mid-paste.

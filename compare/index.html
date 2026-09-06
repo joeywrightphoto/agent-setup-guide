@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agent Setup Guide by JoeyBaggaBots</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'><g fill='none' stroke='%235e5ce6' stroke-width='2.8' stroke-linecap='round'><rect x='5.6' y='9.2' width='28.8' height='22' rx='8.6'/><path d='M20 5.8v3.4M3 18.4v4.2M37 18.4v4.2'/><path d='M15.4 24.4c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.6-2.5'/></g><g fill='%235e5ce6'><circle cx='20' cy='3.2' r='2.6'/><circle cx='14.6' cy='18.4' r='2.5'/><circle cx='25.4' cy='18.4' r='2.5'/></g></svg>" />
-    <script>
-      // The theme toggle was removed so this page matches the setup guide, which
-      // is light-only. Pin light explicitly: without this, the prefers-color-scheme
-      // rule below would send this page dark while "/" stayed white. The dark
-      // tokens are left in the stylesheet so a toggle can come back cheaply.
-      document.documentElement.dataset.theme = "light";
-    </script>
     <style>
       /* ============================================================
          Apple-style design system. Two neutrals, one accent, plus a
@@ -46,60 +39,6 @@
         --radius-sm: 14px;
         --shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      }
-
-      :root[data-theme="dark"] {
-        color-scheme: dark;
-        --bg: #000000;
-        --bg2: #1d1d1f;
-        --bar: rgba(22, 22, 23, 0.72);
-        --ink: #f5f5f7;
-        --text: #f5f5f7;
-        --muted: #86868b;
-        --line: #424245;
-        --line2: #2c2c2e;
-        --card: #1d1d1f;
-        --card2: #161617;
-        --blue: #2997ff;
-        --blue-hover: #4aa8ff;
-        --link: #2997ff;
-        --tint-blue: #10233c;
-        --tint-warm: #2a1c0c;
-        --tint-mint: #0f2a1c;
-        --pop-a: #2997ff;
-        --pop-b: #7d7aff;
-        --pop-c: #da8fff;
-        --amber: #f5a623;
-        --amber-soft: #2a1c0c;
-        --shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme]) {
-          color-scheme: dark;
-          --bg: #000000;
-          --bg2: #1d1d1f;
-          --bar: rgba(22, 22, 23, 0.72);
-          --ink: #f5f5f7;
-          --text: #f5f5f7;
-          --muted: #86868b;
-          --line: #424245;
-          --line2: #2c2c2e;
-          --card: #1d1d1f;
-          --card2: #161617;
-          --blue: #2997ff;
-          --blue-hover: #4aa8ff;
-          --link: #2997ff;
-          --tint-blue: #10233c;
-          --tint-warm: #2a1c0c;
-          --tint-mint: #0f2a1c;
-          --pop-a: #2997ff;
-          --pop-b: #7d7aff;
-          --pop-c: #da8fff;
-          --amber: #f5a623;
-          --amber-soft: #2a1c0c;
-          --shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
-        }
       }
 
       * {
@@ -220,21 +159,7 @@
       .top-actions {
         display: flex;
         align-items: center;
-        gap: 6px;
         margin-left: auto;
-      }
-
-      .top-link {
-        font-size: 14px;
-        letter-spacing: -0.006em;
-        color: var(--muted);
-        text-decoration: none;
-        white-space: nowrap;
-        margin-right: 8px;
-      }
-
-      .top-link:hover {
-        color: var(--ink);
       }
 
       .top-cta {
@@ -255,28 +180,47 @@
         color: #fff;
       }
 
-      .icon-button {
-        display: grid;
-        place-items: center;
-        width: 36px;
-        height: 36px;
-        border: none;
-        border-radius: 50%;
-        background: transparent;
-        color: var(--muted);
-        cursor: pointer;
-        transition: background 0.2s var(--ease), color 0.2s var(--ease);
-      }
-
-      .icon-button:hover {
-        background: var(--bg2);
-        color: var(--ink);
-      }
-
       /* ---------- stage ---------- */
+      .page-actions {
+        width: min(1320px, calc(100vw - 44px));
+        margin: 22px auto 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .back-guide {
+        color: var(--link);
+        font-size: 15px;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+      }
+
+      .back-guide:hover {
+        text-decoration: underline;
+      }
+
+      .reset-comparison {
+        border: 1px solid var(--line);
+        border-radius: 980px;
+        background: var(--bg);
+        color: var(--ink);
+        font-size: 15px;
+        letter-spacing: -0.01em;
+        padding: 8px 14px;
+        cursor: pointer;
+        transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+      }
+
+      .reset-comparison:hover {
+        background: var(--bg2);
+        border-color: var(--muted);
+      }
+
       .stage {
         width: min(1320px, calc(100vw - 44px));
-        margin: 46px auto 0;
+        margin: 26px auto 0;
         display: grid;
         grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
         gap: 40px;
@@ -474,6 +418,10 @@
         align-items: center;
         gap: 12px;
         margin-top: 28px;
+      }
+
+      .wizard-actions.is-first-step .secondary {
+        display: none;
       }
 
       .primary {
@@ -1100,11 +1048,7 @@
           gap: 12px;
         }
 
-        /* the "back to setup guide" job is already done by the logo */
-        .top-link {
-          display: none;
-        }
-
+        .page-actions,
         .stage,
         .path,
         .detail-drawer,
@@ -1113,7 +1057,11 @@
         }
 
         .stage {
-          margin-top: 32px;
+          margin-top: 22px;
+        }
+
+        .page-actions {
+          margin-top: 18px;
         }
 
         .rail-step span:last-child {
@@ -1151,26 +1099,14 @@
         .wizard-actions .secondary {
           flex: 1 1 auto;
         }
-      }
-      /* On a phone this bar carries a wordmark, three working buttons and a
-         pill — that does not fit. The buttons and the CTA both do real work,
-         so the wordmark is what gives way; the robot still links home. */
-      @media (max-width: 560px) {
-        .brand span {
-          display: none;
-        }
 
+        .wizard-actions.is-first-step .primary {
+          flex: 0 0 auto;
+        }
+      }
+      @media (max-width: 560px) {
         .bot {
           width: 26px;
-        }
-
-        .top-actions {
-          gap: 2px;
-        }
-
-        .icon-button {
-          width: 34px;
-          height: 34px;
         }
 
         .top-cta {
@@ -1201,19 +1137,16 @@
           <span>Agent Setup Guide</span>
         </a>
         <div class="top-actions">
-          <a class="top-link" href="/">&larr; Setup guide</a>
-          <button class="icon-button" type="button" id="resetButton" aria-label="Reset answers" title="Reset answers">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-              <path d="M4.5 4.8v4.6h4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
           <a class="top-cta" href="/#consult">Book a consult</a>
         </div>
         </div>
       </header>
 
       <main>
+        <div class="page-actions">
+          <a class="back-guide" href="/">&larr; Back to Setup Guide</a>
+          <button class="reset-comparison" type="button" id="resetButton">Reset comparison</button>
+        </div>
         <section class="stage" aria-label="Agent recommendation wizard">
           <div class="main">
             <div class="progress" aria-label="Setup progress">
@@ -1765,8 +1698,7 @@
       const backButton = document.querySelector("#backButton");
       const nextButton = document.querySelector("#nextButton");
       const resetButton = document.querySelector("#resetButton");
-      const themeButton = document.querySelector("#themeButton");
-      const helpButton = document.querySelector("#helpButton");
+      const wizardActions = document.querySelector(".wizard-actions");
       const detailsButton = document.querySelector("#detailsButton");
       const selectRouteButton = document.querySelector("#selectRouteButton");
       const installGuideLink = document.querySelector("#installGuideLink");
@@ -1774,61 +1706,6 @@
       const launchCard = document.querySelector("#launchCard");
       const launchSecurityButton = document.querySelector("#launchSecurityButton");
       const launchInstallLink = document.querySelector("#launchInstallLink");
-
-      const themeIcons = {
-        light: `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v2.4M12 18.6V21M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M3 12h2.4M18.6 12H21M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" /></svg>`,
-        dark: `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.6A7.4 7.4 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>`
-      };
-
-      const systemTheme = window.matchMedia?.("(prefers-color-scheme: dark)");
-
-      function savedTheme() {
-        try {
-          return localStorage.getItem("agentGuideTheme");
-        } catch {
-          return null;
-        }
-      }
-
-      function activeTheme() {
-        return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-      }
-
-      function setTheme(theme, persist = true) {
-        document.documentElement.dataset.theme = theme;
-        if (persist) {
-          try {
-            localStorage.setItem("agentGuideTheme", theme);
-          } catch {
-            // The visual theme can still change even if storage is blocked.
-          }
-        }
-        updateThemeButton();
-      }
-
-      function syncSystemTheme() {
-        if (savedTheme()) {
-          updateThemeButton();
-          return;
-        }
-        if (systemTheme?.matches) {
-          document.documentElement.dataset.theme = "dark";
-        } else {
-          document.documentElement.removeAttribute("data-theme");
-        }
-        updateThemeButton();
-      }
-
-      function updateThemeButton() {
-        // No-op while the theme toggle is absent; the theme plumbing stays intact
-        // so the button can be restored without touching this logic.
-        if (!themeButton) return;
-        const current = activeTheme();
-        const next = current === "dark" ? "light" : "dark";
-        themeButton.innerHTML = themeIcons[next];
-        themeButton.setAttribute("aria-label", `Switch to ${next} theme`);
-        themeButton.title = `Switch to ${next} theme`;
-      }
 
       function getScores() {
         return Object.values(state.answers).reduce(
@@ -1883,6 +1760,7 @@
         helperText.textContent = question.helper;
         progressLabel.textContent = `Step ${state.index + 1} of ${questions.length}`;
         backButton.style.visibility = state.index === 0 ? "hidden" : "visible";
+        wizardActions.classList.toggle("is-first-step", state.index === 0);
         nextButton.textContent = state.index === questions.length - 1 ? "Show my install path" : "Continue";
 
         answerList.innerHTML = "";
@@ -2026,18 +1904,6 @@
         render();
       });
 
-      themeButton?.addEventListener("click", () => {
-        setTheme(activeTheme() === "dark" ? "light" : "dark");
-      });
-
-      // The drawer is still reachable from the results card's own details button.
-      helpButton?.addEventListener("click", () => {
-        detailDrawer.classList.toggle("is-open");
-        if (detailDrawer.classList.contains("is-open")) {
-          detailDrawer.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
-      });
-
       detailsButton.addEventListener("click", () => {
         detailDrawer.classList.toggle("is-open");
         if (detailDrawer.classList.contains("is-open")) {
@@ -2055,7 +1921,6 @@
         document.querySelector("#securityCard").scrollIntoView({ behavior: "smooth", block: "center" });
       });
 
-      syncSystemTheme();
       render();
     </script>
   </body>
