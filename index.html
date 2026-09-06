@@ -154,7 +154,8 @@ section.tint .tile{background:#fff}
 .step:nth-of-type(3){--accent:#a12ed4}
 .step:nth-of-type(4){--accent:#d61f4e}
 .step:nth-of-type(5){--accent:#b8620a}
-.stepno{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--accent);margin:0 0 10px;text-transform:uppercase}
+/* big enough to find with your thumb on the scroll bar */
+.stepno{font-size:clamp(21px,2.3vw,25px);line-height:1.15;font-weight:600;letter-spacing:-.014em;color:var(--accent);margin:0 0 12px}
 .note{
   background:var(--bg2);border-radius:16px;padding:20px 22px;margin:24px 0 0;
   font-size:15px;line-height:1.55;color:var(--ink2);
@@ -239,6 +240,13 @@ section.tint .says div{background:#fff}
 footer{background:var(--bg2);padding:40px 0;border-top:1px solid var(--line)}
 footer p{margin:0 0 8px}
 footer p:last-child{margin:0}
+
+/* ---------- centring guard (keep last) ----------
+   .narrow is declared early, so any later rule using a `margin` shorthand
+   (.lede, .note) was resetting its auto side margins and pinning the block
+   to the left of the 980px wrap. Re-assert the side margins as longhands,
+   after everything, so the bottom margins survive. */
+.narrow{margin-left:auto;margin-right:auto}
 
 @media(max-width:860px){
   .grid3{grid-template-columns:1fr;gap:14px}
