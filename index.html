@@ -49,6 +49,7 @@
   --g1:#0071e3;
   --g2:#5e5ce6;
   --g3:#bf5af2;
+  --flow-pop:#5e5ce6;
   --tint-blue:#d8e8fd;
   --tint-violet:#ecdefb;
   --tint-warm:#ffe6c9;
@@ -411,6 +412,20 @@ section.tint .note{background:#fff}
 .codebox.mini{margin:0}
 .codebox.mini pre{padding:18px;max-height:none;font-size:13px}
 
+/* ---------- Flow referral ---------- */
+.flow-referral{
+  max-width:720px;margin:48px auto 0;padding:32px;
+  display:grid;grid-template-columns:184px minmax(0,1fr);gap:28px;align-items:center;
+  background:var(--bg2);border-radius:20px;
+}
+.flow-logo{display:block;justify-self:center;width:164px;height:164px;object-fit:contain}
+.flow-referral h3{font-size:28px;line-height:1.08;letter-spacing:-.024em;margin:0 0 10px}
+.flow-referral .flow-copy{min-width:0}
+.flow-referral .flow-copy > p{font-size:16px;line-height:1.5;color:var(--ink2);margin:0}
+.flow-name{color:var(--flow-pop);font-weight:700}
+.flow-referral .flow-cta{margin-top:20px;font-size:15px;padding:9px 18px}
+.flow-referral .flow-disclosure{margin-top:13px!important;font-size:13px!important;line-height:1.45!important;color:var(--ink)!important}
+
 /* ---------- plain list ---------- */
 .rows{margin-top:36px;border-top:1px solid var(--line)}
 .rows .row{border-bottom:1px solid var(--line);padding:22px 0}
@@ -495,6 +510,8 @@ footer p:last-child{margin:0}
   .alive-layout{grid-template-columns:1fr;gap:26px;max-width:720px}
   .alive-robot{justify-content:center}
   .alive-robot img{width:min(300px,72vw)}
+  .flow-referral{grid-template-columns:1fr;gap:22px;text-align:center}
+  .flow-logo{width:144px;height:144px;margin:0 auto}
 }
 /* the nav links go before the wordmark does — the CTA is the point of the bar.
    The CTA has to take over the auto margin, or it slides left next to the logo. */
@@ -966,13 +983,15 @@ give me five things to try that you couldn't have done an hour ago.</pre>
 <!-- ============ PERMISSION ============ -->
 <section class="tint tight permission">
   <div class="wrap">
-    <h2>The one setting you flip yourself.</h2>
-    <p class="lede sub">Step 3 only works if the ChatGPT app is allowed to run things on your computer. It ships locked down, on purpose.</p>
-    <p>The setup runs in <b>Codex</b>, the coding side of the ChatGPT desktop app. Open it, point it at a folder on your computer, and allow it to run commands there. Then paste the prompt.</p>
-    <div class="note flag">
-      <b>Approve as you go, at least at first.</b> Letting it run without asking is faster, and it's where most people end up — but only after watching it work for a while. There's no undo on a command that already ran.
+    <div class="narrow">
+      <h2>The one setting you flip yourself.</h2>
+      <p class="lede sub">Step 3 only works if the ChatGPT app is allowed to run things on your computer. It ships locked down, on purpose.</p>
+      <p>The setup runs in <b>Codex</b>, the coding side of the ChatGPT desktop app. Open it, point it at a folder on your computer, and allow it to run commands there. Then paste the prompt.</p>
+      <div class="note flag">
+        <b>Approve as you go, at least at first.</b> Letting it run without asking is faster, and it's where most people end up — but only after watching it work for a while. There's no undo on a command that already ran.
+      </div>
+      <p class="small" style="margin-top:26px">These menus move around every few weeks as the apps update, so no guide stays right for long. If you can't find it, ask the app itself: <b>"how do I let you run commands on my computer?"</b> It knows its own settings better than this page can.</p>
     </div>
-    <p class="small" style="margin-top:26px">These menus move around every few weeks as the apps update, so no guide stays right for long. If you can't find it, ask the app itself: <b>"how do I let you run commands on my computer?"</b> It knows its own settings better than this page can.</p>
   </div>
 </section>
 
@@ -1165,6 +1184,15 @@ only what I choose.</pre>
       </details>
 
     </div>
+    <aside class="flow-referral" aria-label="Wispr Flow referral">
+      <img class="flow-logo" src="/graphics/wispr.png" width="400" height="400" alt="Wispr Flow">
+      <div class="flow-copy">
+        <h3>Talk to your bot at the speed you think.</h3>
+        <p><strong class="flow-name">Wispr Flow</strong> turns your voice into clean text wherever you chat with your assistant — perfect for a quick idea, a real task, or a full brain dump.</p>
+        <a class="btn flow-cta" href="https://wisprflow.ai/r?JOEY175" target="_blank" rel="noopener noreferrer">Try Wispr Flow Free</a>
+        <p class="flow-disclosure">Use Joey&rsquo;s link and you both get a free month of Flow Pro.</p>
+      </div>
+    </aside>
   </div>
 </section>
 

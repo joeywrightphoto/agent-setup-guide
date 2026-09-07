@@ -102,6 +102,14 @@ assistant to add it" rather than "go download this." Keep the vendor names out
 of both the summary and the prompt — naming the problem lets the assistant pick
 whatever is current.
 
+**Exception — Wispr Flow referral.** The card after the `#later` accordions is
+the one deliberate named-vendor and external-link exception. It uses the
+supplied `graphics/wispr.png` and must link to
+`https://wisprflow.ai/r?JOEY175`. Its visible disclosure has to stay directly
+beside the CTA: **Use Joey's link and you both get a free month of Flow Pro.**
+Do not hide, soften, or move that line away from the link, and do not use this
+exception as a reason to add other named optional add-ons.
+
 **5b. Telegram is a step, not a footnote.**
 Step 4 spells out the @BotFather flow because it is the one part the AI cannot
 do for the reader — it happens on their phone. The step-3 prompt still handles
