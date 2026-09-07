@@ -90,9 +90,9 @@ requirement for closed-lid operation. Apple Silicon laptops also need its
 is the one third-party app the guide names, because the OS alternative is a
 `sudo` command a beginner shouldn't be pasting.
 
-Describe the closed-lid option as a laptop the reader does not use during the
-day. It stays plugged in with its lid closed; never frame it as their everyday
-laptop that must sit open overnight, or tell them to tuck it onto a shelf.
+Describe the closed-lid option as a laptop the reader wants to close overnight
+or while they are away. It stays plugged in with its lid closed; never frame it
+as a laptop that has to stay open nonstop, or tell them to tuck it onto a shelf.
 
 **5. Optional things get described, not linked.**
 Anything in "Later, when you want more" is named by the *problem it solves*,
