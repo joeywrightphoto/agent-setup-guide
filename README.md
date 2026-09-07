@@ -55,6 +55,10 @@ No download lists, no version numbers, no "first, install X." The OpenClaw
 installer brings its own Node, Homebrew and Git. If a change adds a manual
 install step, the change is wrong.
 
+This means no *developer* tools or technical setup by hand. A reader still
+installs the normal ChatGPT desktop app in step 1 and may need Telegram on
+their phone in step 4, so never promise "zero things to install."
+
 **2. Subscription auth only.**
 Never steer a reader toward an API console or a billing account. A normal
 ChatGPT subscription is the whole story. This is the single mistake that costs
@@ -81,6 +85,10 @@ requirement for closed-lid operation. Apple Silicon laptops also need its
 **Power Protect** option, or a charger plug/unplug can drop the session. This
 is the one third-party app the guide names, because the OS alternative is a
 `sudo` command a beginner shouldn't be pasting.
+
+Describe the closed-lid option as a laptop the reader does not use during the
+day. It stays plugged in with its lid closed; never frame it as their everyday
+laptop that must sit open overnight, or tell them to tuck it onto a shelf.
 
 **5. Optional things get described, not linked.**
 Anything in "Later, when you want more" is named by the *problem it solves*,
@@ -294,6 +302,10 @@ Its three bento-card titles are intentionally larger than ordinary tile
 headings: the session is the guide's human payoff, so the card titles carry the
 composition rather than disappearing into the body copy.
 
+Their gradients follow the supplied colour studies rather than merely
+darkening: teal to a lighter teal, magenta through orange to yellow, and
+purple to teal.
+
 The quiz's own CTA points at `/#consult` rather than Calendly, so there is one
 place to change.
 
@@ -302,7 +314,8 @@ place to change.
 Joey is credited in four places, and they should stay in sync:
 
 1. The nav wordmark — `Agent Setup Guide` next to the robot.
-2. The guide's hero eyebrow — `by Joey Wright`, linking to @JoeyBaggaBots.
+2. The guide's hero eyebrow — `Agent Setup Guide by Joey Wright`, with the
+   guide name in blue and Joey's name linking to @JoeyBaggaBots.
 3. The `#also` section above the guide's footer — a `.shelf` of four artwork
    cards for **SpeedGrid, HeySiggy, ShootFeed, ShootCast**. See below.
 4. A one-line `Also by Joey:` row in the quiz footer. Text links only — the
