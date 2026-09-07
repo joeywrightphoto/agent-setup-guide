@@ -20,6 +20,10 @@ always-on AI assistant. Two static pages, no build step, no dependencies.
 | `/compare` | `compare/index.html` | **Side quiz.** Routes people between OpenClaw and Hermes based on host, OS, complexity, multi-agent needs and credential preference. It uses the same fixed light theme as the main guide. |
 | — | `graphics/` | Shared images. Referenced **absolutely** (`/graphics/…`) so `/compare` doesn't 404 from its subfolder. |
 
+`graphics/agent-setup-guide-social.png` is the 1200×630 Open Graph and X
+share card for the main guide. Its absolute production URL appears in the
+metadata at the top of `index.html`; keep the image and those tags together.
+
 Both pages are self-contained: CSS and JS are inline, there is no framework,
 no `package.json`, and nothing to compile. Open `index.html` in a browser and
 what you see is exactly what ships.
