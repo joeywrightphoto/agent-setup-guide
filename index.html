@@ -196,10 +196,9 @@ section.tight{padding:72px 0}
 .brand{display:flex;align-items:center;gap:9px;flex:0 0 auto;color:var(--ink);
   font-size:17px;font-weight:600;letter-spacing:-.014em;white-space:nowrap}
 .brand:hover{text-decoration:none;color:var(--ink)}
-/* the mark: one colour, round everything, big eyes — a robot you'd let in the house */
-.bot{width:27px;height:auto;flex:0 0 auto;color:var(--g2);display:block}
-.brand:hover .bot{color:var(--g3)}
-.bot{transition:color .2s ease}
+/* The header uses Joey's 3D Robby mark; the tiny vector version remains the favicon. */
+.brand-robot{width:32px;height:32px;flex:0 0 auto;object-fit:contain;display:block;transform:translateY(-3px);transition:transform .2s ease}
+.brand:hover .brand-robot{transform:translateY(-3px) scale(1.05)}
 .navlinks{display:flex;align-items:center;gap:26px;margin-left:auto;min-width:0}
 .navlinks a{font-size:14px;letter-spacing:-.006em;color:var(--ink2);white-space:nowrap}
 .navlinks a:hover{color:var(--ink);text-decoration:none}
@@ -427,6 +426,17 @@ section.tint .says div{background:#fff}
 .says div:nth-child(3){box-shadow:inset 3px 0 0 #a12ed4}
 .says div:nth-child(4){box-shadow:inset 3px 0 0 #d61f4e}
 
+/* ---------- alive ---------- */
+.alive-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,320px);gap:44px;align-items:center;max-width:980px;margin:0 auto}
+.alive-copy{min-width:0}
+.alive-robot{position:relative;isolation:isolate;margin:0;display:flex;justify-content:flex-end;align-items:flex-end}
+.alive-robot::after{content:"";position:absolute;z-index:0;bottom:18px;left:50%;width:76%;height:18px;border-radius:50%;background:rgba(0,0,0,.23);filter:blur(9px);transform:translateX(-50%)}
+.alive-robot img{position:relative;z-index:1;display:block;width:min(100%,320px);height:auto}
+
+/* This follows the fifth step inside the same pale-gray field, so the standard
+   section-to-section padding created a void instead of a transition. */
+section.permission.tight{padding:24px 0 72px}
+
 /* ---------- cross link ---------- */
 .cross{display:block;background:linear-gradient(135deg,var(--tint-blue),var(--tint-violet));
   border:1px solid transparent;border-radius:20px;padding:28px;color:var(--ink)}
@@ -482,6 +492,9 @@ footer p:last-child{margin:0}
   .hero{padding:64px 0 56px}
   .stats div{flex-basis:100%;border-left:none;border-top:1px solid var(--line);padding:16px 0}
   .stats div:first-child{border-top:none;padding-top:0}
+  .alive-layout{grid-template-columns:1fr;gap:26px;max-width:720px}
+  .alive-robot{justify-content:center}
+  .alive-robot img{width:min(300px,72vw)}
 }
 /* the nav links go before the wordmark does — the CTA is the point of the bar.
    The CTA has to take over the auto margin, or it slides left next to the logo. */
@@ -554,7 +567,7 @@ footer p:last-child{margin:0}
 @media(max-width:480px){
   .nav .bar{gap:12px;padding:0 16px}
   .brand{font-size:16px;gap:8px}
-  .bot{width:24px}
+  .brand-robot{width:29px;height:29px}
   .navcta{font-size:13px;padding:6px 13px}
   .device-card,.device-card.feat{min-height:218px;padding:24px 22px}
   .device-card.device-closed{padding-bottom:84px}
@@ -622,18 +635,7 @@ footer p:last-child{margin:0}
 <nav class="nav" aria-label="Main">
   <div class="bar">
     <a class="brand" href="/">
-      <svg class="bot" viewBox="0 0 40 36" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round">
-          <rect x="5.6" y="9.2" width="28.8" height="22" rx="8.6"/>
-          <path d="M20 5.8v3.4M3 18.4v4.2M37 18.4v4.2"/>
-          <path d="M15.4 24.4c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.6-2.5"/>
-        </g>
-        <g fill="currentColor">
-          <circle cx="20" cy="3.2" r="2.6"/>
-          <circle cx="14.6" cy="18.4" r="2.5"/>
-          <circle cx="25.4" cy="18.4" r="2.5"/>
-        </g>
-      </svg>
+      <img class="brand-robot" src="/graphics/robby-head.png" width="144" height="135" alt="" aria-hidden="true">
       <span>Agent Setup Guide</span>
     </a>
     <div class="navlinks">
@@ -962,8 +964,8 @@ give me five things to try that you couldn't have done an hour ago.</pre>
 </section>
 
 <!-- ============ PERMISSION ============ -->
-<section class="tint tight">
-  <div class="wrap narrow">
+<section class="tint tight permission">
+  <div class="wrap">
     <h2>The one setting you flip yourself.</h2>
     <p class="lede sub">Step 3 only works if the ChatGPT app is allowed to run things on your computer. It ships locked down, on purpose.</p>
     <p>The setup runs in <b>Codex</b>, the coding side of the ChatGPT desktop app. Open it, point it at a folder on your computer, and allow it to run commands there. Then paste the prompt.</p>
@@ -1002,16 +1004,23 @@ give me five things to try that you couldn't have done an hour ago.</pre>
 
 <!-- ============ FIRST THINGS ============ -->
 <section class="tint cool">
-  <div class="wrap narrow">
-    <h2>Once it’s <span class="grad">alive.</span></h2>
-    <p class="lede sub">Don't open with a big project. Open by proving to yourself it's real.</p>
-    <div class="says">
-      <div>“What's on my calendar tomorrow?”</div>
-      <div>“Summarize this for me: [paste a link]”</div>
-      <div>“Watch this page and text me if the price drops.”</div>
-      <div>“Go through my inbox and tell me what actually needs me.”</div>
+  <div class="wrap">
+    <div class="alive-layout">
+      <div class="alive-copy">
+        <h2>Once it’s <span class="grad">alive.</span></h2>
+        <p class="lede sub">Don't open with a big project. Open by proving to yourself it's real.</p>
+        <div class="says">
+          <div>“What's on my calendar tomorrow?”</div>
+          <div>“Summarize this for me: [paste a link]”</div>
+          <div>“Watch this page and text me if the price drops.”</div>
+          <div>“Go through my inbox and tell me what actually needs me.”</div>
+        </div>
+        <p style="margin-top:30px">The last two are step 5's doing. That's the whole difference between a clever chatbot and something that knows your actual week — and unlike a chat window, it writes down what it learns about you and keeps it.</p>
+      </div>
+      <figure class="alive-robot" aria-label="Robby, the Agent Setup Guide robot, giving a thumbs up">
+        <img src="/graphics/robby-thumbs-up.png" width="480" height="720" alt="">
+      </figure>
     </div>
-    <p style="margin-top:30px">The last two are step 5's doing. That's the whole difference between a clever chatbot and something that knows your actual week — and unlike a chat window, it writes down what it learns about you and keeps it.</p>
   </div>
 </section>
 

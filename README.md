@@ -269,16 +269,19 @@ the 860px one the 3-up grids use, so iPad portrait keeps the layout.
 Both pages open with the same sticky bar: translucent white, 20px blur, one
 hairline underneath, 56px tall. Nothing else goes in it.
 
-The logo is an inline SVG, **one colour** (`currentColor`, set to the violet
-pop token), drawn on a `0 0 40 36` viewBox. The guide wordmark is black; only
-the robot carries the violet pop. Round head, oversized eyes, a
-smile, stubby ears, one antenna — friendly on purpose. It is duplicated in
-four places and they must move together if it is ever redrawn:
+The header uses Joey's silver 3D Robby mark at
+`graphics/robby-head.png`; it is the small raster image beside the black guide
+wordmark on both pages. It has one blue-eye colour pop and should stay compact
+enough to feel like a mark rather than a second hero. The tiny browser-tab
+version deliberately remains the original single-colour vector, duplicated in
+the two favicon data-URIs:
 
-1. `index.html` nav `<svg class="bot">`
-2. `index.html` favicon data-URI
-3. `compare/index.html` topbar `<svg class="bot">`
-4. `compare/index.html` favicon data-URI
+1. `index.html` favicon data-URI
+2. `compare/index.html` favicon data-URI
+
+The only in-page 3D character appearance is `graphics/robby-thumbs-up.png`,
+to the right of the **Once it’s alive** prompts (stacked underneath on phones).
+Do not repeat it through the guide.
 
 **Bar layout rules, learned the hard way:**
 
