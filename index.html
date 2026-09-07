@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent Setup Guide — Build your own AI assistant</title>
 <meta name="description" content="A free, beginner-friendly guide to your own always-on AI assistant on a Mac.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#ffffff">
 <meta property="og:title" content="Your own AI assistant. Living on your own Mac.">
 <meta property="og:description" content="A free, beginner-friendly guide to your own always-on AI assistant on a Mac.">
@@ -22,6 +23,16 @@
 <meta name="twitter:image" content="https://agentsetupguide.com/graphics/agent-setup-guide-social.png">
 <meta name="twitter:image:alt" content="Agent Setup Guide — Your own AI assistant. Living on your own Mac.">
 <link rel="canonical" href="https://agentsetupguide.com/">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MN0VX9WTQF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MN0VX9WTQF');
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Agent Setup Guide","url":"https://agentsetupguide.com/","description":"A free, beginner-friendly guide to your own always-on AI assistant on a Mac."}
+</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'><g fill='none' stroke='%235e5ce6' stroke-width='2.8' stroke-linecap='round'><rect x='5.6' y='9.2' width='28.8' height='22' rx='8.6'/><path d='M20 5.8v3.4M3 18.4v4.2M37 18.4v4.2'/><path d='M15.4 24.4c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.6-2.5'/></g><g fill='%235e5ce6'><circle cx='20' cy='3.2' r='2.6'/><circle cx='14.6' cy='18.4' r='2.5'/><circle cx='25.4' cy='18.4' r='2.5'/></g></svg>">
 <style>
 :root{
@@ -1173,7 +1184,7 @@ only what I choose.</pre>
       </div>
     </div>
     <div class="cta" style="margin-top:38px">
-      <a class="btn" href="https://calendly.com/joeywrightphoto/ai" target="_blank" rel="noopener">Book a session</a>
+      <a class="btn" href="https://calendly.com/joeywrightphoto/ai" target="_blank" rel="noopener" data-analytics="book-session">Book a session</a>
       <a class="btnlink" href="mailto:info@joeywrightphoto.com">Or email me first &rsaquo;</a>
     </div>
     <p class="small" style="margin-top:18px;text-align:center;text-wrap:balance">Two hours, one-on-one, over Zoom. Sessions are non&#8209;refundable, and rescheduling needs 72 hours&rsquo; notice.</p>
@@ -1256,6 +1267,12 @@ document.querySelectorAll('.copy').forEach(function(b){
       b.textContent='Copied';b.classList.add('done');
       setTimeout(function(){b.textContent=label;b.classList.remove('done');},1800);
     });
+  });
+});
+
+document.querySelectorAll('[data-analytics="book-session"]').forEach(function(link){
+  link.addEventListener('click',function(){
+    if(typeof gtag==='function')gtag('event','generate_lead',{lead_type:'ai_strategy_session'});
   });
 });
 
