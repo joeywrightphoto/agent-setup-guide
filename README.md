@@ -269,15 +269,10 @@ the 860px one the 3-up grids use, so iPad portrait keeps the layout.
 Both pages open with the same sticky bar: translucent white, 20px blur, one
 hairline underneath, 56px tall. Nothing else goes in it.
 
-The header uses Joey's silver 3D Robby mark at
+The header and browser-tab icon use Joey's silver 3D Robby mark at
 `graphics/robby-head.png`; it is the small raster image beside the black guide
-wordmark on both pages. It has one blue-eye colour pop and should stay compact
-enough to feel like a mark rather than a second hero. The tiny browser-tab
-version deliberately remains the original single-colour vector, duplicated in
-the two favicon data-URIs:
-
-1. `index.html` favicon data-URI
-2. `compare/index.html` favicon data-URI
+wordmark and the favicon for both pages. It has one blue-eye colour pop and
+should stay compact enough to feel like a mark rather than a second hero.
 
 The only in-page 3D character appearance is `graphics/robby-thumbs-up.png`,
 to the right of the **Once it’s alive** prompts (stacked underneath on phones).
